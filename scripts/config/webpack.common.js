@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const path = require('path')
 
 const { SOURCE_DIRECTORY, BUILD_DIRECTORY } = require('../constants')
 
@@ -12,7 +13,14 @@ module.exports = {
     },
     mode: 'none',
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js'],
+        alias: {
+            '@selectors': path.join(SOURCE_DIRECTORY, '__data__/selectors'),
+            '@slices': path.join(SOURCE_DIRECTORY, '__data__/slices'),
+            '@components': path.join(SOURCE_DIRECTORY, 'components'),
+            '@utils': path.join(SOURCE_DIRECTORY, 'utils'),
+            '@hooks': path.join(SOURCE_DIRECTORY, 'hooks')
+        }
     },
     module: {
         rules: [
