@@ -1,1 +1,0 @@
-export { getCount } from './counter'

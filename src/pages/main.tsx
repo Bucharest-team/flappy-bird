@@ -1,21 +1,22 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { actions, selectors } from '../__data__'
+import { getCount } from '@selectors/counter'
+import { dec, inc } from '@slices/counter'
 
 import { TypographyH1, Wrapper } from './typography.styles'
 
 export const Main = () => {
     const dispatch = useDispatch()
 
-    const value = useSelector(selectors.getCount)
+    const value = useSelector(getCount)
 
     const onInc = React.useCallback(() => {
-        dispatch(actions.inc())
+        dispatch(inc())
     }, [dispatch])
 
     const onDec = React.useCallback(() => {
-        dispatch(actions.dec())
+        dispatch(dec())
     }, [dispatch])
 
     return (

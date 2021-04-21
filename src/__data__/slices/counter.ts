@@ -22,4 +22,5 @@ const counter = createSlice({
     }
 })
 
-export default counter
+export default counter.reducer
+export const { inc, dec, set } = counter.actions

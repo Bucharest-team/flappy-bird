@@ -1,8 +1,5 @@
 module.exports = {
-    extends: [
-        'airbnb-typescript',
-        'airbnb/hooks'
-    ],
+    extends: ['airbnb-typescript', 'airbnb/hooks'],
     parserOptions: {
         project: './tsconfig.json'
     },
@@ -24,6 +21,7 @@ module.exports = {
         'no-param-reassign': 'off',
         'react/button-has-type': 'off',
         'prefer-destructuring': 'warn',
-        '@typescript-eslint/object-curly-spacing': 'warn'
+        '@typescript-eslint/object-curly-spacing': 'warn',
+        'react-hooks/exhaustive-deps': 'warn'
     }
 }
