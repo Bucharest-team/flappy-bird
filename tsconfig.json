@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "commonjs",
+        "jsx": "react",
+        "strict": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "baseUrl": "./src",
+        "paths": {
+            "@selectors/*": ["__data__/selectors/*"],
+            "@slices/*": ["__data__/slices/*"],
+            "@components/*": ["components/*"],
+            "@utils/*": ["utils/*"],
+            "@hooks/*": ["hooks/*"]
+        }
+    },
+    "include": ["./src/**/*"],
+    "exclude": ["node_modules", "build"]
+}
