@@ -62,7 +62,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: './static/index.html',
-            title: '🚀',
+            title: 'Flappy-Bird',
             minify: false
         })
     ]

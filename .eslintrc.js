@@ -22,6 +22,18 @@ module.exports = {
         'react/button-has-type': 'off',
         'prefer-destructuring': 'warn',
         '@typescript-eslint/object-curly-spacing': 'warn',
-        'react-hooks/exhaustive-deps': 'warn'
+        'react-hooks/exhaustive-deps': 'warn',
+        'react/jsx-props-no-spreading': 'off',
+        'react/jsx-indent-props': 'off',
+        'arrow-body-style': 'off',
+        '@typescript-eslint/lines-between-class-members': 'off',
+        'react/state-in-constructor': 'off',
+        'object-curly-newline': 'off',
+        'class-methods-use-this': 'off',
+        '@typescript-eslint/no-extra-semi': 'off',
+        'react/destructuring-assignment': 'off',
+        'operator-linebreak': 'off',
+        'operator-assignment': 'off',
+        'no-magic-numbers': 'warn'
     }
 }
