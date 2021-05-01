@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Game } from './game'
 import { CANVAS_DIMENSIONS } from './constants'
-import { Wrapper } from './main.styles'
+import { Wrapper } from './main.style'
 
 export const Main = () => {
     const canvas = React.useRef<HTMLCanvasElement | null>(null)
