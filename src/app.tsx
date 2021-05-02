@@ -5,6 +5,7 @@ import { BrowserRouter as ReactRouter, Route, Switch } from 'react-router-dom'
 import { Navigation as NavigationList } from './constants'
 import { Main } from './pages/main'
 import { Login } from './pages/auth'
+import { Leaderboard } from './pages/leaderboard'
 
 export const App = () => (
     <ReactRouter>
@@ -12,6 +13,7 @@ export const App = () => (
         <Switch>
             <Route exact path="/" component={Main} />
             <Route exact path={NavigationList.Login} component={Login} />
+            <Route exact path="/leaderboard" component={Leaderboard} />
         </Switch>
     </ReactRouter>
 )
