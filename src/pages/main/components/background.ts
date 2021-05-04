@@ -1,11 +1,11 @@
 import { BACKGROUND, CANVAS_DIMENSIONS } from '../constants'
 
 import { Component } from '../component'
-import { ContextType, GameGlobalState, GameStatus } from '../types'
+import { ContextType, GameGlobalState } from '../types'
 
 // класс для отрисовки и обновления фона
 export class Background extends Component {
-    private globalState: GameGlobalState;
+    private globalState: GameGlobalState
     private state = {
         // координаты и размеры фона из спрайта
         bg: {
@@ -29,23 +29,25 @@ export class Background extends Component {
     }
 
     constructor(ctx: ContextType, globalState: GameGlobalState) {
-        super(ctx);
-        this.globalState = globalState;
+        super(ctx)
+        this.globalState = globalState
     }
 
     draw() {
-        if (!this.ctx) return;
+        if (!this.ctx) {
+            return
+        }
 
-        const { bg, foreground } = this.state;
+        const { bg, foreground } = this.state
 
         // отрисовка цвета фона
-        this.ctx.fillStyle = BACKGROUND;
-        this.ctx.fillRect(0, 0, CANVAS_DIMENSIONS.width, CANVAS_DIMENSIONS.height);
+        this.ctx.fillStyle = BACKGROUND
+        this.ctx.fillRect(0, 0, CANVAS_DIMENSIONS.width, CANVAS_DIMENSIONS.height)
 
         // отрисовка фона из спрайта
-        this.ctx.drawImage(this.sprite, bg.sX, bg.sY, bg.w, bg.h, bg.x, bg.y, bg.w, bg.h);
-        this.ctx.drawImage(this.sprite, bg.sX, bg.sY, bg.w, bg.h, bg.x + bg.w, bg.y, bg.w, bg.h);
-        
+        this.ctx.drawImage(this.sprite, bg.sX, bg.sY, bg.w, bg.h, bg.x, bg.y, bg.w, bg.h)
+        this.ctx.drawImage(this.sprite, bg.sX, bg.sY, bg.w, bg.h, bg.x + bg.w, bg.y, bg.w, bg.h)
+
         // отрисовка переднего плана
         this.ctx.drawImage(
             this.sprite,
@@ -72,11 +74,11 @@ export class Background extends Component {
     }
 
     update() {
-        const { x, dX, w } = this.state.foreground;
-        const { status } = this.globalState;
+        const { x, dX, w } = this.state.foreground
+        const { status } = this.globalState
 
-        if (status === GameStatus.Playing) {
-            this.state.foreground.x = (x - dX) % (w / 2);
+        if (status === 'playing') {
+            this.state.foreground.x = (x - dX) % (w / 2)
         }
     }
 }

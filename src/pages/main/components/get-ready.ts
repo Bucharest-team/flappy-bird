@@ -1,10 +1,10 @@
 import { CANVAS_DIMENSIONS } from '../constants'
 import { Component } from '../component'
-import { ContextType, GameGlobalState, GameStatus } from '../types'
+import { ContextType, GameGlobalState } from '../types'
 
 // класс для отрисовки состояние готовности игры
 export class GetReady extends Component {
-    globalState: GameGlobalState;
+    globalState: GameGlobalState
     // координаты и размеры get ready message из спрайта
     private state = {
         sX: 0,
@@ -16,18 +16,20 @@ export class GetReady extends Component {
     }
 
     constructor(ctx: ContextType, globalState: GameGlobalState) {
-        super(ctx);
-        this.globalState = globalState;
+        super(ctx)
+        this.globalState = globalState
     }
 
     draw() {
-        if (!this.ctx) return;
+        if (!this.ctx) {
+            return
+        }
 
-        const { sX, sY, w, h, x, y } = this.state;
-        const { status } = this.globalState;
+        const { sX, sY, w, h, x, y } = this.state
+        const { status } = this.globalState
 
-        if (status === GameStatus.Start) {
-            this.ctx.drawImage(this.sprite, sX, sY, w, h, x, y, w, h);
+        if (status === 'getReady') {
+            this.ctx.drawImage(this.sprite, sX, sY, w, h, x, y, w, h)
         }
     }
 }
