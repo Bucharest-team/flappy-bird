@@ -1,11 +1,11 @@
-import { Component } from '../component'
-import { ContextType, GameGlobalState, GameStatus } from '../types'
+import { Component } from '../component';
+import { ContextType, GameGlobalState, GameStatus } from '../types';
 
-import { CANVAS_DIMENSIONS, FOREGROUND_HEIGHT } from '../constants'
+import { CANVAS_DIMENSIONS, FOREGROUND_HEIGHT } from '../constants';
 
-const DEFAULT_COORD = 150
-const DEFAULT_SPEED = 0
-const WING_SPAN = 5
+const DEFAULT_COORD = 150;
+const DEFAULT_SPEED = 0;
+const WING_SPAN = 5;
 
 // класс для отрисовки птицы и ее обновления
 export class Bird extends Component {
@@ -49,7 +49,7 @@ export class Bird extends Component {
             this.state.y - this.state.h / 2,
             this.state.w,
             this.state.h
-        )
+        );
     }
 
     private animate() {
@@ -76,7 +76,7 @@ export class Bird extends Component {
         const { y, h, jump } = this.state;
 
         if (y + h / 2 >= CANVAS_DIMENSIONS.height - FOREGROUND_HEIGHT) {
-            this.state.y = CANVAS_DIMENSIONS.height - FOREGROUND_HEIGHT - h / 2
+            this.state.y = CANVAS_DIMENSIONS.height - FOREGROUND_HEIGHT - h / 2;
 
             if (status === GameStatus.Playing) {
                 this.globalState.status = GameStatus.Over;

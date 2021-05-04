@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
     display: flex;
@@ -11,5 +11,4 @@ export const Wrapper = styled.div`
         height: 480px;
         border: 1px solid black;
         margin-top: 48px;
-    }
-`
+    }`;

@@ -1,11 +1,10 @@
-
 import { Component } from '../component';
 import { CANVAS_DIMENSIONS } from '../constants';
 import { ContextType, GameGlobalState, GameStatus } from '../types';
 
 export class Score extends Component {
     value = 0;
-    
+
     constructor(ctx: ContextType, private globalState: GameGlobalState) {
         super(ctx);
     }
@@ -25,15 +24,15 @@ export class Score extends Component {
 
         this.ctx.fillStyle = '#FFF';
         this.ctx.strokeStyle = '#000';
-        
+
         if (status === GameStatus.Playing) {
             this.ctx.lineWidth = 2;
             this.ctx.font = '35px Teko';
             this.ctx.fillText(String(this.value), CANVAS_DIMENSIONS.width / 2, 50);
             this.ctx.strokeText(String(this.value), CANVAS_DIMENSIONS.width / 2, 50);
             return;
-        } 
-        
+        }
+
         if (status === GameStatus.Over) {
             this.ctx.font = '25px Teko';
             this.ctx.fillText(String(this.value), 225, 186);

@@ -1,7 +1,7 @@
-import { CANVAS_DIMENSIONS } from '../constants'
+import { CANVAS_DIMENSIONS } from '../constants';
 
-import { Component } from '../component'
-import { ContextType, GameGlobalState, GameStatus } from '../types'
+import { Component } from '../component';
+import { ContextType, GameGlobalState, GameStatus } from '../types';
 
 // класс для отрисовки и обновления состояния конца игры
 export class GameOver extends Component {
@@ -14,7 +14,7 @@ export class GameOver extends Component {
         h: 202,
         x: CANVAS_DIMENSIONS.width / 2 - 225 / 2,
         y: 90
-    }
+    };
 
     constructor(ctx: ContextType, globalState: GameGlobalState) {
         super(ctx);
@@ -24,11 +24,11 @@ export class GameOver extends Component {
     draw() {
         if (!this.ctx) return;
 
-        const { sX, sY, w, h, x, y } = this.state
-        const { status } = this.globalState
+        const { sX, sY, w, h, x, y } = this.state;
+        const { status } = this.globalState;
 
         if (status === GameStatus.Over) {
-            this.ctx.drawImage(this.sprite, sX, sY, w, h, x, y, w, h)
+            this.ctx.drawImage(this.sprite, sX, sY, w, h, x, y, w, h);
         }
     }
 }

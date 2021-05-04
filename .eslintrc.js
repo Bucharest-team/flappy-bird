@@ -4,7 +4,7 @@ module.exports = {
         project: './tsconfig.json'
     },
     rules: {
-        '@typescript-eslint/semi': 'off',
+        '@typescript-eslint/semi': [2, "always"],
         '@typescript-eslint/indent': ['warn', 4],
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/comma-dangle': 'off',

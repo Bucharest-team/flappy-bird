@@ -1,7 +1,7 @@
-import { BACKGROUND, CANVAS_DIMENSIONS } from '../constants'
+import { BACKGROUND, CANVAS_DIMENSIONS } from '../constants';
 
-import { Component } from '../component'
-import { ContextType, GameGlobalState, GameStatus } from '../types'
+import { Component } from '../component';
+import { ContextType, GameGlobalState, GameStatus } from '../types';
 
 // класс для отрисовки и обновления фона
 export class Background extends Component {
@@ -26,7 +26,7 @@ export class Background extends Component {
             y: CANVAS_DIMENSIONS.height - 112,
             dX: 2
         }
-    }
+    };
 
     constructor(ctx: ContextType, globalState: GameGlobalState) {
         super(ctx);
@@ -45,7 +45,7 @@ export class Background extends Component {
         // отрисовка фона из спрайта
         this.ctx.drawImage(this.sprite, bg.sX, bg.sY, bg.w, bg.h, bg.x, bg.y, bg.w, bg.h);
         this.ctx.drawImage(this.sprite, bg.sX, bg.sY, bg.w, bg.h, bg.x + bg.w, bg.y, bg.w, bg.h);
-        
+
         // отрисовка переднего плана
         this.ctx.drawImage(
             this.sprite,
@@ -57,7 +57,7 @@ export class Background extends Component {
             foreground.y,
             foreground.w,
             foreground.h
-        )
+        );
         this.ctx.drawImage(
             this.sprite,
             foreground.sX,
@@ -68,7 +68,7 @@ export class Background extends Component {
             foreground.y,
             foreground.w,
             foreground.h
-        )
+        );
     }
 
     update() {

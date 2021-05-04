@@ -1,6 +1,6 @@
-import { CANVAS_DIMENSIONS } from '../constants'
-import { Component } from '../component'
-import { ContextType, GameGlobalState, GameStatus } from '../types'
+import { CANVAS_DIMENSIONS } from '../constants';
+import { Component } from '../component';
+import { ContextType, GameGlobalState, GameStatus } from '../types';
 
 // класс для отрисовки состояние готовности игры
 export class GetReady extends Component {
@@ -13,7 +13,7 @@ export class GetReady extends Component {
         h: 152,
         x: CANVAS_DIMENSIONS.width / 2 - 173 / 2,
         y: 80
-    }
+    };
 
     constructor(ctx: ContextType, globalState: GameGlobalState) {
         super(ctx);

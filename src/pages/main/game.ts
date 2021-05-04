@@ -1,11 +1,11 @@
-import { Background } from './components/background'
-import { Bird } from './components/bird'
-import { GameOver } from './components/game-over'
-import { GetReady } from './components/get-ready'
-import { Pipes } from './components/pipes'
-import { Score } from './components/score'
-import { GameState } from './game-state'
-import { ContextType, GameStatus } from './types'
+import { Background } from './components/background';
+import { Bird } from './components/bird';
+import { GameOver } from './components/game-over';
+import { GetReady } from './components/get-ready';
+import { Pipes } from './components/pipes';
+import { Score } from './components/score';
+import { GameState } from './game-state';
+import { ContextType, GameStatus } from './types';
 
 export class Game extends GameState {
     private canvas: HTMLCanvasElement | null;
@@ -37,7 +37,7 @@ export class Game extends GameState {
     }
 
     private updateGameStatus = () => {
-        const { status } = this.globalState
+        const { status } = this.globalState;
 
         if (status === GameStatus.Start) {
             this.setPlaying();
@@ -47,12 +47,12 @@ export class Game extends GameState {
         } else if (status === GameStatus.Over) {
             this.setStart();
         }
-    }
+    };
 
     destroy = () => {
         this.canvas?.removeEventListener('click', this.updateGameStatus);
         cancelAnimationFrame(this.requestAnimationFrameId);
-    }
+    };
 
     private draw() {
         this.background.draw();
@@ -75,5 +75,5 @@ export class Game extends GameState {
         this.incrementFrame();
 
         this.requestAnimationFrameId = requestAnimationFrame(this.loop);
-    }
+    };
 }
