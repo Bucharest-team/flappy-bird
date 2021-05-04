@@ -6,7 +6,5 @@ export type GameGlobalState = {
 };
 
 export enum GameStatus {
-    Start = 0,
-    Playing = 1,
-    Over = 2
+    Start, Playing, Over
 }

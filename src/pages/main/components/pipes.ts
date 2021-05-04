@@ -36,7 +36,7 @@ export class Pipes extends Component {
 
         const { top, bottom, w, h, gap, } = this.state;
 
-        for (let i = 0; i < this.position.length; i++) {
+        for (let i = 0; i < this.position.length; i += 1) {
             const p = this.position[i];
 
             const topYPos = p.y;
@@ -51,24 +51,31 @@ export class Pipes extends Component {
         const { frames } = this.globalState;
         const { w, h, gap, maxYPos, dx } = this.state;
         const bird = this.bird.state;
+        const radius = 5;
 
         if (this.globalState.status !== GameStatus.Playing) return;
 
-        if (frames % 100 == 0) {
+        if (frames % 100 === 0) {
             this.position.push({ x: CANVAS_DIMENSIONS.width, y: maxYPos * (Math.random() + 1) });
         }
 
-        for (let i = 0; i < this.position.length; i++) {
+        for (let i = 0; i < this.position.length; i += 1) {
             const p = this.position[i];
 
             const bottomPipeYPos = p.y + h + gap;
 
-            if (bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + w && bird.y + bird.radius > p.y && bird.y - bird.radius < p.y + h) {
+            if (bird.x + radius > p.x &&
+                bird.x - radius < p.x + w &&
+                bird.y + radius > p.y &&
+                bird.y - radius < p.y + h) {
                 this.globalState.status = GameStatus.Over;
                 this.position = [];
             }
 
-            if (bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + w && bird.y + bird.radius > bottomPipeYPos && bird.y - bird.radius < bottomPipeYPos + h) {
+            if (bird.x + radius > p.x &&
+                bird.x - radius < p.x + w &&
+                bird.y + radius > bottomPipeYPos &&
+                bird.y - radius < bottomPipeYPos + h) {
                 this.globalState.status = GameStatus.Over;
                 this.position = [];
             }

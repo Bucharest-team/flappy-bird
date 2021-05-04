@@ -21,7 +21,6 @@ export class Bird extends Component {
         y: 150,
         w: 34,
         h: 26,
-        radius: 5,
         frame: 0,
         speed: 0,
         gravity: 0.25,

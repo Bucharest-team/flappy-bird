@@ -27,6 +27,6 @@ export class GameState {
     }
 
     incrementFrame() {
-        this.globalState.frames++;
+        this.globalState.frames += 1;
     }
 }
