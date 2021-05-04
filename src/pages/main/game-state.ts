@@ -5,28 +5,28 @@ export class GameState {
 
     constructor() {
         this.globalState = {
-            status: 'getReady',
+            status: 0,
             frames: 0
         }
     }
 
-    private setGameStatus(status: GameStatus) {
+    private set gameStatus(status: GameStatus) {
         this.globalState.status = status
     }
 
     setPlaying() {
-        this.setGameStatus('playing')
+        this.gameStatus = GameStatus.Playing; 
     }
 
-    setGetReady() {
-        this.setGameStatus('getReady')
+    setStart() {
+        this.gameStatus = GameStatus.Start; 
     }
 
     setGameOver() {
-        this.setGameStatus('gameOver')
+        this.gameStatus = GameStatus.Over; 
     }
 
     incrementFrame() {
-        this.globalState.frames += 1
+        this.globalState.frames++;
     }
 }
