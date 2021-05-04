@@ -6,6 +6,7 @@ import { Score } from './score';
 
 export class Pipes extends Component {
     private position: { x: number, y: number }[] = [];
+    private radius: number = 5;
     private state = {
         top: {
             sX: 553,
@@ -51,7 +52,6 @@ export class Pipes extends Component {
         const { frames } = this.globalState;
         const { w, h, gap, maxYPos, dx } = this.state;
         const bird = this.bird.state;
-        const radius = 5;
 
         if (this.globalState.status !== GameStatus.Playing) return;
 
@@ -64,18 +64,18 @@ export class Pipes extends Component {
 
             const bottomPipeYPos = p.y + h + gap;
 
-            if (bird.x + radius > p.x &&
-                bird.x - radius < p.x + w &&
-                bird.y + radius > p.y &&
-                bird.y - radius < p.y + h) {
+            if (bird.x + this.radius > p.x &&
+                bird.x - this.radius < p.x + w &&
+                bird.y + this.radius > p.y &&
+                bird.y - this.radius < p.y + h) {
                 this.globalState.status = GameStatus.Over;
                 this.position = [];
             }
 
-            if (bird.x + radius > p.x &&
-                bird.x - radius < p.x + w &&
-                bird.y + radius > bottomPipeYPos &&
-                bird.y - radius < bottomPipeYPos + h) {
+            if (bird.x + this.radius > p.x &&
+                bird.x - this.radius < p.x + w &&
+                bird.y + this.radius > bottomPipeYPos &&
+                bird.y - this.radius < bottomPipeYPos + h) {
                 this.globalState.status = GameStatus.Over;
                 this.position = [];
             }
