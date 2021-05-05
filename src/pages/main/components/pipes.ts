@@ -5,7 +5,7 @@ import { Bird } from './bird';
 import { Score } from './score';
 
 export class Pipes extends Component {
-    private position: { x: number, y: number }[] = [];
+    private positions: { x: number, y: number }[] = [];
     private radius: number = 5;
     private state = {
         top: {
@@ -37,8 +37,8 @@ export class Pipes extends Component {
 
         const { top, bottom, w, h, gap, } = this.state;
 
-        for (let i = 0; i < this.position.length; i += 1) {
-            const p = this.position[i];
+        for (let i = 0; i < this.positions.length; i += 1) {
+            const p = this.positions[i];
 
             const topYPos = p.y;
             const bottomYPos = p.y + h + gap;
@@ -56,11 +56,11 @@ export class Pipes extends Component {
         if (this.globalState.status !== GameStatus.Playing) return;
 
         if (frames % 100 === 0) {
-            this.position.push({ x: CANVAS_DIMENSIONS.width, y: maxYPos * (Math.random() + 1) });
+            this.positions.push({ x: CANVAS_DIMENSIONS.width, y: maxYPos * (Math.random() + 1) });
         }
 
-        for (let i = 0; i < this.position.length; i += 1) {
-            const p = this.position[i];
+        for (let i = 0; i < this.positions.length; i += 1) {
+            const p = this.positions[i];
 
             const bottomPipeYPos = p.y + h + gap;
 
@@ -69,7 +69,7 @@ export class Pipes extends Component {
                 bird.y + this.radius > p.y &&
                 bird.y - this.radius < p.y + h) {
                 this.globalState.status = GameStatus.Over;
-                this.position = [];
+                this.positions = [];
             }
 
             if (bird.x + this.radius > p.x &&
@@ -77,13 +77,13 @@ export class Pipes extends Component {
                 bird.y + this.radius > bottomPipeYPos &&
                 bird.y - this.radius < bottomPipeYPos + h) {
                 this.globalState.status = GameStatus.Over;
-                this.position = [];
+                this.positions = [];
             }
 
             p.x -= dx;
 
             if (p.x + w <= 0) {
-                this.position.shift();
+                this.positions.shift();
                 this.score.value += 1;
                 this.score.best = Math.max(this.score.value, this.score.best);
             }

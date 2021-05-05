@@ -8,7 +8,7 @@ import { GameState } from './game-state';
 import { ContextType, GameStatus } from './types';
 
 export class Game extends GameState {
-    private canvas: HTMLCanvasElement | null;
+    private canvas?: HTMLCanvasElement;
     private requestAnimationFrameId!: number;
 
     private readonly background: Background;
@@ -18,7 +18,7 @@ export class Game extends GameState {
     private readonly pipes: Pipes;
     private readonly score: Score;
 
-    constructor(ctx: ContextType, canvas: HTMLCanvasElement | null) {
+    constructor(ctx: ContextType, canvas?: HTMLCanvasElement) {
         super();
 
         this.canvas = canvas;
