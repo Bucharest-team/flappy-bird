@@ -1,3 +1,3 @@
-import { RootState } from '../store'
+import { RootState } from '../store';
 
-export const getCount = (state: RootState) => state.counter.value
+export const getCount = (state: RootState) => state.counter.value;

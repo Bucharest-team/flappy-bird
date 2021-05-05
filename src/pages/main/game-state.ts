@@ -1,32 +1,32 @@
-import { GameGlobalState, GameStatus } from './types'
+import { GameGlobalState, GameStatus } from './types';
 
 export class GameState {
-    protected globalState: GameGlobalState
+    protected globalState: GameGlobalState;
 
     constructor() {
         this.globalState = {
-            status: 'getReady',
+            status: 0,
             frames: 0
-        }
+        };
     }
 
-    private setGameStatus(status: GameStatus) {
-        this.globalState.status = status
+    private set gameStatus(status: GameStatus) {
+        this.globalState.status = status;
     }
 
     setPlaying() {
-        this.setGameStatus('playing')
+        this.gameStatus = GameStatus.Playing;
     }
 
-    setGetReady() {
-        this.setGameStatus('getReady')
+    setStart() {
+        this.gameStatus = GameStatus.Start;
     }
 
     setGameOver() {
-        this.setGameStatus('gameOver')
+        this.gameStatus = GameStatus.Over;
     }
 
     incrementFrame() {
-        this.globalState.frames += 1
+        this.globalState.frames += 1;
     }
 }
