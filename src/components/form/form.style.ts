@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
-import { Link as RouterLink } from "react-router-dom";
+import styled from '@emotion/styled';
+import { Link as RouterLink } from 'react-router-dom';
 
-const mainRed = "#ff2f2f";
-const mainText = "#1e1e1e";
+const mainRed = '#ff2f2f';
+const mainText = '#1e1e1e';
 
 export const WrapperForm = styled.form`
   display: flex;

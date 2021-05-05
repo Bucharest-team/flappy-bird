@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "@emotion/styled";
+import React from 'react';
+import styled from '@emotion/styled';
 
-import { Navigation } from "../../constants";
-import { Form } from "@components/form";
+import { Form } from '@components/form';
+import { Navigation } from '../../constants';
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,57 +13,57 @@ const Wrapper = styled.div`
 `;
 
 export const Register = () => (
-  <Wrapper>
-    <Form
-      fields={[
-        {
-          name: "email",
-          validation: "mail",
-          error: "Невалидный email",
-          label: "Почта",
-          type: "text",
-        },
-        {
-          type: "text",
-          name: "login",
-          validation: "login",
-          error: "Невалидный логин",
-          label: "Логин",
-        },
-        {
-          type: "text",
-          name: "first_name",
-          validation: "text",
-          error: "Имя содержет недопустимые символы",
-          label: "Имя",
-        },
-        {
-          type: "text",
-          name: "second_name",
-          validation: "text",
-          error: "Фамилия содержет недопустимые символы",
-          label: "Фамилия",
-        },
-        {
-          type: "tel",
-          name: "phone",
-          validation: "phone",
-          error: "Телефон набран неправильно",
-          label: "Телефон",
-        },
-        {
-          type: "password",
-          name: "password",
-          validation: "pass",
-          error: "Слабый пароль",
-          label: "Пароль",
-        },
-      ]}
-      submit={(data: any) => console.log(data)}
-      submitText={"Зарегистрироваться"}
-      link={Navigation.Login}
-      linkText={"Войти"}
-      title={"Регистрация"}
-    />
-  </Wrapper>
+    <Wrapper>
+        <Form
+            fields={[
+                {
+                    name: 'email',
+                    validation: 'mail',
+                    error: 'Невалидный email',
+                    label: 'Почта',
+                    type: 'text',
+                },
+                {
+                    type: 'text',
+                    name: 'login',
+                    validation: 'login',
+                    error: 'Невалидный логин',
+                    label: 'Логин',
+                },
+                {
+                    type: 'text',
+                    name: 'first_name',
+                    validation: 'text',
+                    error: 'Имя содержет недопустимые символы',
+                    label: 'Имя',
+                },
+                {
+                    type: 'text',
+                    name: 'second_name',
+                    validation: 'text',
+                    error: 'Фамилия содержет недопустимые символы',
+                    label: 'Фамилия',
+                },
+                {
+                    type: 'tel',
+                    name: 'phone',
+                    validation: 'phone',
+                    error: 'Телефон набран неправильно',
+                    label: 'Телефон',
+                },
+                {
+                    type: 'password',
+                    name: 'password',
+                    validation: 'pass',
+                    error: 'Слабый пароль',
+                    label: 'Пароль',
+                },
+            ]}
+            submit={(data: any) => console.log(data)}
+            submitText="Зарегистрироваться"
+            link={Navigation.Login}
+            linkText="Войти"
+            title="Регистрация"
+        />
+    </Wrapper>
 );

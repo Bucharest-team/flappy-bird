@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "@emotion/styled";
+import React from 'react';
+import styled from '@emotion/styled';
 
-import { Navigation } from "../../constants";
-import { Form } from "@components/form";
+import { Form } from '@components/form';
+import { Navigation } from '../../constants';
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,29 +13,29 @@ const Wrapper = styled.div`
 `;
 
 export const Login = () => (
-  <Wrapper>
-    <Form
-      fields={[
-        {
-          name: "login",
-          label: "Логин",
-          error: "Неверно введён логин",
-          validation: "login",
-          type: "text",
-        },
-        {
-          name: "pass",
-          label: "Пароль",
-          error: "Неверно введён пароль",
-          validation: "pass",
-          type: "password",
-        },
-      ]}
-      submit={(data: any) => console.log(data)}
-      submitText={"Авторизоваться"}
-      link={Navigation.Register}
-      linkText={"Нет аккаунта?"}
-      title={"Авторизация"}
-    />
-  </Wrapper>
+    <Wrapper>
+        <Form
+            fields={[
+                {
+                    name: 'login',
+                    label: 'Логин',
+                    error: 'Неверно введён логин',
+                    validation: 'login',
+                    type: 'text',
+                },
+                {
+                    name: 'pass',
+                    label: 'Пароль',
+                    error: 'Неверно введён пароль',
+                    validation: 'pass',
+                    type: 'password',
+                },
+            ]}
+            submit={(data: any) => console.log(data)}
+            submitText="Авторизоваться"
+            link={Navigation.Register}
+            linkText="Нет аккаунта?"
+            title="Авторизация"
+        />
+    </Wrapper>
 );
