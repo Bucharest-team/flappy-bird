@@ -16,4 +16,4 @@ export const App = () => (
             <Route exact path={NavigationList.Register} component={Register} />
         </Switch>
     </ReactRouter>
-)
+);

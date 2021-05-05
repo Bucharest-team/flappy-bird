@@ -5,8 +5,8 @@ import { Global } from '@emotion/react'
 import emotionNormalize from 'emotion-normalize'
 import { StylesProvider } from '@material-ui/core'
 
-import { store } from './__data__/store'
-import { App } from './app'
+import { store } from './__data__/store';
+import { App } from './app';
 
 ReactDOM.render(
     <Provider store={store}>
@@ -16,4 +16,4 @@ ReactDOM.render(
         </StylesProvider>
     </Provider>,
     document.getElementById('root')
-)
+);

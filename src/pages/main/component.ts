@@ -1,20 +1,20 @@
-import sprite from '../../images/sprite.png'
+import sprite from '../../images/sprite.png';
 
-import { ContextType } from './types'
+import { ContextType } from './types';
 
 export abstract class Component {
-    protected ctx: ContextType
-    protected sprite: HTMLImageElement
+    protected ctx: ContextType;
+    protected sprite: HTMLImageElement;
 
     constructor(ctx: ContextType) {
-        this.ctx = ctx
+        this.ctx = ctx;
 
-        this.sprite = new Image()
-        this.sprite.src = sprite
+        this.sprite = new Image();
+        this.sprite.src = sprite;
     }
 
     draw() {
-        throw new Error('Method "draw" should be implemented')
+        throw new Error('Method "draw" should be implemented');
     }
 
     update() {}
