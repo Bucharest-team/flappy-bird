@@ -21,5 +21,18 @@ module.exports = merge(commonConfig, {
         quiet: false,
         historyApiFallback: true
     },
-    target: 'web'
+    target: 'web',
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'eslint-loader'
+                    }
+                ]
+            }
+        ]
+    }
 })
