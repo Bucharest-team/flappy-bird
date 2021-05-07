@@ -23,16 +23,16 @@ module.exports = merge(commonConfig, {
     },
     target: 'web',
     module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'eslint-loader'
-                    }
-                ]
-            }
-        ]
+        // rules: [
+        //     {
+        //         test: /\.tsx?$/,
+        //         exclude: /node_modules/,
+        //         use: [
+        //             {
+        //                 // loader: 'eslint-loader'
+        //             }
+        //         ]
+        //     }
+        // ]
     }
 })
