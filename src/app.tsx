@@ -1,11 +1,11 @@
-import React from 'react'
-import { Navigation } from '@components/navigation'
-import { BrowserRouter as ReactRouter, Route, Switch } from 'react-router-dom'
+import React from 'react';
+import { Navigation } from '@components/navigation';
+import { BrowserRouter as ReactRouter, Route, Switch } from 'react-router-dom';
 
-import { Navigation as NavigationList } from './constants'
-import { Main } from './pages/main'
-import { Login } from './pages/login'
-import { Register } from './pages/register'
+import { Navigation as NavigationList } from './constants';
+import { Main } from './pages/main';
+import { Login } from './pages/login';
+import { Register } from './pages/register';
 
 export const App = () => (
     <ReactRouter>

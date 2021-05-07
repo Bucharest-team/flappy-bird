@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Navigation } from '../../constants';
 
@@ -23,6 +24,7 @@ const regularExp = {
     pass: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/,
     phone: /^\+?(\d{1,3})?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/,
     mail: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
+    all: /\w/,
 };
 
 type Field = {
@@ -56,7 +58,9 @@ export const Form = ({
         formState: { errors },
     } = useForm<Inputs>();
 
-    const onSubmit = (data: Inputs) => submit(data);
+    const dispatch = useDispatch();
+
+    const onSubmit = (data: Inputs) => dispatch(submit(data));
 
     return (
         <WrapperForm onSubmit={handleSubmit(onSubmit)}>

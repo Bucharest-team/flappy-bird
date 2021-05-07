@@ -1,8 +1,9 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
-import { Game } from './game'
-import { CANVAS_DIMENSIONS } from './constants'
-import { Wrapper } from './main.style'
+import { Game } from './game';
+import { CANVAS_DIMENSIONS } from './constants';
+import { Wrapper } from './main.style';
 
 export const Main = () => {
     const canvas = React.useRef<HTMLCanvasElement | null>(null);
@@ -15,6 +16,10 @@ export const Main = () => {
 
         return game.destroy;
     }, []);
+
+    if (!localStorage.getItem('login')) {
+        return <Redirect to="/login" />;
+    }
 
     return (
         <Wrapper>
