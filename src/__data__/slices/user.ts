@@ -15,28 +15,35 @@ const user = createSlice({
         setUser: (state, action: PayloadAction<number>) => {
             state.userID = action.payload;
         },
+        setLogin: (state, action: PayloadAction<boolean>) => {
+            state.isLogin = action.payload;
+        }
     },
 });
-export const { setUser } = user.actions;
+export const { setUser, setLogin } = user.actions;
 
-export const auth = (payload: any) => (dispatch: any) => {
-    UserApi.login(payload)
-        .then(() => {
-            localStorage.setItem('login', 'true');
-        })
-        .catch(() => {
-            alert('Неверный логин или пароль!');
-        });
+export const checkLogin = () => (dispatch: any) => {
+    dispatch(setLogin(localStorage.getItem('login') === true));
 };
 
-export const register = (payload: any) => (dispatch: any) => {
-    UserApi.register(payload)
-        .then(() => {
-            localStorage.setItem('login', 'true');
-        })
-        .catch(() => {
-            alert('Произошла ошибка!');
-        });
+export const auth = (payload: any) => async (dispatch: any) => {
+    try {
+        await UserApi.login(payload);
+        localStorage.setItem('login', 'true');
+        dispatch(setLogin(true));
+    } catch (e) {
+        alert('Неверный логин или пароль!');
+    }
+};
+
+export const register = (payload: any) => async (dispatch: any) => {
+    try {
+        await UserApi.register(payload);
+        localStorage.setItem('login', 'true');
+        dispatch(setLogin(true));
+    } catch (e) {
+        alert('Неверный логин или пароль!');
+    }
 };
 
 export default user.reducer;

@@ -20,9 +20,9 @@ import { Wrapper, Link, Title } from './navigation.style';
 export const Navigation = () => {
     const [toggleMenu, setToggleMenu] = React.useState(false);
 
-    const toggleDrawer = () => {
+    const toggleDrawer = React.useCallback(() => {
         setToggleMenu(!toggleMenu);
-    };
+    }, [toggleMenu]);
 
     return (
         <React.Fragment>
@@ -54,44 +54,58 @@ export const Navigation = () => {
                     <List>
                         <Link to="/">
                             <ListItem button>
-                                <ListItemIcon><HomeIcon /></ListItemIcon>
+                                <ListItemIcon>
+                                    <HomeIcon />
+                                </ListItemIcon>
                                 <ListItemText primary="Главная" />
                             </ListItem>
                         </Link>
                         <Link to="/profile">
                             <ListItem button>
-                                <ListItemIcon><AccountCircle /></ListItemIcon>
+                                <ListItemIcon>
+                                    <AccountCircle />
+                                </ListItemIcon>
                                 <ListItemText primary="Профиль" />
                             </ListItem>
                         </Link>
                         <Link to="/register">
                             <ListItem button>
-                                <ListItemIcon><AccountCircle /></ListItemIcon>
+                                <ListItemIcon>
+                                    <AccountCircle />
+                                </ListItemIcon>
                                 <ListItemText primary="Регистрация" />
                             </ListItem>
                         </Link>
                         <Link to="/login">
                             <ListItem button>
-                                <ListItemIcon><AccountCircle /></ListItemIcon>
+                                <ListItemIcon>
+                                    <AccountCircle />
+                                </ListItemIcon>
                                 <ListItemText primary="Вход" />
                             </ListItem>
                         </Link>
                         <Divider />
                         <Link to="/game">
                             <ListItem button>
-                                <ListItemIcon><GameIcon /></ListItemIcon>
+                                <ListItemIcon>
+                                    <GameIcon />
+                                </ListItemIcon>
                                 <ListItemText primary="Играть" />
                             </ListItem>
                         </Link>
                         <Link to="/leaderboard">
                             <ListItem button>
-                                <ListItemIcon><SupervisedUserCircle /></ListItemIcon>
+                                <ListItemIcon>
+                                    <SupervisedUserCircle />
+                                </ListItemIcon>
                                 <ListItemText primary="Таблица лидеров" />
                             </ListItem>
                         </Link>
                         <Link to="/forum">
                             <ListItem button>
-                                <ListItemIcon><ForumIcon /></ListItemIcon>
+                                <ListItemIcon>
+                                    <ForumIcon />
+                                </ListItemIcon>
                                 <ListItemText primary="Форум" />
                             </ListItem>
                         </Link>
