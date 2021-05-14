@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserApi } from '../../api/user-api';
+import axios from '../axios';
 
 type SliceState = {
     userID: number | null;
@@ -7,6 +8,13 @@ type SliceState = {
 };
 
 const initialState: SliceState = { userID: null, isLogin: false };
+
+const LOGOUT_URL = '/auth/logout';
+
+export const logout = createAsyncThunk('auth/logout', async () => {
+    const { data } = await axios.post(LOGOUT_URL);
+    return data;
+});
 
 const user = createSlice({
     name: 'user',
@@ -19,6 +27,12 @@ const user = createSlice({
             state.isLogin = action.payload;
         }
     },
+    extraReducers: (builder) => {
+        builder.addCase(logout.fulfilled, (state) => {
+            localStorage.removeItem('login');
+            state.isLogin = false;
+        });
+    }
 });
 export const { setUser, setLogin } = user.actions;
 
