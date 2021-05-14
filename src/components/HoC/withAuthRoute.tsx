@@ -5,7 +5,7 @@ import { isLoggedIn } from '@selectors/user';
 
 export const withAuthRoute = (Component: any) => {
     return (props: any) => {
-        const isLogin = !useSelector(isLoggedIn);
+        const isLogin = useSelector(isLoggedIn);
 
         if (isLogin) {
             return <Redirect to="/" />;

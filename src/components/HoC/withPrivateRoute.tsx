@@ -9,7 +9,7 @@ export const withPrivateRoute = (Component: any) => {
     return (props: any) => {
         const isLogin = useSelector(isLoggedIn);
 
-        if (isLogin) {
+        if (!isLogin) {
             return <Redirect to={NavigationList.Login} />;
         }
         return <Component {...props} />;
