@@ -38,8 +38,8 @@ export const TitleInput = styled.label`
   left: 0;
   top: -17px;
   font-weight: 500;
-  font-size: 9px;
-  line-height: 9px;
+  font-size: 12px;
+  line-height: 12px;
   color: #999999;
   transition: all 0.2s;
 `;

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
+import { withPrivateRoute } from '../../hoc/with-private-route';
 import { Game } from './game';
 import { CANVAS_DIMENSIONS } from './constants';
 import { Wrapper } from './main.style';
 
-export const Main = () => {
+export const Main = withPrivateRoute(() => {
     const canvas = React.useRef<HTMLCanvasElement | null>(null);
 
     React.useEffect(() => {
@@ -26,4 +27,4 @@ export const Main = () => {
             <canvas ref={canvas} {...CANVAS_DIMENSIONS} />
         </Wrapper>
     );
-};
+});

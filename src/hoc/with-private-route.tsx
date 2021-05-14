@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { isLoggedIn } from '@selectors/user';
 
-import { Navigation as NavigationList } from '../../constants';
+import { Navigation as NavigationList } from '../constants';
 
 export const withPrivateRoute = (Component: any) => {
     return (props: any) => {

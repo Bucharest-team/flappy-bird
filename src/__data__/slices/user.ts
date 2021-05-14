@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserApi } from '../../api/userApi';
+import { UserApi } from '../../api/user-api';
 
 type SliceState = {
     userID: number | null;

@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { Navigation } from '../../constants';
+
+import { Inputs, Field, Prop } from './types';
 
 import {
     WrapperForm,
@@ -14,10 +15,6 @@ import {
     Link,
 } from './form.style';
 
-type Inputs = {
-    [key: string]: string;
-};
-
 const regularExp = {
     login: /^[a-zA-Z0-9_-]{3,16}$/,
     text: /^[а-яА-Яa-zA-Z0-9]{3,16}$/,
@@ -26,23 +23,6 @@ const regularExp = {
     mail: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
     all: /\w/,
 };
-
-type Field = {
-    name: string;
-    label: string;
-    error: string;
-    validation: string;
-    type: string;
-};
-
-interface Prop {
-    submit: Function;
-    title: string;
-    submitText: string;
-    fields: Array<Field>;
-    link: Navigation;
-    linkText: string;
-}
 
 export const Form = ({
     fields,
