@@ -15,9 +15,6 @@ module.exports = merge(commonConfig, {
         splitChunks: {
             chunks: 'all',
             name: 'chunk'
-        },
-        runtimeChunk: {
-            name: (entrypoint) => `runtime~${entrypoint.name}`
         }
     },
     plugins: [
