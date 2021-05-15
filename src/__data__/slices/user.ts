@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { AUTH_LOGOUT_FETCH } from '../action-types';
 import { UserApi } from '../../api/user-api';
 import axios from '../axios';
 
@@ -11,7 +13,7 @@ const initialState: SliceState = { userID: null, isLogin: false };
 
 const LOGOUT_URL = '/auth/logout';
 
-export const logout = createAsyncThunk('auth/logout', async () => {
+export const logout = createAsyncThunk(AUTH_LOGOUT_FETCH, async () => {
     const { data } = await axios.post(LOGOUT_URL);
     return data;
 });
