@@ -1,20 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Global, css } from '@emotion/react';
+import { Global } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
+import { StylesProvider } from '@material-ui/core';
 
 import { store } from './__data__/store';
 import { App } from './app';
 
 ReactDOM.render(
     <Provider store={store}>
-        <Global
-            styles={css`
-                ${emotionNormalize}
-            `}
-        />
-        <App />
+        <StylesProvider injectFirst>
+            <Global styles={emotionNormalize} />
+            <App />
+        </StylesProvider>
     </Provider>,
     document.getElementById('root')
 );

@@ -1,15 +1,15 @@
-const { merge } = require('webpack-merge')
+const { merge } = require("webpack-merge");
 
-const { BUILD_DIRECTORY } = require('../constants')
+const { BUILD_DIRECTORY } = require("../constants");
 
-const commonConfig = require('./webpack.common')
+const commonConfig = require("./webpack.common");
 
 module.exports = merge(commonConfig, {
     output: {
-        filename: 'index.js'
+        filename: "index.js",
     },
-    mode: 'development',
-    devtool: 'eval-cheap-module-source-map',
+    mode: "development",
+    devtool: "eval-cheap-module-source-map",
     devServer: {
         contentBase: BUILD_DIRECTORY,
         open: false,
@@ -19,20 +19,7 @@ module.exports = merge(commonConfig, {
         stats: { colors: true },
         port: 8080,
         quiet: false,
-        historyApiFallback: true
+        historyApiFallback: true,
     },
-    target: 'web',
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'eslint-loader'
-                    }
-                ]
-            }
-        ]
-    }
-})
+    target: "web",
+});
