@@ -7,7 +7,18 @@ import { BASE_RESOURCE_URL } from '../../constants';
 import { withPrivateRoute } from '../../hoc/with-private-route';
 
 import { useProfile } from './use-profile';
-import { Wrapper, Thumbnail, List, ListItemText, Link, Button, Buttons } from './profile.style';
+import {
+    Wrapper,
+    Thumbnail,
+    List,
+    ListItemText,
+    Link,
+    Button,
+    Buttons,
+    NoAvatar,
+    AvatarWrapper,
+    CameraIconStyled
+} from './profile.style';
 
 const ProfileInner = () => {
     const dispatch = useDispatch();
@@ -16,6 +27,10 @@ const ProfileInner = () => {
     const handleLogout = React.useCallback(() => {
         dispatch(logout());
     }, [dispatch]);
+
+    const handleUploadAvatar = React.useCallback(() => {
+        // TODO: upload avatar
+    }, []);
 
     if (isLoading) {
         return (
@@ -28,7 +43,14 @@ const ProfileInner = () => {
     return (
         <Container maxWidth="sm">
             <Wrapper>
-                <Thumbnail src={BASE_RESOURCE_URL + avatar} alt="" />
+                <AvatarWrapper onClick={handleUploadAvatar}>
+                    {avatar ? (
+                        <Thumbnail src={`${BASE_RESOURCE_URL}${avatar}`} alt="" />
+                    ) : (
+                        <NoAvatar color="primary" fontSize="large" />
+                    )}
+                    <CameraIconStyled fontSize="large" />
+                </AvatarWrapper>
                 <div>
                     <Typography variant="h4" color="inherit" display="block">
                         {first_name}

@@ -5,9 +5,7 @@ module.exports = {
         ecmaVersion: 2021,
         sourceType: 'module'
     },
-    plugins: [
-        'unicorn'
-    ],
+    plugins: ['unicorn'],
     rules: {
         '@typescript-eslint/semi': 'error',
         '@typescript-eslint/indent': ['warn', 4],
@@ -48,9 +46,9 @@ module.exports = {
         'unicorn/filename-case': [
             'error',
             {
-                'case': 'kebabCase'
-
+                case: 'kebabCase'
             }
-        ]
+        ],
+        'import/no-cycle': 'off'
     }
-}
+};

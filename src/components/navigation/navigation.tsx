@@ -14,10 +14,13 @@ import HomeIcon from '@material-ui/icons/Home';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 import { Wrapper, Link, Title } from './navigation.style';
+import type { Props } from './types';
 
-export const Navigation = () => {
+export const Navigation = ({ isAuth }: Props) => {
     const [toggleMenu, setToggleMenu] = React.useState(false);
 
     const toggleDrawer = React.useCallback(() => {
@@ -60,30 +63,36 @@ export const Navigation = () => {
                                 <ListItemText primary="Главная" />
                             </ListItem>
                         </Link>
-                        <Link to="/profile">
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <AccountCircle />
-                                </ListItemIcon>
-                                <ListItemText primary="Профиль" />
-                            </ListItem>
-                        </Link>
-                        <Link to="/register">
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <AccountCircle />
-                                </ListItemIcon>
-                                <ListItemText primary="Регистрация" />
-                            </ListItem>
-                        </Link>
-                        <Link to="/login">
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <AccountCircle />
-                                </ListItemIcon>
-                                <ListItemText primary="Вход" />
-                            </ListItem>
-                        </Link>
+                        {isAuth && (
+                            <Link to="/profile">
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <AccountCircle />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Профиль" />
+                                </ListItem>
+                            </Link>
+                        )}
+                        {!isAuth && (
+                            <React.Fragment>
+                                <Link to="/register">
+                                    <ListItem button>
+                                        <ListItemIcon>
+                                            <VpnKeyIcon />
+                                        </ListItemIcon>
+                                        <ListItemText primary="Регистрация" />
+                                    </ListItem>
+                                </Link>
+                                <Link to="/login">
+                                    <ListItem button>
+                                        <ListItemIcon>
+                                            <ExitToAppIcon />
+                                        </ListItemIcon>
+                                        <ListItemText primary="Вход" />
+                                    </ListItem>
+                                </Link>
+                            </React.Fragment>
+                        )}
                         <Divider />
                         <Link to="/game">
                             <ListItem button>
@@ -114,4 +123,8 @@ export const Navigation = () => {
             </Drawer>
         </React.Fragment>
     );
+};
+
+Navigation.defaultProps = {
+    isAuth: false
 };
