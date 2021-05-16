@@ -40,7 +40,10 @@ export const Form = ({
 
     const dispatch = useDispatch();
 
-    const onSubmit = (data: Inputs) => dispatch(submit(data));
+    const onSubmit = React.useCallback(
+        (data: Inputs) => dispatch(submit(data)),
+        [dispatch, submit]
+    );
 
     return (
         <WrapperForm onSubmit={handleSubmit(onSubmit)}>

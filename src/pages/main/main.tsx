@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 
 import { withPrivateRoute } from '../../hoc/with-private-route';
 import { Game } from './game';
@@ -17,10 +16,6 @@ export const Main = withPrivateRoute(() => {
 
         return game.destroy;
     }, []);
-
-    if (!localStorage.getItem('login')) {
-        return <Redirect to="/login" />;
-    }
 
     return (
         <Wrapper>

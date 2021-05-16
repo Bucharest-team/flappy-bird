@@ -17,13 +17,13 @@ const user = createSlice({
         },
         setLogin: (state, action: PayloadAction<boolean>) => {
             state.isLogin = action.payload;
-        }
+        },
     },
 });
 export const { setUser, setLogin } = user.actions;
 
 export const checkLogin = () => (dispatch: any) => {
-    dispatch(setLogin(Boolean(localStorage.getItem('login')) === true));
+    dispatch(setLogin(Boolean(localStorage.getItem('login'))));
 };
 
 export const auth = (payload: any) => async (dispatch: any) => {

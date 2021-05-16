@@ -8,18 +8,18 @@ const headersJson = {
 };
 
 export type Registration = {
-    first_name: 'string';
-    second_name: 'string';
-    login: 'string';
-    email: 'string';
-    password: 'string';
-    passwordTwo?: 'string';
-    phone: 'string';
+    first_name: string;
+    second_name: string;
+    login: string;
+    email: string;
+    password: string;
+    passwordTwo?: string;
+    phone: string;
 };
 
 export type Login = {
-    login: 'string';
-    password: 'string';
+    login: string;
+    password: string;
 };
 
 const STATUS_OK = 200;
