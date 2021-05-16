@@ -1,10 +1,15 @@
 module.exports = {
     extends: ['airbnb-typescript', 'airbnb/hooks'],
     parserOptions: {
-        project: './tsconfig.json'
+        project: './tsconfig.json',
+        ecmaVersion: 2021,
+        sourceType: 'module'
     },
+    plugins: [
+        'unicorn'
+    ],
     rules: {
-        '@typescript-eslint/semi': "error",
+        '@typescript-eslint/semi': 'error',
         '@typescript-eslint/indent': ['warn', 4],
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/comma-dangle': 'off',
@@ -37,6 +42,15 @@ module.exports = {
         'no-magic-numbers': 'warn',
         'react/jsx-tag-spacing': 'warn',
         'spaced-comment': 'off',
-        'max-len': 'off'
+        'max-len': 'off',
+        '@typescript-eslint/naming-convention': 'off',
+        'react/jsx-one-expression-per-line': 'off',
+        'unicorn/filename-case': [
+            'error',
+            {
+                'case': 'kebabCase'
+
+            }
+        ]
     }
 }

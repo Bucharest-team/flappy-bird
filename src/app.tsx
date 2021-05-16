@@ -7,6 +7,7 @@ import { checkLogin } from '@slices/user';
 import { Navigation as NavigationList } from './constants';
 import { Main } from './pages/main';
 import { Login, Register } from './pages/auth';
+import { Profile } from './pages/profile';
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export const App = () => {
                 <Route exact path="/" component={Main} />
                 <Route exact path={NavigationList.Login} component={Login} />
                 <Route exact path={NavigationList.Register} component={Register} />
+                <Route exact path={NavigationList.Profile} component={Profile} />
             </Switch>
         </ReactRouter>
     );
