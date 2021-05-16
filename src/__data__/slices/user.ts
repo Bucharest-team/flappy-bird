@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { AUTH_LOGOUT_FETCH, AUTH_SIGNIN, AUTH_SIGNUP } from '../action-types';
-import { UserApi } from '../../api/user-api';
 import axios from '../axios';
 
 type SliceState = {
@@ -40,7 +39,7 @@ export const auth = createAsyncThunk(AUTH_SIGNIN, async (payload: Login) => {
     return data;
 });
 
-export const register = createAsyncThunk(AUTH_SIGNUP, async (payload: Login) => {
+export const register = createAsyncThunk(AUTH_SIGNUP, async (payload: Registration) => {
     const { data } = await axios.post(REGISTER_URL, payload);
     return data;
 });
