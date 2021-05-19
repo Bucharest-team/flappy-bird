@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { isLoggedIn } from '@selectors/user';
+import { isLoggedIn } from '@slices/user';
 
 import { Navigation as NavigationList } from '../constants';
 
