@@ -1,8 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { profileInfo } from '@selectors/profile';
-import { getProfileInfo } from '@slices/profile';
+import { getProfileInfo, profileInfo } from '@slices/profile';
 
 export function useProfile() {
     const dispatch = useDispatch();

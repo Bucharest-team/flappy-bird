@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AUTH_LOGOUT_FETCH, AUTH_SIGNIN, AUTH_SIGNUP } from '../action-types';
 import axios from '../axios';
 
+
 type SliceState = {
     userID: number | null;
     isLogin: boolean;
@@ -83,3 +84,5 @@ export const checkLogin = () => (dispatch: any) => {
 };
 
 export default user.reducer;
+
+export const isLoggedIn = (state: RootState) => Boolean(state.user.isLogin) === true;

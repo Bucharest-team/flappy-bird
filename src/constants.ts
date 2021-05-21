@@ -1,4 +1,5 @@
 export enum Navigation {
+    Main = '/',
     Login = '/login',
     Register = '/register',
     Profile = '/profile'

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
+import { RootState } from '../store';
 import axios from '../axios';
 import { PROFILE_FETCH } from '../action-types';
 
@@ -49,7 +50,7 @@ const profile = createSlice({
         builder.addCase(getProfileInfo.fulfilled, (state, action: PayloadAction<Info>) => {
             state.isLoading = false;
             Object.entries(action.payload).forEach(([key, value]) => {
-                // @ts-ignore, не знаю как поправить ворнинг
+                // @ts-ignore
                 state[key] = value ?? '';
             });
         });
@@ -60,3 +61,5 @@ const profile = createSlice({
 });
 
 export default profile.reducer;
+
+export const profileInfo = (state: RootState) => state.profile;
