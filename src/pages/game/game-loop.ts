@@ -1,3 +1,6 @@
+import { changeScreen, currentScreenSize } from '@slices/game';
+import { store, Store } from '../../__data__/store';
+
 import { Background } from './components/background';
 import { Bird } from './components/bird';
 import { GameOver } from './components/game-over';
@@ -7,7 +10,7 @@ import { Score } from './components/score';
 import { ContextType, GameGlobalState, GameStatus } from './types';
 
 export class GameLoop {
-    private globalState: GameGlobalState;
+    public globalState: GameGlobalState;
     private canvas: HTMLCanvasElement | null;
     private requestAnimationFrameId!: number;
 
@@ -17,11 +20,15 @@ export class GameLoop {
     private readonly gameOver: GameOver;
     private readonly pipes: Pipes;
     private readonly score: Score;
+    private store: Store;
 
     constructor(ctx: ContextType, canvas: HTMLCanvasElement | null) {
+        this.store = store;
+
         this.globalState = {
             status: 0,
-            frames: 0
+            frames: 0,
+            isFullScreen: currentScreenSize(this.store.getState())
         };
 
         this.canvas = canvas;
@@ -36,8 +43,17 @@ export class GameLoop {
 
     init() {
         this.canvas?.addEventListener('click', this.updateGameStatus);
+        document.addEventListener('keypress', this.handleKeyPress);
         this.loop();
     }
+
+    private handleKeyPress = (event: KeyboardEvent) => {
+        event.preventDefault();
+        if (event.code === 'Enter') {
+            this.store.dispatch(changeScreen());
+            this.globalState.isFullScreen = !this.globalState.isFullScreen;
+        }
+    };
 
     private updateGameStatus = () => {
         const { status } = this.globalState;
@@ -54,6 +70,7 @@ export class GameLoop {
 
     destroy = () => {
         this.canvas?.removeEventListener('click', this.updateGameStatus);
+        document.removeEventListener('keypress', this.handleKeyPress);
         cancelAnimationFrame(this.requestAnimationFrameId);
     };
 

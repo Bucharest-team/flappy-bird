@@ -1,6 +1,18 @@
+/* eslint-disable no-magic-numbers */
 import { Component } from '../component';
-import { CANVAS_DIMENSIONS } from '../constants';
+import { getCanvasDimensions } from '../constants';
 import { ContextType, GameGlobalState, GameStatus } from '../types';
+
+const ValueStatusCoords = {
+    fullX: 305,
+    x: 225,
+    y: 186
+};
+const BestValueStatusCoords = {
+    fullX: 305,
+    x: 225,
+    y: 228,
+};
 
 export class Score extends Component {
     value = 0;
@@ -20,7 +32,8 @@ export class Score extends Component {
     draw() {
         if (!this.ctx) return;
 
-        const { status } = this.globalState;
+        const { status, isFullScreen } = this.globalState;
+        const CANVAS_DIMENSIONS = getCanvasDimensions(isFullScreen);
 
         this.ctx.fillStyle = '#FFF';
         this.ctx.strokeStyle = '#000';
@@ -33,13 +46,15 @@ export class Score extends Component {
             return;
         }
 
+        const horizontalCoord = isFullScreen ? ValueStatusCoords.fullX : ValueStatusCoords.x;
+
         if (status === GameStatus.Over) {
             this.ctx.font = '25px Teko';
-            this.ctx.fillText(String(this.value), 225, 186);
-            this.ctx.strokeText(String(this.value), 225, 186);
+            this.ctx.fillText(String(this.value), horizontalCoord, ValueStatusCoords.y);
+            this.ctx.strokeText(String(this.value), horizontalCoord, ValueStatusCoords.y);
 
-            this.ctx.fillText(String(this.best), 225, 228);
-            this.ctx.strokeText(String(this.best), 225, 228);
+            this.ctx.fillText(String(this.best), horizontalCoord, BestValueStatusCoords.y);
+            this.ctx.strokeText(String(this.best), horizontalCoord, BestValueStatusCoords.y);
         }
     }
 
