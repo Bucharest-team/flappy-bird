@@ -1,13 +1,16 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
+import { currentScreenSize } from '@slices/game';
 import { withPrivateRoute } from '../../hoc/with-private-route';
+
 import { GameLoop } from './game-loop';
-import { CANVAS_DIMENSIONS } from './constants';
-import { Wrapper } from './game.style';
+import { getCanvasDimensions } from './constants';
+import { Wrapper, Title } from './game.style';
 
 export const Game = withPrivateRoute(() => {
     const canvas = React.useRef<HTMLCanvasElement | null>(null);
+    const isFullScreen = useSelector(currentScreenSize);
 
     React.useEffect(() => {
         const ctx = canvas.current?.getContext('2d');
@@ -18,13 +21,26 @@ export const Game = withPrivateRoute(() => {
         return game.destroy;
     }, []);
 
-    if (!localStorage.getItem('login')) {
-        return <Redirect to="/login" />;
-    }
+    React.useEffect(() => {
+        if (isFullScreen && !document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        }
+
+        if (!isFullScreen && document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }, [isFullScreen]);
 
     return (
-        <Wrapper>
-            <canvas ref={canvas} {...CANVAS_DIMENSIONS} />
-        </Wrapper>
+        <React.Fragment>
+            <Title variant="h2">
+                {isFullScreen
+                    ? 'Чтобы выйти из полноэкранного режима нажмите Enter'
+                    : 'Чтобы перейти в полноэкранный режим нажмите Enter'}
+            </Title>
+            <Wrapper fullScreen={isFullScreen}>
+                <canvas ref={canvas} {...getCanvasDimensions(isFullScreen)} />
+            </Wrapper>
+        </React.Fragment>
     );
 });

@@ -1,7 +1,8 @@
+/* eslint-disable no-magic-numbers */
 import { Component } from '../component';
 import { ContextType, GameGlobalState, GameStatus } from '../types';
 
-import { CANVAS_DIMENSIONS, FOREGROUND_HEIGHT } from '../constants';
+import { FOREGROUND_HEIGHT, getCanvasDimensions } from '../constants';
 
 const DEFAULT_COORD = 150;
 const DEFAULT_SPEED = 0;
@@ -71,8 +72,9 @@ export class Bird extends Component {
 
     // проверка соприкосновения с землей
     private checkGround() {
-        const { status } = this.globalState;
+        const { status, isFullScreen } = this.globalState;
         const { y, h, jump } = this.state;
+        const CANVAS_DIMENSIONS = getCanvasDimensions(isFullScreen);
 
         if (y + h / 2 >= CANVAS_DIMENSIONS.height - FOREGROUND_HEIGHT) {
             this.state.y = CANVAS_DIMENSIONS.height - FOREGROUND_HEIGHT - h / 2;
