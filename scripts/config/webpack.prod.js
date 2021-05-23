@@ -1,8 +1,8 @@
-const { merge } = require('webpack-merge')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const path = require('path')
+const { merge } = require('webpack-merge');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
-const commonConfig = require('./webpack.common')
+const commonConfig = require('./webpack.common');
 
 module.exports = merge(commonConfig, {
     output: {
@@ -16,15 +16,5 @@ module.exports = merge(commonConfig, {
             chunks: 'all',
             name: 'chunk'
         }
-    },
-    plugins: [
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: path.resolve(__dirname, '../../static/assets'),
-                    to: path.resolve(__dirname, '../../build/assets')
-                }
-            ]
-        })
-    ]
-})
+    }
+});

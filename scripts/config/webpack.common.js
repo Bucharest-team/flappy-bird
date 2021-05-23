@@ -1,8 +1,8 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path');
 
-const { SOURCE_DIRECTORY, BUILD_DIRECTORY } = require('../constants')
+const { SOURCE_DIRECTORY, BUILD_DIRECTORY } = require('../constants');
 
 module.exports = {
     entry: SOURCE_DIRECTORY,
@@ -30,7 +30,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: 'images/[name]-[hash:5].[ext]'
+                            name: 'assets/[name]-[hash:5].[ext]'
                         }
                     }
                 ]
@@ -66,4 +66,4 @@ module.exports = {
             minify: false
         })
     ]
-}
+};

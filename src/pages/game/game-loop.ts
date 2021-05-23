@@ -4,11 +4,11 @@ import { GameOver } from './components/game-over';
 import { GetReady } from './components/get-ready';
 import { Pipes } from './components/pipes';
 import { Score } from './components/score';
-import { GameState } from './game-state';
-import { ContextType, GameStatus } from './types';
+import { ContextType, GameGlobalState, GameStatus } from './types';
 
-export class Game extends GameState {
-    private canvas?: HTMLCanvasElement;
+export class GameLoop {
+    private globalState: GameGlobalState;
+    private canvas: HTMLCanvasElement | null;
     private requestAnimationFrameId!: number;
 
     private readonly background: Background;
@@ -18,8 +18,11 @@ export class Game extends GameState {
     private readonly pipes: Pipes;
     private readonly score: Score;
 
-    constructor(ctx: ContextType, canvas?: HTMLCanvasElement) {
-        super();
+    constructor(ctx: ContextType, canvas: HTMLCanvasElement | null) {
+        this.globalState = {
+            status: 0,
+            frames: 0
+        };
 
         this.canvas = canvas;
 
@@ -53,6 +56,26 @@ export class Game extends GameState {
         this.canvas?.removeEventListener('click', this.updateGameStatus);
         cancelAnimationFrame(this.requestAnimationFrameId);
     };
+
+    private set gameStatus(status: GameStatus) {
+        this.globalState.status = status;
+    }
+
+    setPlaying() {
+        this.gameStatus = GameStatus.Playing;
+    }
+
+    setStart() {
+        this.gameStatus = GameStatus.Start;
+    }
+
+    setGameOver() {
+        this.gameStatus = GameStatus.Over;
+    }
+
+    incrementFrame() {
+        this.globalState.frames += 1;
+    }
 
     private draw() {
         this.background.draw();
