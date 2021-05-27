@@ -1,5 +1,6 @@
 import { changeScreen, currentScreenSize } from '@slices/game';
-import { store, Store } from '../../__data__/store';
+import { Store } from '@reduxjs/toolkit';
+import store from '../../../__data__/store';
 
 import { Background } from './components/background';
 import { Bird } from './components/bird';

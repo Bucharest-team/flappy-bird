@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 export enum Navigation {
     Main = '/',
     Login = '/login',

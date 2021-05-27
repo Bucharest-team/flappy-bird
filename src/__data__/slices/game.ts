@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from '../store';
+import { RootState } from '../types';
 
-type State = {
+export type State = {
     isFullScreen: boolean
 };
 
-const initialState: State = {
+export const initialState: State = {
     isFullScreen: false
 };
 

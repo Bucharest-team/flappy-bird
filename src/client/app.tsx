@@ -1,13 +1,16 @@
 import React from 'react';
+import { Global } from '@emotion/react';
+import { Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from '@components/navigation';
-import { BrowserRouter as ReactRouter, Route, Switch } from 'react-router-dom';
+import { StylesProvider } from '@material-ui/core';
 
 import { checkLogin, isLoggedIn } from '@slices/user';
 import { Navigation as NavigationList } from './constants';
 import { Game } from './pages/game';
 import { Login, Register } from './pages/auth';
 import { Profile } from './pages/profile';
+import { globalStyles } from './global-styles';
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -18,7 +21,8 @@ export const App = () => {
     }, [dispatch]);
 
     return (
-        <ReactRouter>
+        <StylesProvider injectFirst>
+            <Global styles={globalStyles} />
             <Navigation isAuth={isAuth} />
             <Switch>
                 <Route exact path={NavigationList.Game} component={Game} />
@@ -26,6 +30,6 @@ export const App = () => {
                 <Route exact path={NavigationList.Register} component={Register} />
                 <Route exact path={NavigationList.Profile} component={Profile} />
             </Switch>
-        </ReactRouter>
+        </StylesProvider>
     );
 };

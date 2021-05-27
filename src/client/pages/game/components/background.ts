@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { getCanvasDimensions } from '../constants';
 
 import { Component } from '../component';

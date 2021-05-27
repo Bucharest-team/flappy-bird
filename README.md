@@ -1,4 +1,5 @@
 # Flappy-Bird
+> Пример реализации игры Flappy-Bird в связке с server side rendering.
 
 ## [Demo](https://flappy-bird-bucharest.herokuapp.com) - ссылка на демонстрацию приложения
 
