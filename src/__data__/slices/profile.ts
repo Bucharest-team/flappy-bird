@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { RootState } from '../store';
+import { RootState } from '../types';
 import axios from '../axios';
 
 const PROFILE_FETCH = 'profile/fetch';
 
-type State = {
+export type State = {
     avatar: string | null;
     email: string;
     login: string;
@@ -20,7 +20,7 @@ type State = {
 
 type Info = Omit<State, 'isLoading' | 'hasError'>;
 
-const initialState: State = {
+export const initialState: State = {
     avatar: null,
     email: '',
     login: '',

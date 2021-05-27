@@ -1,17 +1,47 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { routerMiddleware, RouterState } from 'connected-react-router';
+import { createBrowserHistory, createMemoryHistory } from 'history';
 
-import user from './slices/user';
-import profile from './slices/profile';
-import game from './slices/game';
+import { isServer } from '@utils/is-server';
 
-export const store = configureStore({
-    reducer: {
-        user,
-        profile,
-        game
+import { RootState } from './types';
+import { createRootReducer } from './slices';
+import { initialState as UserState } from './slices/user';
+import { initialState as ProfileState } from './slices/profile';
+import { initialState as GameState } from './slices/game';
+
+export const createReduxStore = (initialState = {}, url = '/') => {
+    const preloadedState = !isServer ? window.__PRELOADED_STATE__ : initialState;
+
+    if (!isServer) {
+        delete window.__PRELOADED_STATE__;
     }
-});
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export type Store = typeof store;
+    const history = isServer
+        ? createMemoryHistory({ initialEntries: [url] })
+        : createBrowserHistory();
+    const middleware = [...getDefaultMiddleware(), routerMiddleware(history)];
+
+    const store = configureStore({
+        reducer: createRootReducer(history),
+        preloadedState,
+        middleware,
+        devTools: !isServer
+    });
+
+    return { store, history };
+};
+
+export default createReduxStore().store;
+
+export const getInitialState = (pathname: string = '/'): RootState => {
+    return {
+        user: UserState,
+        profile: ProfileState,
+        game: GameState,
+        router: {
+            location: { pathname, search: '', hash: '', key: '' },
+            action: 'POP'
+        } as unknown as RouterState,
+    };
+};

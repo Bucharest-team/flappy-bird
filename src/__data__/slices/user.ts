@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { RootState } from '../types';
 import axios from '../axios';
 
 const AUTH_LOGOUT_FETCH = 'auth/logout';
 const AUTH_SIGNIN = 'auth/signin';
 const AUTH_SIGNUP = 'auth/signup';
 
-type SliceState = {
+export type SliceState = {
     userID: number | null;
     isLogin: boolean;
 };
@@ -26,7 +27,7 @@ export type Login = {
     password: string;
 };
 
-const initialState: SliceState = { userID: null, isLogin: false };
+export const initialState: SliceState = { userID: null, isLogin: false };
 
 const LOGOUT_URL = '/auth/logout';
 const LOGIN_URL = '/auth/signin';

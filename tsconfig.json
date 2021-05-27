@@ -15,13 +15,14 @@
         "moduleResolution": "node",
         "baseUrl": "./src",
         "paths": {
-            "@selectors/*": ["__data__/selectors/*"],
             "@slices/*": ["__data__/slices/*"],
-            "@components/*": ["components/*"],
+            "@components/*": ["client/components/*"],
             "@utils/*": ["utils/*"],
-            "@hooks/*": ["hooks/*"]
-        }
+            "@hooks/*": ["client/hooks/*"]
+        },
+        "typeRoots": [
+            "./@types"
+        ]
     },
-    "include": ["./src/**/*"],
     "exclude": ["node_modules", "build"]
 }

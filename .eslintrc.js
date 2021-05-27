@@ -3,9 +3,17 @@ module.exports = {
     parserOptions: {
         project: './tsconfig.json',
         ecmaVersion: 2021,
-        sourceType: 'module'
+        sourceType: 'module',
+        ecmaFeatures: {
+            jsx: true,
+        },
+        warnOnUnsupportedTypeScriptVersion: false,
     },
     plugins: ['unicorn'],
+    env: {
+        es6: true,
+        node: true,
+    },
     rules: {
         '@typescript-eslint/semi': 'error',
         '@typescript-eslint/indent': ['warn', 4],
@@ -50,6 +58,10 @@ module.exports = {
             }
         ],
         'import/no-cycle': 'off',
-        'no-confusing-arrow': 'off'
+        'no-confusing-arrow': 'off',
+        'no-underscore-dangle': 'off',
+        'import/no-extraneous-dependencies': 'off',
+        '@typescript-eslint/no-shadow': 'warn',
+        'implicit-arrow-linebreak': 'off'
     }
 };

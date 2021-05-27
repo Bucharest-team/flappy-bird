@@ -3,10 +3,11 @@
     "version": "1.0.0",
     "description": "flappy-bird",
     "scripts": {
-        "start": "cross-env NODE_ENV=development webpack serve --config=\"scripts/config/webpack.dev.js\"",
-        "dev": "cross-env NODE_ENV=development webpack --config=\"scripts/config/webpack.dev.js\"",
-        "build": "cross-env NODE_ENV=production webpack --config=\"scripts/config/webpack.prod.js\"",
-        "serve": "serve \"./build\" -s",
+        "start": "npm run clean && cross-env NODE_ENV=development npm-run-all --print-label start:*",
+        "start:client": "cross-env NODE_ENV=development webpack",
+        "start:server": "nodemon index.js --watch build/server.js",
+        "build": "npm run clean && cross-env NODE_ENV=production webpack",
+        "clean": "rimraf build",
         "eslint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
         "eslint:fix": "eslint ./src --fix",
         "test": "jest",
@@ -17,9 +18,11 @@
         "type": "git",
         "url": "git+https://github.com/Bucharest-team/flappy-bird.git"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "keywords": [
+        "dev-team",
+        "typescript",
+        "flappy-bird"
+    ],
     "dependencies": {
         "@emotion/react": "11.1.5",
         "@emotion/styled": "11.3.0",
@@ -27,8 +30,9 @@
         "@material-ui/icons": "4.11.2",
         "@reduxjs/toolkit": "1.5.1",
         "axios": "0.21.1",
+        "connected-react-router": "6.9.1",
         "emotion-normalize": "11.0.1",
-        "express": "4.17.1",
+        "history": "4.9.0",
         "react": "17.0.2",
         "react-dom": "17.0.2",
         "react-hook-form": "7.3.6",
@@ -44,12 +48,15 @@
         "@babel/preset-typescript": "^7.13.0",
         "@emotion/babel-plugin": "^11.3.0",
         "@types/enzyme": "^3.10.8",
+        "@types/express": "4.17.12",
         "@types/jest": "^26.0.23",
         "@types/node": "^14.14.41",
         "@types/react": "^17.0.2",
         "@types/react-dom": "^17.0.2",
+        "@types/react-helmet": "6.1.1",
         "@types/react-router-dom": "^5.1.7",
         "@types/redux-mock-store": "^1.0.2",
+        "@types/serialize-javascript": "5.0.0",
         "@typescript-eslint/eslint-plugin": "^4.22.0",
         "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
         "babel-loader": "^8.2.2",
@@ -64,28 +71,36 @@
         "eslint-plugin-react": "^7.23.2",
         "eslint-plugin-react-hooks": "^4.2.0",
         "eslint-plugin-unicorn": "^32.0.1",
-        "file-loader": "^6.2.0",
+        "express": "4.17.1",
         "html-webpack-plugin": "5.3.1",
-        "jest": "^26.6.3",
-        "mini-css-extract-plugin": "1.4.1",
+        "jest": "26.6.3",
+        "nodemon": "2.0.7",
+        "npm-run-all": "4.1.5",
+        "null-loader": "4.0.1",
+        "react-router": "5.2.0",
         "redux-mock-store": "^1.5.4",
-        "serve": "11.3.2",
-        "ts-node": "^9.1.1",
+        "rimraf": "3.0.2",
+        "serialize-javascript": "5.0.1",
+        "ts-node": "9.1.1",
+        "tsconfig-paths-webpack-plugin": "3.5.1",
         "typescript": "4.2.4",
         "webpack": "5.31.0",
         "webpack-cli": "4.6.0",
         "webpack-dev-server": "3.11.2",
-        "webpack-merge": "5.7.3"
+        "webpack-merge": "5.7.3",
+        "webpack-node-externals": "3.0.0"
     },
+    "author": "Bucharest-team",
+    "contributors": [
+        "bazarbaeff2011@gmail.com"
+    ],
+    "license": "ISC",
     "browserslist": [
         "defaults",
         "not IE 11"
     ],
     "engines": {
         "node": ">=12"
-    },
-    "bugs": {
-        "url": "https://github.com/Bucharest-team/flappy-bird/issues"
     },
     "homepage": "https://github.com/Bucharest-team/flappy-bird#readme"
 }
