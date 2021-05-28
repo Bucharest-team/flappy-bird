@@ -3,7 +3,6 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import axios from '../axios';
 
-// action-types
 const PROFILE_FETCH = 'profile/fetch';
 
 type State = {
