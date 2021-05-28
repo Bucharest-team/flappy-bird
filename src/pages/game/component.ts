@@ -1,4 +1,4 @@
-import sprite from '../../images/sprite.png';
+import sprite from '../../assets/sprite.png';
 
 import { ContextType } from './types';
 

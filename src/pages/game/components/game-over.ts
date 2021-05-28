@@ -1,4 +1,5 @@
-import { CANVAS_DIMENSIONS } from '../constants';
+/* eslint-disable no-magic-numbers */
+import { getCanvasDimensions } from '../constants';
 
 import { Component } from '../component';
 import { ContextType, GameGlobalState, GameStatus } from '../types';
@@ -12,7 +13,7 @@ export class GameOver extends Component {
         sY: 228,
         w: 225,
         h: 202,
-        x: CANVAS_DIMENSIONS.width / 2 - 225 / 2,
+        x: 225 / 2,
         y: 90
     };
 
@@ -25,10 +26,11 @@ export class GameOver extends Component {
         if (!this.ctx) return;
 
         const { sX, sY, w, h, x, y } = this.state;
-        const { status } = this.globalState;
+        const { status, isFullScreen } = this.globalState;
+        const CANVAS_DIMENSIONS = getCanvasDimensions(isFullScreen);
 
         if (status === GameStatus.Over) {
-            this.ctx.drawImage(this.sprite, sX, sY, w, h, x, y, w, h);
+            this.ctx.drawImage(this.sprite, sX, sY, w, h, CANVAS_DIMENSIONS.width / 2 - x, y, w, h);
         }
     }
 }

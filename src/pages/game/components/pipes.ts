@@ -1,5 +1,6 @@
+/* eslint-disable no-magic-numbers */
 import { Component } from '../component';
-import { CANVAS_DIMENSIONS } from '../constants';
+import { getCanvasDimensions } from '../constants';
 import { ContextType, GameGlobalState, GameStatus } from '../types';
 import { Bird } from './bird';
 import { Score } from './score';
@@ -49,9 +50,10 @@ export class Pipes extends Component {
     }
 
     update() {
-        const { frames } = this.globalState;
+        const { frames, isFullScreen } = this.globalState;
         const { w, h, gap, maxYPos, dx } = this.state;
         const bird = this.bird.state;
+        const CANVAS_DIMENSIONS = getCanvasDimensions(isFullScreen);
 
         if (this.globalState.status !== GameStatus.Playing) return;
 

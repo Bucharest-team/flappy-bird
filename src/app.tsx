@@ -5,7 +5,7 @@ import { BrowserRouter as ReactRouter, Route, Switch } from 'react-router-dom';
 
 import { checkLogin, isLoggedIn } from '@slices/user';
 import { Navigation as NavigationList } from './constants';
-import { Main } from './pages/main';
+import { Game } from './pages/game';
 import { Login, Register } from './pages/auth';
 import { Profile } from './pages/profile';
 
@@ -21,7 +21,7 @@ export const App = () => {
         <ReactRouter>
             <Navigation isAuth={isAuth} />
             <Switch>
-                <Route exact path={NavigationList.Main} component={Main} />
+                <Route exact path={NavigationList.Game} component={Game} />
                 <Route exact path={NavigationList.Login} component={Login} />
                 <Route exact path={NavigationList.Register} component={Register} />
                 <Route exact path={NavigationList.Profile} component={Profile} />

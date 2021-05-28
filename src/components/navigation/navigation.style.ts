@@ -3,15 +3,16 @@ import { Link as RouterLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 
 export const Wrapper = styled.div`
-  width: 300px;
+    width: 300px;
 `;
 
 export const Title = styled(Typography)`
-  flex-grow: 1;
-  margin-left: 16px;
+    flex-grow: 1;
+    margin-left: 16px;
+    user-select: none;
 `;
 
 export const Link = styled(RouterLink)`
-  text-decoration: none;
-  color: inherit;
+    text-decoration: none;
+    color: inherit;
 `;

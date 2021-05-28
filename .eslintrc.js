@@ -49,6 +49,7 @@ module.exports = {
                 case: 'kebabCase'
             }
         ],
-        'import/no-cycle': 'off'
+        'import/no-cycle': 'off',
+        'no-confusing-arrow': 'off'
     }
 };

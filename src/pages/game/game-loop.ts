@@ -1,14 +1,17 @@
+import { changeScreen, currentScreenSize } from '@slices/game';
+import { store, Store } from '../../__data__/store';
+
 import { Background } from './components/background';
 import { Bird } from './components/bird';
 import { GameOver } from './components/game-over';
 import { GetReady } from './components/get-ready';
 import { Pipes } from './components/pipes';
 import { Score } from './components/score';
-import { GameState } from './game-state';
-import { ContextType, GameStatus } from './types';
+import { ContextType, GameGlobalState, GameStatus } from './types';
 
-export class Game extends GameState {
-    private canvas?: HTMLCanvasElement;
+export class GameLoop {
+    public globalState: GameGlobalState;
+    private canvas: HTMLCanvasElement | null;
     private requestAnimationFrameId!: number;
 
     private readonly background: Background;
@@ -17,9 +20,16 @@ export class Game extends GameState {
     private readonly gameOver: GameOver;
     private readonly pipes: Pipes;
     private readonly score: Score;
+    private store: Store;
 
-    constructor(ctx: ContextType, canvas?: HTMLCanvasElement) {
-        super();
+    constructor(ctx: ContextType, canvas: HTMLCanvasElement | null) {
+        this.store = store;
+
+        this.globalState = {
+            status: 0,
+            frames: 0,
+            isFullScreen: currentScreenSize(this.store.getState())
+        };
 
         this.canvas = canvas;
 
@@ -33,8 +43,17 @@ export class Game extends GameState {
 
     init() {
         this.canvas?.addEventListener('click', this.updateGameStatus);
+        document.addEventListener('keypress', this.handleKeyPress);
         this.loop();
     }
+
+    private handleKeyPress = (event: KeyboardEvent) => {
+        event.preventDefault();
+        if (event.code === 'Enter') {
+            this.store.dispatch(changeScreen());
+            this.globalState.isFullScreen = !this.globalState.isFullScreen;
+        }
+    };
 
     private updateGameStatus = () => {
         const { status } = this.globalState;
@@ -51,8 +70,29 @@ export class Game extends GameState {
 
     destroy = () => {
         this.canvas?.removeEventListener('click', this.updateGameStatus);
+        document.removeEventListener('keypress', this.handleKeyPress);
         cancelAnimationFrame(this.requestAnimationFrameId);
     };
+
+    private set gameStatus(status: GameStatus) {
+        this.globalState.status = status;
+    }
+
+    setPlaying() {
+        this.gameStatus = GameStatus.Playing;
+    }
+
+    setStart() {
+        this.gameStatus = GameStatus.Start;
+    }
+
+    setGameOver() {
+        this.gameStatus = GameStatus.Over;
+    }
+
+    incrementFrame() {
+        this.globalState.frames += 1;
+    }
 
     private draw() {
         this.background.draw();
