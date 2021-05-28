@@ -2,7 +2,8 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { RootState } from '../store';
 import axios from '../axios';
-import { PROFILE_FETCH } from '../action-types';
+
+const PROFILE_FETCH = 'profile/fetch';
 
 type State = {
     avatar: string | null;

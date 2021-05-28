@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AUTH_LOGOUT_FETCH, AUTH_SIGNIN, AUTH_SIGNUP } from '../action-types';
 import axios from '../axios';
 
+const AUTH_LOGOUT_FETCH = 'auth/logout';
+const AUTH_SIGNIN = 'auth/signin';
+const AUTH_SIGNUP = 'auth/signup';
 
 type SliceState = {
     userID: number | null;
