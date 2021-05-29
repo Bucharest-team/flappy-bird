@@ -7,6 +7,7 @@ import { withPrivateRoute } from '../../hoc/with-private-route';
 import { GameLoop } from './game-loop';
 import { getCanvasDimensions } from './constants';
 import { Wrapper, Title } from './game.style';
+import { Meta } from '@components/meta';
 
 export const Game = withPrivateRoute(() => {
     const canvas = React.useRef<HTMLCanvasElement | null>(null);
@@ -33,6 +34,7 @@ export const Game = withPrivateRoute(() => {
 
     return (
         <React.Fragment>
+            <Meta title="Играть во Flappy-Bird" description="Запуск игры Flappy-Bird" />
             <Title variant="h2">
                 {isFullScreen
                     ? 'Чтобы выйти из полноэкранного режима нажмите Enter'

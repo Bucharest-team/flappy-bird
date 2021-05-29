@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { CircularProgress, Container, Divider, Typography } from '@material-ui/core';
 
 import { logout } from '@slices/user';
+import { Meta } from '@components/meta';
 import { BASE_RESOURCE_URL } from '../../constants';
 import { withPrivateRoute } from '../../hoc/with-private-route';
 
@@ -42,6 +43,7 @@ const ProfileInner = () => {
 
     return (
         <Container maxWidth="sm">
+            <Meta title="Профиль" description="Страница профиля" />
             <Wrapper>
                 <AvatarWrapper onClick={handleUploadAvatar}>
                     {avatar ? (

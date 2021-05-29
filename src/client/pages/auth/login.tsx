@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { Meta } from '@components/meta';
 import { auth } from '@slices/user';
 import { withAuthRoute } from '../../hoc/with-auth-route';
+
 import { Form } from './form';
 import { Navigation } from '../../constants';
 import { Wrapper } from './auth.style';
@@ -25,6 +27,7 @@ const FIELDS = [
 
 export const Login = withAuthRoute(() => (
     <Wrapper>
+        <Meta title="Логин" description="Страница логина" />
         <Form
             fields={FIELDS}
             submit={auth}

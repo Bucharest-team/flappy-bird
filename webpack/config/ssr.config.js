@@ -1,24 +1,26 @@
-const { join } = require('path');
 const nodeExternals = require('webpack-node-externals');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const { IS_DEV, BUILD_DIRECTORY, SOURCE_DIRECTORY } = require('../constants');
+const { ENVS } = require('../assets/env');
+const { DIST_DIR, SERVER_DIR } = require('../assets/dir');
 const jsLoader = require('../loaders/js');
 const assetsLoader = require('../loaders/assets');
+
+const { __DEV__ } = ENVS;
 
 module.exports = {
     target: 'node',
     node: { __dirname: false },
-    entry: join(SOURCE_DIRECTORY, 'server'),
-    mode: IS_DEV ? 'development' : 'production',
+    entry: SERVER_DIR,
+    mode: __DEV__ ? 'development' : 'production',
     module: {
         rules: [jsLoader.server, assetsLoader.server]
     },
     output: {
         filename: 'server.js',
         libraryTarget: 'commonjs2',
-        path: BUILD_DIRECTORY,
+        path: DIST_DIR,
         publicPath: '/'
     },
     resolve: {
@@ -29,11 +31,11 @@ module.exports = {
     externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
     devtool: 'source-map',
     plugins: [
-        !IS_DEV && new CopyWebpackPlugin({
+        new CopyWebpackPlugin({
             patterns: [
                 { from: './www/favicons', to: 'favicons' },
                 { from: './www/robots.txt', to: '' }
             ]
         })
-    ].filter(Boolean)
+    ]
 };
