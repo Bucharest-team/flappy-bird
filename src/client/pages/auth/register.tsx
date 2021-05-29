@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { register } from '@slices/user';
+import { Meta } from '@components/meta';
 import { withAuthRoute } from '../../hoc/with-auth-route';
+
 import { Form } from './form';
 import { Navigation } from '../../constants';
 import { Wrapper } from './auth.style';
@@ -53,6 +55,7 @@ const FIELDS = [
 
 export const Register = withAuthRoute(() => (
     <Wrapper>
+        <Meta title="Регистрация" description="Страница регистрации" />
         <Form
             fields={FIELDS}
             submit={register}

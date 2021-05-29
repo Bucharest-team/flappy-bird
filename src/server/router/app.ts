@@ -1,6 +1,6 @@
-import { Router } from 'express';
+import { ErrorRequestHandler, RequestHandler, Router } from 'express';
 
-import renderApp from '../middleware/render';
+import { render, cookieParser, csrfProtection } from '../middlewares';
 import { ROUTES } from '../../client/routes';
 
 const allRoutes = (function flatRoutes(routesMap: object): string[] {
@@ -11,6 +11,11 @@ const allRoutes = (function flatRoutes(routesMap: object): string[] {
     );
 }(ROUTES));
 
+const middleware: Array<RequestHandler | ErrorRequestHandler> = [
+    cookieParser,
+    csrfProtection
+];
+
 export function appRoutes(router: Router) {
-    router.get(allRoutes, renderApp);
+    router.get(allRoutes, middleware, render);
 }

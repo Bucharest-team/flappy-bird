@@ -3,6 +3,7 @@ import { Global } from '@emotion/react';
 import { Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from '@components/navigation';
+import { NotFoundPage } from '@components/404';
 import { StylesProvider } from '@material-ui/core';
 
 import { checkLogin, isLoggedIn } from '@slices/user';
@@ -25,10 +26,12 @@ export const App = () => {
             <Global styles={globalStyles} />
             <Navigation isAuth={isAuth} />
             <Switch>
+                <Route exact path="/" render={() => <h1>Main Page</h1>} />
                 <Route exact path={NavigationList.Game} component={Game} />
                 <Route exact path={NavigationList.Login} component={Login} />
                 <Route exact path={NavigationList.Register} component={Register} />
                 <Route exact path={NavigationList.Profile} component={Profile} />
+                <Route exact path="*" component={NotFoundPage} />
             </Switch>
         </StylesProvider>
     );

@@ -62,6 +62,8 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'import/no-extraneous-dependencies': 'off',
         '@typescript-eslint/no-shadow': 'warn',
-        'implicit-arrow-linebreak': 'off'
+        'implicit-arrow-linebreak': 'off',
+        'func-names': 'off',
+        'import/no-dynamic-require': 'off'
     }
 };
