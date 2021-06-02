@@ -12,6 +12,7 @@ import { Game } from './pages/game';
 import { Login, Register } from './pages/auth';
 import { Profile } from './pages/profile';
 import { globalStyles } from './global-styles';
+import { ProfileEdit } from './pages/profile/profile-edit';
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export const App = () => {
                 <Route exact path={NavigationList.Login} component={Login} />
                 <Route exact path={NavigationList.Register} component={Register} />
                 <Route exact path={NavigationList.Profile} component={Profile} />
+                <Route exact path={NavigationList.ProfileEdit} component={ProfileEdit} />
                 <Route exact path="*" component={NotFoundPage} />
             </Switch>
         </StylesProvider>

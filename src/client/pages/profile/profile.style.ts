@@ -16,12 +16,12 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     margin-top: 64px;
-    cursor: pointer;
     border-radius: 16px;
 `;
 
 export const AvatarWrapper = styled.div`
     position: relative;
+    cursor: pointer;
 `;
 
 export const Thumbnail = styled.img`
@@ -47,8 +47,7 @@ export const CameraIconStyled = styled(PhotoCameraIcon)`
 `;
 
 export const List = styled(MaterialList)`
-    margin-top: 32px;
-    margin-bottom: 16px;
+    margin: 16px 0;
 `;
 
 export const ListItemText = styled.li`
