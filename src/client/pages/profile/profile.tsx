@@ -28,7 +28,6 @@ const ProfileInner = () => {
     
     const handleLogout = React.useCallback(() => {
         dispatch(logout());
-        location.href = Navigation.Login;
     }, [dispatch]);
 
     const handleClickdAvatar = React.useCallback(() => {
@@ -36,7 +35,7 @@ const ProfileInner = () => {
         if (!element) return;
         element.click();
     }, []);
-    
+
     const handleUploadAvatar = React.useCallback(async () => {
         try {
             const inputNode: HTMLFormElement | null = document.querySelector('#avatar_form');
