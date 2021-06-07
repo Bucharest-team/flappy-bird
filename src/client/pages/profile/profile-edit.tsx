@@ -56,7 +56,7 @@ const ProfileEditInner = () => {
 
     const updateProperty = React.useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const newVal: any = {...profile};
-        newVal[event.target.id] = event.target.value;
+        newVal[event.target.name] = event.target.value;
         setProfile(newVal);
     }, [profile]);
     
@@ -88,12 +88,12 @@ const ProfileEditInner = () => {
                 </form>
 
                 <form onSubmit={handleSubmit}>
-                    <TextField id="first_name" margin="normal" required fullWidth label="Имя" value={profile.first_name} onChange={updateProperty} />
-                    <TextField id="second_name" margin="normal" required fullWidth label="Фамилия" value={profile.second_name} onChange={updateProperty} />
-                    <TextField id="display_name" margin="normal" required fullWidth label="Никнейм" value={profile.display_name} onChange={updateProperty} />
-                    <TextField id="login" margin="normal" required fullWidth label="Логин" value={profile.login} onChange={updateProperty} />
-                    <TextField id="email" margin="normal" required fullWidth label="Почта" value={profile.email} onChange={updateProperty} />
-                    <TextField id="phone" margin="normal" required fullWidth label="Телефон" value={profile.phone} onChange={updateProperty} />
+                    <TextField name="first_name" margin="normal" required fullWidth label="Имя" value={profile.first_name} onChange={updateProperty} />
+                    <TextField name="second_name" margin="normal" required fullWidth label="Фамилия" value={profile.second_name} onChange={updateProperty} />
+                    <TextField name="display_name" margin="normal" required fullWidth label="Никнейм" value={profile.display_name} onChange={updateProperty} />
+                    <TextField name="login" margin="normal" required fullWidth label="Логин" value={profile.login} onChange={updateProperty} />
+                    <TextField name="email" margin="normal" required fullWidth label="Почта" value={profile.email} onChange={updateProperty} />
+                    <TextField name="phone" margin="normal" required fullWidth label="Телефон" value={profile.phone} onChange={updateProperty} />
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}> Применить </Button>
                 </form>
             </div>
