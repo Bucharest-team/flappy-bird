@@ -1,18 +1,22 @@
-import React, { FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useRef, useState } from 'react';
 import { Container, CssBaseline, makeStyles, TextField } from '@material-ui/core';
 import { withPrivateRoute } from '../../hoc/with-private-route';
-import { TUpdateUserData, updateUserData } from '@slices/profile';
+import { TUpdateUserData, updateAvatar, updateUserData } from '@slices/profile';
 import { useProfile } from './use-profile';
-import Button from "@material-ui/core/Button";
-import { NoAvatar } from './profile.style';
+import Button from '@material-ui/core/Button';
+import { CameraIconStyled, NoAvatar } from './profile.style';
 import { BASE_RESOURCE_URL } from 'client/constants';
 
 const useStyles = makeStyles(theme => ({
     paper: {
       marginTop: theme.spacing(8),
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center"
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
+    },
+    avatarWrapper: {
+        cursor: 'pointer',
+        position: 'relative'
     },
     avatar: {
         width: '160px',
@@ -27,62 +31,70 @@ const useStyles = makeStyles(theme => ({
 const ProfileEditInner = () => {
     const classes = useStyles();
 
-    const [state] = useState(useProfile());
-    const [first_name, setFirstName] = useState(state.first_name);
-    const [second_name, setSecondName] = useState(state.second_name);
-    const [display_name, setDisplayName] = useState(state.display_name);
-    const [login, setLogin] = useState(state.login);
-    const [email, setEmail] = useState(state.email);
-    const [phone, setPhone] = useState(state.phone);
+    const { first_name, second_name, display_name, login, email, phone, avatar } = useProfile();
 
-    const handleSubmit = React.useCallback(async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const inputs = document.getElementsByTagName('input');
-        const data: Record<string, string> = {};
+    const [profile, setProfile] = useState({ first_name, second_name, display_name, login, email, phone });
+    const [avatarUrl, setAvatar] = useState(avatar);
 
-        for (let i = 0; i < inputs.length; i++) {
-            data[inputs[i].id] = inputs[i].value;
-        }
+    const avatarFormRef = useRef<HTMLFormElement>(null);
+    const avatarInputRef = useRef<HTMLInputElement>(null);
 
+    const handleClickdAvatar = React.useCallback(() => {
+        avatarInputRef.current?.click();
+    }, []);
+
+    const handleUploadAvatar = React.useCallback(async () => {
         try {
-            const result = await updateUserData(data as TUpdateUserData);
-            setFirstName(result.first_name);
-            setSecondName(result.second_name);
-            setDisplayName(result.display_name);
-            setLogin(result.login);
-            setEmail(result.email);
-            setPhone(result.phone);
+            const inputNode = avatarFormRef.current;
+            if (!inputNode) return;
+            const result = await updateAvatar(new FormData(inputNode));
+            setAvatar(result.avatar);
         } catch (err) {
             console.log(err);
         }
-    }, []);
+    }, [profile]);
+
+    const updateProperty = React.useCallback((event: ChangeEvent<HTMLInputElement>) => {
+        const newVal: any = {...profile};
+        newVal[event.target.id] = event.target.value;
+        setProfile(newVal);
+    }, [profile]);
+    
+    const handleSubmit = React.useCallback(async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        
+        try {
+            await updateUserData(profile as TUpdateUserData);
+        } catch (err) {
+            console.log(err);
+        }
+    }, [profile]);
 
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
-                {state.avatar ? (
-                    <img src={`${BASE_RESOURCE_URL}${state.avatar}`} className={classes.avatar} />
-                ) : (
-                    <NoAvatar color="primary" fontSize="large" />
-                )}
-                
+                <div className={classes.avatarWrapper} onClick={handleClickdAvatar}>
+                    {avatarUrl ? (
+                        <img src={`${BASE_RESOURCE_URL}${avatarUrl}`} className={classes.avatar} />
+                    ) : (
+                        <NoAvatar color="primary" fontSize="large" />
+                    )}
+                    <CameraIconStyled fontSize="large" />
+                </div>
+
+                <form ref={avatarFormRef} encType={'multipart/form-data'}>
+                    <input type="file" name="avatar" ref={avatarInputRef} hidden accept="image/*" onChange={handleUploadAvatar} />
+                </form>
+
                 <form onSubmit={handleSubmit}>
-                    <TextField id="first_name" margin="normal" required fullWidth label="Имя" value={first_name} 
-                        onChange={(event) => setFirstName(event.target.value)} />
-                    <TextField id="second_name" margin="normal" required fullWidth label="Фамилия" value={second_name} 
-                        onChange={(event) => setSecondName(event.target.value)} />
-                    <TextField id="display_name" margin="normal" required fullWidth label="Никнейм" value={display_name} 
-                        onChange={(event) => setDisplayName(event.target.value)} />
-                    <TextField id="login" margin="normal" required fullWidth label="Логин" value={login} 
-                        onChange={(event) => setLogin(event.target.value)} />
-                    <TextField id="email" margin="normal" required fullWidth label="Почта" value={email} 
-                        onChange={(event) => setEmail(event.target.value)} />
-                    <TextField id="phone" margin="normal" required fullWidth label="Телефон" value={phone} 
-                        onChange={(event) => setPhone(event.target.value)} />
-                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}> 
-                        Применить 
-                    </Button>
+                    <TextField id="first_name" margin="normal" required fullWidth label="Имя" value={profile.first_name} onChange={updateProperty} />
+                    <TextField id="second_name" margin="normal" required fullWidth label="Фамилия" value={profile.second_name} onChange={updateProperty} />
+                    <TextField id="display_name" margin="normal" required fullWidth label="Никнейм" value={profile.display_name} onChange={updateProperty} />
+                    <TextField id="login" margin="normal" required fullWidth label="Логин" value={profile.login} onChange={updateProperty} />
+                    <TextField id="email" margin="normal" required fullWidth label="Почта" value={profile.email} onChange={updateProperty} />
+                    <TextField id="phone" margin="normal" required fullWidth label="Телефон" value={profile.phone} onChange={updateProperty} />
+                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}> Применить </Button>
                 </form>
             </div>
         </Container>

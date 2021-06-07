@@ -21,7 +21,6 @@ export const Wrapper = styled.div`
 
 export const AvatarWrapper = styled.div`
     position: relative;
-    cursor: pointer;
 `;
 
 export const Thumbnail = styled.img`
@@ -42,7 +41,7 @@ export const NoAvatar = styled(AccountBoxIcon)`
 
 export const CameraIconStyled = styled(PhotoCameraIcon)`
     position: absolute;
-    right: 56px;
+    right: 8px;
     bottom: 8px;
 `;
 
