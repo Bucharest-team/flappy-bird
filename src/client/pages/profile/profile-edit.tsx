@@ -1,19 +1,19 @@
 import React, { ChangeEvent, FormEvent, useRef, useState } from 'react';
 import { Container, CssBaseline, makeStyles, TextField } from '@material-ui/core';
-import { withPrivateRoute } from '../../hoc/with-private-route';
 import { TUpdateUserData, updateAvatar, updateUserData } from '@slices/profile';
-import { useProfile } from './use-profile';
 import Button from '@material-ui/core/Button';
-import { CameraIconStyled, NoAvatar } from './profile.style';
 import { BASE_RESOURCE_URL } from 'client/constants';
 import { useDispatch } from 'react-redux';
+import { CameraIconStyled, NoAvatar } from './profile.style';
+import { useProfile } from './use-profile';
+import { withPrivateRoute } from '../../hoc/with-private-route';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     paper: {
-      marginTop: theme.spacing(8),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center'
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
     },
     avatarWrapper: {
         cursor: 'pointer',
@@ -22,10 +22,10 @@ const useStyles = makeStyles(theme => ({
     avatar: {
         width: '160px',
         height: '160px',
-        borderRadius:'16px'
+        borderRadius: '16px'
     },
     submit: {
-      margin: theme.spacing(3, 0, 2)
+        margin: theme.spacing(3, 0, 2)
     }
 }));
 
@@ -50,21 +50,16 @@ const ProfileEditInner = () => {
     }, [dispatch]);
 
     const updateProperty = React.useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const newVal = {...profile};
+        const newVal = { ...profile };
         // @ts-ignore
         newVal[event.target.name] = event.target.value;
         setProfile(newVal);
     }, [profile]);
-    
+
     const handleSubmit = React.useCallback(async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        
-        try {
-            await updateUserData(profile as TUpdateUserData);
-        } catch (err) {
-            console.log(err);
-        }
-    }, [profile]);
+        dispatch(updateUserData(profile as TUpdateUserData));
+    }, [dispatch, profile]);
 
     return (
         <Container component="main" maxWidth="xs">
@@ -79,7 +74,7 @@ const ProfileEditInner = () => {
                     <CameraIconStyled fontSize="large" />
                 </div>
 
-                <form ref={avatarFormRef} encType={'multipart/form-data'}>
+                <form ref={avatarFormRef} encType="multipart/form-data">
                     <input type="file" name="avatar" ref={avatarInputRef} hidden accept="image/*" onChange={handleUploadAvatar} />
                 </form>
 

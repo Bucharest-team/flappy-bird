@@ -13,7 +13,7 @@ export type TUpdateUserData = {
     login: string;
     email: string;
     phone: string;
-}
+};
 
 export type State = {
     avatar: string | null;
@@ -61,7 +61,6 @@ export const updateUserData = async (userData: TUpdateUserData): Promise<State> 
     const { data } = await axios.put(UPDATE_PROFILE_URL, userData);
     return data;
 };
-
 
 const profile = createSlice({
     name: 'profile',
