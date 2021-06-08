@@ -4,6 +4,7 @@ import { RootState } from '../types';
 import axios from '../axios';
 
 const PROFILE_FETCH = 'profile/fetch';
+const PROFILE_AVATAR_UPDATE = 'profile/avatar/update';
 
 export type TUpdateUserData = {
     first_name: string;
@@ -51,15 +52,16 @@ export const getProfileInfo = createAsyncThunk(PROFILE_FETCH, async () => {
     return data;
 });
 
+export const updateAvatar = createAsyncThunk(PROFILE_AVATAR_UPDATE, async (formData: FormData) => {
+    const { data } = await axios.put(USER_AVATAR_URL, formData);
+    return data;
+});
+
 export const updateUserData = async (userData: TUpdateUserData): Promise<State> => {
     const { data } = await axios.put(UPDATE_PROFILE_URL, userData);
     return data;
 };
 
-export const updateAvatar = async (formData: FormData): Promise<State> => {
-    const { data } = await axios.put(USER_AVATAR_URL, formData);
-    return data;
-};
 
 const profile = createSlice({
     name: 'profile',
@@ -78,6 +80,12 @@ const profile = createSlice({
         });
         builder.addCase(getProfileInfo.rejected, (state) => {
             state.isLoading = false;
+            state.hasError = true;
+        });
+        builder.addCase(updateAvatar.fulfilled, (state, action) => {
+            state.avatar = action.payload.avatar;
+        });
+        builder.addCase(updateAvatar.rejected, (state) => {
             state.hasError = true;
         });
     }

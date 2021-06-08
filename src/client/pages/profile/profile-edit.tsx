@@ -6,6 +6,7 @@ import { useProfile } from './use-profile';
 import Button from '@material-ui/core/Button';
 import { CameraIconStyled, NoAvatar } from './profile.style';
 import { BASE_RESOURCE_URL } from 'client/constants';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -29,12 +30,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProfileEditInner = () => {
+    const dispatch = useDispatch();
     const classes = useStyles();
 
     const { first_name, second_name, display_name, login, email, phone, avatar } = useProfile();
-
     const [profile, setProfile] = useState({ first_name, second_name, display_name, login, email, phone });
-    const [avatarUrl, setAvatar] = useState(avatar);
 
     const avatarFormRef = useRef<HTMLFormElement>(null);
     const avatarInputRef = useRef<HTMLInputElement>(null);
@@ -44,18 +44,14 @@ const ProfileEditInner = () => {
     }, []);
 
     const handleUploadAvatar = React.useCallback(async () => {
-        try {
-            const inputNode = avatarFormRef.current;
-            if (!inputNode) return;
-            const result = await updateAvatar(new FormData(inputNode));
-            setAvatar(result.avatar);
-        } catch (err) {
-            console.log(err);
-        }
-    }, [profile]);
+        const avatarFormNode = avatarFormRef.current;
+        if (!avatarFormNode) return;
+        dispatch(updateAvatar(new FormData(avatarFormNode)));
+    }, [dispatch]);
 
     const updateProperty = React.useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const newVal: any = {...profile};
+        const newVal = {...profile};
+        // @ts-ignore
         newVal[event.target.name] = event.target.value;
         setProfile(newVal);
     }, [profile]);
@@ -75,8 +71,8 @@ const ProfileEditInner = () => {
             <CssBaseline />
             <div className={classes.paper}>
                 <div className={classes.avatarWrapper} onClick={handleClickdAvatar}>
-                    {avatarUrl ? (
-                        <img src={`${BASE_RESOURCE_URL}${avatarUrl}`} className={classes.avatar} />
+                    {avatar ? (
+                        <img src={`${BASE_RESOURCE_URL}${avatar}`} className={classes.avatar} />
                     ) : (
                         <NoAvatar color="primary" fontSize="large" />
                     )}
