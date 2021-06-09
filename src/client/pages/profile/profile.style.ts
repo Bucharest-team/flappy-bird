@@ -16,7 +16,6 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     margin-top: 64px;
-    cursor: pointer;
     border-radius: 16px;
 `;
 
@@ -42,13 +41,12 @@ export const NoAvatar = styled(AccountBoxIcon)`
 
 export const CameraIconStyled = styled(PhotoCameraIcon)`
     position: absolute;
-    right: 56px;
+    right: 8px;
     bottom: 8px;
 `;
 
 export const List = styled(MaterialList)`
-    margin-top: 32px;
-    margin-bottom: 16px;
+    margin: 16px 0;
 `;
 
 export const ListItemText = styled.li`

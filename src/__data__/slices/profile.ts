@@ -4,6 +4,16 @@ import { RootState } from '../types';
 import axios from '../axios';
 
 const PROFILE_FETCH = 'profile/fetch';
+const PROFILE_AVATAR_UPDATE = 'profile/avatar/update';
+
+export type TUpdateUserData = {
+    first_name: string;
+    second_name: string;
+    display_name: string;
+    login: string;
+    email: string;
+    phone: string;
+};
 
 export type State = {
     avatar: string | null;
@@ -34,11 +44,25 @@ export const initialState: State = {
 };
 
 const USER_URL = '/auth/user';
+const USER_AVATAR_URL = '/user/profile/avatar';
+const UPDATE_PROFILE_URL = '/user/profile';
 
 export const getProfileInfo = createAsyncThunk(PROFILE_FETCH, async () => {
     const { data } = await axios.get(USER_URL);
     return data;
 });
+
+export const updateAvatar = createAsyncThunk(PROFILE_AVATAR_UPDATE, async (file: File) => {
+    const formData = new FormData();
+    formData.append('avatar', file);
+    const { data } = await axios.put(USER_AVATAR_URL, formData);
+    return data;
+});
+
+export const updateUserData = async (userData: TUpdateUserData): Promise<State> => {
+    const { data } = await axios.put(UPDATE_PROFILE_URL, userData);
+    return data;
+};
 
 const profile = createSlice({
     name: 'profile',
@@ -56,6 +80,13 @@ const profile = createSlice({
             });
         });
         builder.addCase(getProfileInfo.rejected, (state) => {
+            state.isLoading = false;
+            state.hasError = true;
+        });
+        builder.addCase(updateAvatar.fulfilled, (state, action) => {
+            state.avatar = action.payload.avatar;
+        });
+        builder.addCase(updateAvatar.rejected, (state) => {
             state.hasError = true;
         });
     }

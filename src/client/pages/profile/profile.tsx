@@ -17,8 +17,7 @@ import {
     Button,
     Buttons,
     NoAvatar,
-    AvatarWrapper,
-    CameraIconStyled
+    AvatarWrapper
 } from './profile.style';
 
 const ProfileInner = () => {
@@ -28,10 +27,6 @@ const ProfileInner = () => {
     const handleLogout = React.useCallback(() => {
         dispatch(logout());
     }, [dispatch]);
-
-    const handleUploadAvatar = React.useCallback(() => {
-        // TODO: upload avatar
-    }, []);
 
     if (isLoading) {
         return (
@@ -45,13 +40,12 @@ const ProfileInner = () => {
         <Container maxWidth="sm">
             <Meta title="Профиль" description="Страница профиля" />
             <Wrapper>
-                <AvatarWrapper onClick={handleUploadAvatar}>
+                <AvatarWrapper>
                     {avatar ? (
-                        <Thumbnail src={`${BASE_RESOURCE_URL}${avatar}`} alt="" />
+                        <Thumbnail src={`${BASE_RESOURCE_URL}${avatar}`} />
                     ) : (
                         <NoAvatar color="primary" fontSize="large" />
                     )}
-                    <CameraIconStyled fontSize="large" />
                 </AvatarWrapper>
                 <div>
                     <Typography variant="h4" color="inherit" display="block">
