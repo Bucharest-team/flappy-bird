@@ -52,7 +52,9 @@ export const getProfileInfo = createAsyncThunk(PROFILE_FETCH, async () => {
     return data;
 });
 
-export const updateAvatar = createAsyncThunk(PROFILE_AVATAR_UPDATE, async (formData: FormData) => {
+export const updateAvatar = createAsyncThunk(PROFILE_AVATAR_UPDATE, async (file: File) => {
+    const formData = new FormData();
+    formData.append('avatar', file);
     const { data } = await axios.put(USER_AVATAR_URL, formData);
     return data;
 });

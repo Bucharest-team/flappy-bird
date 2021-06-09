@@ -36,17 +36,16 @@ const ProfileEditInner = () => {
     const { first_name, second_name, display_name, login, email, phone, avatar } = useProfile();
     const [profile, setProfile] = useState({ first_name, second_name, display_name, login, email, phone });
 
-    const avatarFormRef = useRef<HTMLFormElement>(null);
     const avatarInputRef = useRef<HTMLInputElement>(null);
 
     const handleClickdAvatar = React.useCallback(() => {
         avatarInputRef.current?.click();
     }, []);
 
-    const handleUploadAvatar = React.useCallback(async () => {
-        const avatarFormNode = avatarFormRef.current;
-        if (!avatarFormNode) return;
-        dispatch(updateAvatar(new FormData(avatarFormNode)));
+    const handleUploadAvatar = React.useCallback((event: ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files;
+        if (!files || files.length === 0) return; 
+        dispatch(updateAvatar(files[0]));
     }, [dispatch]);
 
     const updateProperty = React.useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +55,7 @@ const ProfileEditInner = () => {
         setProfile(newVal);
     }, [profile]);
 
-    const handleSubmit = React.useCallback(async (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = React.useCallback((event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch(updateUserData(profile as TUpdateUserData));
     }, [dispatch, profile]);
@@ -74,9 +73,7 @@ const ProfileEditInner = () => {
                     <CameraIconStyled fontSize="large" />
                 </div>
 
-                <form ref={avatarFormRef} encType="multipart/form-data">
-                    <input type="file" name="avatar" ref={avatarInputRef} hidden accept="image/*" onChange={handleUploadAvatar} />
-                </form>
+                <input type="file" name="avatar" ref={avatarInputRef} hidden accept="image/*" onChange={handleUploadAvatar} />
 
                 <form onSubmit={handleSubmit}>
                     <TextField name="first_name" margin="normal" required fullWidth label="Имя" value={profile.first_name} onChange={updateProperty} />
