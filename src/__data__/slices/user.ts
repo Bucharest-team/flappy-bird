@@ -3,13 +3,9 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../types';
 import axios from '../axios';
 
-const AUTH_LOGOUT_FETCH = 'auth/logout';
-const AUTH_SIGNIN = 'auth/signin';
-const AUTH_SIGNUP = 'auth/signup';
-
 export type SliceState = {
     userID: number | null;
-    isLogin: boolean;
+    isAuthorized: boolean;
 };
 
 export type Registration = {
@@ -27,23 +23,23 @@ export type Login = {
     password: string;
 };
 
-export const initialState: SliceState = { userID: null, isLogin: false };
+export const initialState: SliceState = { userID: null, isAuthorized: false };
 
 const LOGOUT_URL = '/auth/logout';
 const LOGIN_URL = '/auth/signin';
 const REGISTER_URL = '/auth/signup';
 
-export const logout = createAsyncThunk(AUTH_LOGOUT_FETCH, async () => {
+export const logout = createAsyncThunk('auth/logout', async () => {
     const { data } = await axios.post(LOGOUT_URL);
     return data;
 });
 
-export const auth = createAsyncThunk(AUTH_SIGNIN, async (payload: Login) => {
+export const auth = createAsyncThunk('auth/signin', async (payload: Login) => {
     const { data } = await axios.post(LOGIN_URL, payload);
     return data;
 });
 
-export const register = createAsyncThunk(AUTH_SIGNUP, async (payload: Registration) => {
+export const register = createAsyncThunk('auth/signup', async (payload: Registration) => {
     const { data } = await axios.post(REGISTER_URL, payload);
     return data;
 });
@@ -55,37 +51,30 @@ const user = createSlice({
         setUser: (state, action: PayloadAction<number>) => {
             state.userID = action.payload;
         },
-        setLogin: (state, action: PayloadAction<boolean>) => {
-            state.isLogin = action.payload;
+        setAuthorization: (state, action: PayloadAction<boolean>) => {
+            state.isAuthorized = action.payload;
         },
     },
     extraReducers: (builder) => {
         builder.addCase(logout.fulfilled, (state) => {
-            localStorage.removeItem('login');
-            state.isLogin = false;
+            state.isAuthorized = false;
         });
         builder.addCase(auth.fulfilled, (state) => {
-            localStorage.setItem('login', 'true');
-            state.isLogin = true;
+            state.isAuthorized = true;
         });
         builder.addCase(auth.rejected, () => {
             alert('Неверный логин или пароль!');
         });
         builder.addCase(register.fulfilled, (state) => {
-            localStorage.setItem('login', 'true');
-            state.isLogin = true;
+            state.isAuthorized = true;
         });
         builder.addCase(register.rejected, () => {
             alert('Произошла ошибка!');
         });
     }
 });
-export const { setUser, setLogin } = user.actions;
-
-export const checkLogin = () => (dispatch: any) => {
-    dispatch(setLogin(Boolean(localStorage.getItem('login'))));
-};
+export const { setUser, setAuthorization } = user.actions;
 
 export default user.reducer;
 
-export const isLoggedIn = (state: RootState) => Boolean(state.user.isLogin) === true;
+export const isAuthorized = (state: RootState) => state.user.isAuthorized;

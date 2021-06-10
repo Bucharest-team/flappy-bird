@@ -6,6 +6,7 @@ import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { StaticRouterContext } from 'react-router';
 import { Helmet, HelmetData } from 'react-helmet';
+import { setAuthorization } from '@slices/user';
 
 import { App } from '../../client/app';
 import { renderObject } from '../utils/render-to-object';
@@ -46,6 +47,8 @@ export default (req: Request, res: Response) => {
         res.redirect(context.url);
         return;
     }
+
+    store.dispatch(setAuthorization(req.isAuthorized));
 
     const jsx = (
         <Provider store={store}>

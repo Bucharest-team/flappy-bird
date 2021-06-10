@@ -1,6 +1,5 @@
 import { changeScreen, currentScreenSize } from '@slices/game';
 import { Store } from '@reduxjs/toolkit';
-import store from '../../../__data__/store';
 
 import { Background } from './components/background';
 import { Bird } from './components/bird';
@@ -21,15 +20,15 @@ export class GameLoop {
     private readonly gameOver: GameOver;
     private readonly pipes: Pipes;
     private readonly score: Score;
-    private store: Store;
+    // private store: Store;
 
     constructor(ctx: ContextType, canvas: HTMLCanvasElement | null) {
-        this.store = store;
+        // this.store = store;
 
         this.globalState = {
             status: 0,
             frames: 0,
-            isFullScreen: currentScreenSize(this.store.getState())
+            isFullScreen: false
         };
 
         this.canvas = canvas;
@@ -51,7 +50,8 @@ export class GameLoop {
     private handleKeyPress = (event: KeyboardEvent) => {
         event.preventDefault();
         if (event.code === 'Enter') {
-            this.store.dispatch(changeScreen());
+            // todo: поправить fullScreen режим игры, сейчас он сломан
+            // this.store.dispatch(changeScreen());
             this.globalState.isFullScreen = !this.globalState.isFullScreen;
         }
     };

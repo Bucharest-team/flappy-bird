@@ -1,6 +1,6 @@
 import { ErrorRequestHandler, RequestHandler, Router } from 'express';
 
-import { render, cookieParser, csrfProtection } from '../middlewares';
+import { render, cookieParser, csrfProtection, isAuth } from '../middlewares';
 import { ROUTES } from '../../client/routes';
 
 const allRoutes = (function flatRoutes(routesMap: object): string[] {
@@ -13,7 +13,8 @@ const allRoutes = (function flatRoutes(routesMap: object): string[] {
 
 const middleware: Array<RequestHandler | ErrorRequestHandler> = [
     cookieParser,
-    csrfProtection
+    csrfProtection,
+    isAuth
 ];
 
 export function appRoutes(router: Router) {

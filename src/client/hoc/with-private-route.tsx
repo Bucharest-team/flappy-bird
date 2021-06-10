@@ -1,17 +1,18 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { isLoggedIn } from '@slices/user';
+import { isAuthorized } from '@slices/user';
 
 import { Navigation as NavigationList } from '../constants';
 
 export const withPrivateRoute = (Component: any) => {
     return (props: any) => {
-        const isLogin = useSelector(isLoggedIn);
+        const isLoggedIn = useSelector(isAuthorized);
 
-        if (!isLogin) {
-            return <Redirect to={NavigationList.Login} />;
+        if (isLoggedIn) {
+            return <Component {...props} />;
         }
-        return <Component {...props} />;
+
+        return <Redirect to={NavigationList.Login} />;
     };
 };

@@ -32,8 +32,6 @@ export const createReduxStore = (initialState = {}, url = '/') => {
     return { store, history };
 };
 
-export default createReduxStore().store;
-
 export const getInitialState = (pathname: string = '/'): RootState => {
     return {
         user: UserState,
