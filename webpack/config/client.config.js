@@ -10,10 +10,6 @@ const assetsLoader = require('../loaders/assets');
 
 const { __DEV__, __PROD__ } = ENVS;
 
-const vendorsManifest = require(
-    join(DIST_DIR, 'webpack', 'vendors-manifest.json').replace('build/build', 'build')
-);
-
 module.exports = {
     entry: CLIENT_DIR,
     module: {
@@ -35,10 +31,11 @@ module.exports = {
         hints: __DEV__ ? false : 'warning'
     },
     plugins: [
-        new webpack.DllReferencePlugin({
-            context: ROOT_DIR,
-            manifest: vendorsManifest
-        }),
+        // закоментировано до исправления разделения вендоров
+        // new webpack.DllReferencePlugin({
+        //     context: ROOT_DIR,
+        //     manifest: join(DIST_DIR, 'webpack', 'vendors-manifest.json')
+        // }),
         __PROD__ && new webpack.ProgressPlugin(),
         __PROD__ && new DuplicatePackageCheckerPlugin()
     ].filter(Boolean)
