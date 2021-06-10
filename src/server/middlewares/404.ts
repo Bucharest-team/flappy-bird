@@ -6,6 +6,7 @@ const HTTPCode = {
 
 export default function NotFound() {
     return (req: Request, res: Response, next: NextFunction) => {
+        // @ts-ignore
         req.render404 = () => {
             res.status(HTTPCode.NotFountError); // 500
             res.send('Sorry cant find that!');

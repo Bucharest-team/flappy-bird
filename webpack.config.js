@@ -1,5 +1,6 @@
 module.exports = [
-    require('./webpack/config/vendors.config'),
+    // todo: вынести вендоры
+    // require('./webpack/config/vendors.config'),
     require('./webpack/config/client.config'),
     require('./webpack/config/ssr.config')
 ];

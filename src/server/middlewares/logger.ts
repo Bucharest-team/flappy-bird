@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 
 export default function logger() {
     return (req: Request, _res: Response, next: NextFunction) => {
+        // @ts-ignore
         req.logger = () => {
             console.log(req);
         };

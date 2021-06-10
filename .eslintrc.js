@@ -64,6 +64,7 @@ module.exports = {
         '@typescript-eslint/no-shadow': 'warn',
         'implicit-arrow-linebreak': 'off',
         'func-names': 'off',
-        'import/no-dynamic-require': 'off'
+        'import/no-dynamic-require': 'off',
+        'no-restricted-syntax': 'off'
     }
 };
