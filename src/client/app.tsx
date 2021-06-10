@@ -1,12 +1,12 @@
 import React from 'react';
 import { Global } from '@emotion/react';
 import { Route, Switch } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Navigation } from '@components/navigation';
 import { NotFoundPage } from '@components/404';
 import { StylesProvider } from '@material-ui/core';
 
-import { checkLogin, isLoggedIn } from '@slices/user';
+import { isAuthorized } from '@slices/user';
 import { Navigation as NavigationList } from './constants';
 import { Game } from './pages/game';
 import { Login, Register } from './pages/auth';
@@ -15,17 +15,12 @@ import { globalStyles } from './global-styles';
 import { ProfileEdit } from './pages/profile/profile-edit';
 
 export const App = () => {
-    const dispatch = useDispatch();
-    const isAuth = useSelector(isLoggedIn);
-
-    React.useEffect(() => {
-        dispatch(checkLogin());
-    }, [dispatch]);
+    const isLoggedIn = useSelector(isAuthorized);
 
     return (
         <StylesProvider injectFirst>
             <Global styles={globalStyles} />
-            <Navigation isAuth={isAuth} />
+            <Navigation isLoggedIn={isLoggedIn} />
             <Switch>
                 <Route exact path="/" render={() => <h1>Main Page</h1>} />
                 <Route exact path={NavigationList.Game} component={Game} />

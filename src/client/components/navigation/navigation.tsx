@@ -20,7 +20,7 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import { Wrapper, Link, Title } from './navigation.style';
 import type { Props } from './types';
 
-export const Navigation = ({ isAuth }: Props) => {
+export const Navigation = ({ isLoggedIn }: Props) => {
     const [toggleMenu, setToggleMenu] = React.useState(false);
 
     const toggleDrawer = React.useCallback(() => {
@@ -63,7 +63,7 @@ export const Navigation = ({ isAuth }: Props) => {
                                 <ListItemText primary="Главная" />
                             </ListItem>
                         </Link>
-                        {isAuth && (
+                        {isLoggedIn && (
                             <Link to="/profile">
                                 <ListItem button>
                                     <ListItemIcon>
@@ -73,7 +73,7 @@ export const Navigation = ({ isAuth }: Props) => {
                                 </ListItem>
                             </Link>
                         )}
-                        {!isAuth && (
+                        {!isLoggedIn && (
                             <React.Fragment>
                                 <Link to="/register">
                                     <ListItem button>
@@ -126,5 +126,5 @@ export const Navigation = ({ isAuth }: Props) => {
 };
 
 Navigation.defaultProps = {
-    isAuth: false
+    isLoggedIn: false
 };
