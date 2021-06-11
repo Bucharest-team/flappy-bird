@@ -1,7 +1,8 @@
 declare namespace Express {
     interface Request {
-        isAuthorized: boolean;
+        isAuthorized: boolean
         render404: () => void
         render500: () => void
+        logger: () => void
     }
 }
