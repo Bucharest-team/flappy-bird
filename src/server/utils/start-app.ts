@@ -11,7 +11,7 @@ interface Options {
     server: Express;
 }
 
-const { PORT = 8080, NODE_ENV } = process.env;
+const { PORT = 443, NODE_ENV } = process.env;
 const isDev = NODE_ENV === 'development';
 
 const APP_HOSTS = ['localhost'];
