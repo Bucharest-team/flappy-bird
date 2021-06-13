@@ -6,7 +6,7 @@ import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { StaticRouterContext } from 'react-router';
 import { Helmet, HelmetData } from 'react-helmet';
-import { setAuthorization } from '@slices/user';
+import { setAuthorization } from '@slices/auth';
 
 import { App } from '../../client/app';
 import { renderObject } from '../utils/render-to-object';

@@ -101,3 +101,15 @@ export const Link = styled(RouterLink)`
     color: #3369f3;
   }
 `;
+
+export const OAuthButton = styled.a`
+    text-decoration: none;
+    text-align: center;
+    
+    img {
+        width: 45px;
+        height: 45px;
+        border-radius: 12px;
+        cursor: pointer;
+    }
+`;

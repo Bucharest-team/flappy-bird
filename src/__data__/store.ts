@@ -6,7 +6,7 @@ import { isServer } from '@utils/is-server';
 
 import { RootState } from './types';
 import { createRootReducer } from './slices';
-import { initialState as UserState } from './slices/user';
+import { initialState as AuthState } from './slices/auth';
 import { initialState as ProfileState } from './slices/profile';
 import { initialState as GameState } from './slices/game';
 
@@ -34,7 +34,7 @@ export const createReduxStore = (initialState = {}, url = '/') => {
 
 export const getInitialState = (pathname: string = '/'): RootState => {
     return {
-        user: UserState,
+        auth: AuthState,
         profile: ProfileState,
         game: GameState,
         router: {

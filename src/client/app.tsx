@@ -6,13 +6,14 @@ import { Navigation } from '@components/navigation';
 import { NotFoundPage } from '@components/404';
 import { StylesProvider } from '@material-ui/core';
 
-import { isAuthorized } from '@slices/user';
+import { isAuthorized } from '@slices/auth';
 import { Navigation as NavigationList } from './constants';
 import { Game } from './pages/game';
 import { Login, Register } from './pages/auth';
 import { Profile } from './pages/profile';
 import { globalStyles } from './global-styles';
 import { ProfileEdit } from './pages/profile/profile-edit';
+import { Main } from './pages/main';
 
 export const App = () => {
     const isLoggedIn = useSelector(isAuthorized);
@@ -22,7 +23,7 @@ export const App = () => {
             <Global styles={globalStyles} />
             <Navigation isLoggedIn={isLoggedIn} />
             <Switch>
-                <Route exact path="/" render={() => <h1>Main Page</h1>} />
+                <Route exact path="/" component={Main} />
                 <Route exact path={NavigationList.Game} component={Game} />
                 <Route exact path={NavigationList.Login} component={Login} />
                 <Route exact path={NavigationList.Register} component={Register} />

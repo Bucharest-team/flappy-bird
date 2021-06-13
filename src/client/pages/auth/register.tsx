@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { register } from '@slices/user';
+import { register } from '@slices/auth';
 import { Meta } from '@components/meta';
 import { withAuthRoute } from '../../hoc/with-auth-route';
 

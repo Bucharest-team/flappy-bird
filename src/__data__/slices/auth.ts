@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../types';
 import axios from '../axios';
+import { REDIRECT_URI } from '../../client/constants';
 
 export type SliceState = {
     userID: number | null;
@@ -28,41 +29,64 @@ export const initialState: SliceState = { userID: null, isAuthorized: false };
 const LOGOUT_URL = '/auth/logout';
 const LOGIN_URL = '/auth/signin';
 const REGISTER_URL = '/auth/signup';
+const O_AUTH_SERVICE_ID_URL = '/oauth/yandex/service-id';
+const O_AUTH_URL = '/oauth/yandex';
 
 export const logout = createAsyncThunk('auth/logout', async () => {
-    const { data } = await axios.post(LOGOUT_URL);
-    return data;
+    await axios.post(LOGOUT_URL);
 });
 
-export const auth = createAsyncThunk('auth/signin', async (payload: Login) => {
-    const { data } = await axios.post(LOGIN_URL, payload);
-    return data;
+export const login = createAsyncThunk('auth/signin', async (payload: Login) => {
+    await axios.post(LOGIN_URL, payload);
 });
 
 export const register = createAsyncThunk('auth/signup', async (payload: Registration) => {
-    const { data } = await axios.post(REGISTER_URL, payload);
-    return data;
+    await axios.post(REGISTER_URL, payload);
 });
 
-const user = createSlice({
+export const oAuthServiceId = () => async () => {
+    try {
+        const { data } = await axios({
+            url: O_AUTH_SERVICE_ID_URL,
+            params: {
+                redirect_uri: REDIRECT_URI
+            }
+        });
+
+        window.location.href =
+            `https://oauth.yandex.ru/authorize?response_type=code&client_id=${data.service_id}&redirect_uri=${REDIRECT_URI}`;
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+export const oAuth = createAsyncThunk('auth/signin', async (code: string) => {
+    await axios({
+        url: O_AUTH_URL,
+        method: 'POST',
+        data: {
+            code,
+            redirect_uri: REDIRECT_URI
+        }
+    });
+});
+
+const auth = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<number>) => {
-            state.userID = action.payload;
-        },
         setAuthorization: (state, action: PayloadAction<boolean>) => {
             state.isAuthorized = action.payload;
-        },
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(logout.fulfilled, (state) => {
             state.isAuthorized = false;
         });
-        builder.addCase(auth.fulfilled, (state) => {
+        builder.addCase(login.fulfilled, (state) => {
             state.isAuthorized = true;
         });
-        builder.addCase(auth.rejected, () => {
+        builder.addCase(login.rejected, () => {
             alert('Неверный логин или пароль!');
         });
         builder.addCase(register.fulfilled, (state) => {
@@ -73,8 +97,8 @@ const user = createSlice({
         });
     }
 });
-export const { setUser, setAuthorization } = user.actions;
+export const { setAuthorization } = auth.actions;
 
-export default user.reducer;
+export default auth.reducer;
 
-export const isAuthorized = (state: RootState) => state.user.isAuthorized;
+export const isAuthorized = (state: RootState) => state.auth.isAuthorized;
