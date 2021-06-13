@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Meta } from '@components/meta';
-import { auth } from '@slices/user';
+import { login } from '@slices/auth';
 import { withAuthRoute } from '../../hoc/with-auth-route';
 
 import { Form } from './form';
@@ -30,7 +30,7 @@ export const Login = withAuthRoute(() => (
         <Meta title="Логин" description="Страница логина" />
         <Form
             fields={FIELDS}
-            submit={auth}
+            submit={login}
             submitText="Авторизоваться"
             link={Navigation.Register}
             linkText="Нет аккаунта?"

@@ -5,11 +5,14 @@ module.exports = {
         test: fileRegex,
         type: 'asset/resource',
         generator: {
-            filename: 'static/[name]-[hash:5].[ext]'
+            filename: 'static/[name]-[hash:5][ext]'
         }
     },
     server: {
-        loader: 'null-loader',
-        test: fileRegex
+        test: fileRegex,
+        type: 'asset/resource',
+        generator: {
+            filename: 'static/[name]-[hash:5][ext]'
+        }
     }
 };

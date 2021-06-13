@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { CircularProgress, Container, Divider, Typography } from '@material-ui/core';
 
-import { logout } from '@slices/user';
+import { logout } from '@slices/auth';
 import { Meta } from '@components/meta';
 import { BASE_RESOURCE_URL } from '../../constants';
 import { withPrivateRoute } from '../../hoc/with-private-route';

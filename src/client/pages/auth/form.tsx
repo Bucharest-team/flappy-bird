@@ -14,6 +14,7 @@ import {
     Submit,
     Link,
 } from './form.style';
+import { OAuth } from './o-auth';
 
 const regularExp = {
     login: /^[a-zA-Z0-9_-]{3,16}$/,
@@ -63,7 +64,7 @@ export const Form = ({
                     {errors[el.name] && <ValidInput>{el.error}</ValidInput>}
                 </WrapperInput>
             ))}
-
+            <OAuth />
             <Submit type="submit">{submitText}</Submit>
             <Link to={link}>{linkText}</Link>
         </WrapperForm>

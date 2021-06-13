@@ -2,12 +2,12 @@ import { History } from 'history';
 import { combineReducers } from '@reduxjs/toolkit';
 import { connectRouter } from 'connected-react-router';
 
-import user from './user';
+import auth from './auth';
 import profile from './profile';
 import game from './game';
 
 export const createRootReducer = (history: History) => combineReducers({
-    user,
+    auth,
     profile,
     game,
     router: connectRouter(history)
