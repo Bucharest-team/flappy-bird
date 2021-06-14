@@ -15,7 +15,9 @@
 
 ### Приложение доступно по адресу
 
-    http://localhost:8080
+    https://localhost:443
+    
+    Для работы https в postinstall установлен скрипт, который запускается после npm install
 
 ## Сборка для production
 
