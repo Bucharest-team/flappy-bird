@@ -14,6 +14,7 @@ import { Login, Register } from './pages/auth';
 import { Profile } from './pages/profile';
 import { globalStyles } from './global-styles';
 import { ProfileEdit } from './pages/profile/profile-edit';
+import { Leaderboard } from './pages/leaderboard';
 import { Main } from './pages/main';
 
 const MainApp = () => {
@@ -30,6 +31,7 @@ const MainApp = () => {
                 <Route exact path={NavigationList.Register} component={Register} />
                 <Route exact path={NavigationList.Profile} component={Profile} />
                 <Route exact path={NavigationList.ProfileEdit} component={ProfileEdit} />
+                <Route exact path={NavigationList.Leaderboard} component={Leaderboard} />
                 <Route exact path="*" component={NotFoundPage} />
             </Switch>
         </StylesProvider>
