@@ -51,7 +51,6 @@ export class GameLoop {
     private handleKeyPress = (event: KeyboardEvent) => {
         event.preventDefault();
         if (event.code === 'Enter') {
-            // todo: поправить fullScreen режим игры, сейчас он сломан
             this.store.dispatch(changeScreen());
             this.globalState.isFullScreen = !this.globalState.isFullScreen;
         }
