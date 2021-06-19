@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 
-import { createReduxStore } from '../__data__/store';
+import { store as reduxStore } from '../__data__';
 import { App } from './app';
 
-const { store, history } = createReduxStore();
+const { store, history } = reduxStore;
 
 ReactDOM.hydrate(
     <Provider store={store}>
