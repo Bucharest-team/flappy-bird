@@ -1,15 +1,12 @@
 /* eslint-disable  */
 const selfSigned = require('openssl-self-signed-certificate');
-import { Express } from 'express';
 import https from 'https';
 
-import devHosts from '../hosts.json';
-import { findIP } from './network';
-import { makeStartLogsText } from './make-start-logs-text';
+import devHosts from './src/server/hosts.json';
+import { findIP } from './src/server/utils/network';
+import { makeStartLogsText } from './src/server/utils/make-start-logs-text';
 
-interface Options {
-    server: Express;
-}
+const { server } = require('./build/server');
 
 const { PORT = 443, NODE_ENV } = process.env;
 const isDev = NODE_ENV === 'development';
@@ -21,22 +18,19 @@ if (isDev) {
     if (devLocalIP) {
         APP_HOSTS.push(devLocalIP);
     }
-}
 
-export function startApp({ server }: Options) {
-    if (isDev) {
-        https
-            .createServer({ key: selfSigned.key, cert: selfSigned.cert }, server)
-            .listen(PORT, '0.0.0.0' as any, () => {
-                console.log(makeStartLogsText(
+    https
+        .createServer({ key: selfSigned.key, cert: selfSigned.cert }, server)
+        .listen(PORT, '0.0.0.0' as any, () => {
+            console.log(
+                makeStartLogsText(
                     APP_HOSTS.concat(...devHosts.map(({ host }) => host)),
                     'https',
                     PORT
-                ));
-            });
-        return;
-    }
-
+                )
+            );
+        });
+} else {
     server.listen(PORT, () => {
         console.log(makeStartLogsText(APP_HOSTS, 'http', PORT));
     });

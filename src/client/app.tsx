@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { Navigation } from '@components/navigation';
 import { NotFoundPage } from '@components/404';
 import { StylesProvider } from '@material-ui/core';
+import { hot } from 'react-hot-loader/root';
 
 import { isAuthorized } from '@slices/auth';
 import { Navigation as NavigationList } from './constants';
@@ -15,7 +16,7 @@ import { globalStyles } from './global-styles';
 import { ProfileEdit } from './pages/profile/profile-edit';
 import { Main } from './pages/main';
 
-export const App = () => {
+const MainApp = () => {
     const isLoggedIn = useSelector(isAuthorized);
 
     return (
@@ -34,3 +35,5 @@ export const App = () => {
         </StylesProvider>
     );
 };
+
+export const App = hot(MainApp);

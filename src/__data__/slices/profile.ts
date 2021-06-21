@@ -76,7 +76,7 @@ const profile = createSlice({
             state.isLoading = false;
             Object.entries(action.payload).forEach(([key, value]) => {
                 // @ts-ignore
-                state[key] = value ?? '';
+                state[key] = value || '';
             });
         });
         builder.addCase(getProfileInfo.rejected, (state) => {
