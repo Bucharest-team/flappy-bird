@@ -6,17 +6,7 @@ const ENVS = {
     __TEST__: env === 'testing',
 };
 
-const GLOBAL_ARGS = {
-    ...ENVS,
-    'process.env': {
-        ...ENVS,
-        NODE_ENV: JSON.stringify(env),
-        PORT: process.env.PORT || 4007,
-    },
-};
-
 module.exports = {
     env,
     ENVS,
-    GLOBAL_ARGS
 };

@@ -26,7 +26,7 @@ function addAliases(aliases: any[], prefix: string) {
     }
 }
 
-const hosts = require('../src/server/hosts.json');
+const hosts = require('../config/hosts.json');
 
 (function() {
     addAliases(hosts, 'ssr-project-flappy-bird');
