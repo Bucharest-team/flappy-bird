@@ -9,6 +9,7 @@ import { GetReady } from './components/get-ready';
 import { Pipes } from './components/pipes';
 import { Score } from './components/score';
 import { ContextType, GameGlobalState, GameStatus } from './types';
+import { setLeaderBoard } from '@slices/leaderboard';
 
 export class GameLoop {
     public globalState: GameGlobalState;
@@ -36,10 +37,16 @@ export class GameLoop {
 
         this.background = new Background(ctx, this.globalState);
         this.getReady = new GetReady(ctx, this.globalState);
-        this.bird = new Bird(ctx, this.globalState);
+        this.bird = new Bird(ctx, this.globalState, this.setGameOver.bind(this));
         this.gameOver = new GameOver(ctx, this.globalState);
         this.score = new Score(ctx, this.globalState);
-        this.pipes = new Pipes(ctx, this.globalState, this.bird, this.score);
+        this.pipes = new Pipes(
+            ctx,
+            this.globalState,
+            this.bird,
+            this.score,
+            this.setGameOver.bind(this)
+        );
     }
 
     init() {
@@ -89,6 +96,7 @@ export class GameLoop {
 
     setGameOver() {
         this.gameStatus = GameStatus.Over;
+        this.store.dispatch(setLeaderBoard());
     }
 
     incrementFrame() {

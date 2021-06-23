@@ -11,7 +11,7 @@ const ValueStatusCoords = {
 const BestValueStatusCoords = {
     fullX: 305,
     x: 225,
-    y: 228,
+    y: 228
 };
 
 export class Score extends Component {

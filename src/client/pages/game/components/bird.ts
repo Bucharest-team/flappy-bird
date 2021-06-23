@@ -25,12 +25,14 @@ export class Bird extends Component {
         frame: 0,
         speed: 0,
         gravity: 0.25,
-        jump: 4.6,
+        jump: 4.6
     };
+    setOver: Function;
 
-    constructor(ctx: ContextType, globalState: GameGlobalState) {
+    constructor(ctx: ContextType, globalState: GameGlobalState, setGameOver: Function) {
         super(ctx);
         this.globalState = globalState;
+        this.setOver = setGameOver;
     }
 
     draw() {
@@ -81,6 +83,7 @@ export class Bird extends Component {
 
             if (status === GameStatus.Playing) {
                 this.globalState.status = GameStatus.Over;
+                this.setOver();
             }
 
             if (this.state.speed >= jump) {
