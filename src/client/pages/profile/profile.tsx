@@ -7,7 +7,7 @@ import { Meta } from '@components/meta';
 import { BASE_RESOURCE_URL } from '../../constants';
 import { withPrivateRoute } from '../../hoc/with-private-route';
 
-import { useProfile } from './use-profile';
+import { useProfile } from '@hooks/use-profile'
 import {
     Wrapper,
     Thumbnail,

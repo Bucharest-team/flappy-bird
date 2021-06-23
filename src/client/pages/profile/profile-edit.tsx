@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import { BASE_RESOURCE_URL } from 'client/constants';
 import { useDispatch } from 'react-redux';
 import { CameraIconStyled, NoAvatar } from './profile.style';
-import { useProfile } from './use-profile';
+import { useProfile } from '@hooks/use-profile';
 import { withPrivateRoute } from '../../hoc/with-private-route';
 
 const useStyles = makeStyles((theme) => ({

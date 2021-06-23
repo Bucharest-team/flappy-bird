@@ -1,45 +1,44 @@
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    CircularProgress
+} from '@material-ui/core';
 
 import { Main } from './leaderboard.styles';
 
-const mock = [
-    {
-        name: 'Vladilen',
-        score: '25'
-    },
-    {
-        name: 'Vladilen 2',
-        score: '26'
-    },
-    {
-        name: 'Vladilen 3',
-        score: '27'
-    }
-];
+import { useLeaderboard } from '@hooks/use-leaderboard';
 
 export const Leaderboard = () => {
+    const { isLoading, listLeader } = useLeaderboard();
+
+    if (isLoading) {
+        return (
+            <Main>
+                <CircularProgress size={64} />
+            </Main>
+        );
+    }
+
     return (
         <Main>
             <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell width="60">№</TableCell>
-                        <TableCell >Имя</TableCell>
+                        <TableCell>Имя</TableCell>
                         <TableCell width="200">Количество очков</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {mock.map((el, id) => (
+                    {listLeader.map((el, id) => (
                         <TableRow key={el.name}>
                             <TableCell>{id + 1}</TableCell>
                             <TableCell>{el.name}</TableCell>
-                            <TableCell>{el.score}</TableCell>
+                            <TableCell>{el['flappy-score']}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
