@@ -8,6 +8,7 @@ import { withPrivateRoute } from '../../hoc/with-private-route';
 import { GameLoop } from './game-loop';
 import { getCanvasDimensions } from './constants';
 import { Wrapper, Title } from './game.style';
+import { useProfile } from '@hooks/use-profile';
 
 export const Game = withPrivateRoute(() => {
     const canvas = React.useRef<HTMLCanvasElement | null>(null);
@@ -31,6 +32,8 @@ export const Game = withPrivateRoute(() => {
             document.exitFullscreen();
         }
     }, [isFullScreen]);
+
+    useProfile();
 
     return (
         <React.Fragment>

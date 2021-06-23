@@ -41,6 +41,18 @@ export const getLeaderboard = createAsyncThunk(LEADERBOARD_FETCH, async () => {
     return data;
 });
 
+export const setLeaderBoard = createAsyncThunk(LEADERBOARD_SET, async (_, thunkApi: any) => {
+    const digit = Number(localStorage.getItem('best')) || 0;
+    const name = thunkApi.getState().profile['first_name'];
+    await axios.post(LEADERBOARD_UPDATE_URL, {
+        ratingFieldName: 'flappy-score',
+        data: {
+            'flappy-score': digit,
+            name
+        }
+    });
+});
+
 const leaderboard = createSlice({
     name: 'leaderboard',
     initialState,

@@ -6,7 +6,7 @@ import { Bird } from './bird';
 import { Score } from './score';
 
 export class Pipes extends Component {
-    private positions: { x: number, y: number }[] = [];
+    private positions: { x: number; y: number }[] = [];
     private radius: number = 5;
     private state = {
         top: {
@@ -25,18 +25,23 @@ export class Pipes extends Component {
         maxYPos: -150,
         dx: 2
     };
+    setOver: Function;
 
-    constructor(public ctx: ContextType,
+    constructor(
+        public ctx: ContextType,
         private globalState: GameGlobalState,
         private bird: Bird,
-        private score: Score) {
+        private score: Score,
+        setGameOver: Function
+    ) {
         super(ctx);
+        this.setOver = setGameOver;
     }
 
     draw() {
         if (!this.ctx) return;
 
-        const { top, bottom, w, h, gap, } = this.state;
+        const { top, bottom, w, h, gap } = this.state;
 
         for (let i = 0; i < this.positions.length; i += 1) {
             const p = this.positions[i];
@@ -66,20 +71,26 @@ export class Pipes extends Component {
 
             const bottomPipeYPos = p.y + h + gap;
 
-            if (bird.x + this.radius > p.x &&
+            if (
+                bird.x + this.radius > p.x &&
                 bird.x - this.radius < p.x + w &&
                 bird.y + this.radius > p.y &&
-                bird.y - this.radius < p.y + h) {
+                bird.y - this.radius < p.y + h
+            ) {
                 this.globalState.status = GameStatus.Over;
                 this.positions = [];
+                this.setOver();
             }
 
-            if (bird.x + this.radius > p.x &&
+            if (
+                bird.x + this.radius > p.x &&
                 bird.x - this.radius < p.x + w &&
                 bird.y + this.radius > bottomPipeYPos &&
-                bird.y - this.radius < bottomPipeYPos + h) {
+                bird.y - this.radius < bottomPipeYPos + h
+            ) {
                 this.globalState.status = GameStatus.Over;
                 this.positions = [];
+                this.setOver();
             }
 
             p.x -= dx;
