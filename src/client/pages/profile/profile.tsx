@@ -4,10 +4,10 @@ import { CircularProgress, Container, Divider, Typography } from '@material-ui/c
 
 import { logout } from '@slices/auth';
 import { Meta } from '@components/meta';
+import { useProfile } from '@hooks/use-profile';
 import { BASE_RESOURCE_URL } from '../../constants';
 import { withPrivateRoute } from '../../hoc/with-private-route';
 
-import { useProfile } from '@hooks/use-profile'
 import {
     Wrapper,
     Thumbnail,
@@ -17,7 +17,8 @@ import {
     Button,
     Buttons,
     NoAvatar,
-    AvatarWrapper
+    AvatarWrapper,
+    LoaderWrapper
 } from './profile.style';
 
 const ProfileInner = () => {
@@ -30,9 +31,9 @@ const ProfileInner = () => {
 
     if (isLoading) {
         return (
-            <Wrapper>
+            <LoaderWrapper>
                 <CircularProgress size={64} />
-            </Wrapper>
+            </LoaderWrapper>
         );
     }
 

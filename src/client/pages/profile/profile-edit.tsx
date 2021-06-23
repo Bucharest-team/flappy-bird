@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FormEvent, useRef, useState } from 'react';
 import { Container, CssBaseline, makeStyles, TextField } from '@material-ui/core';
 import { TUpdateUserData, updateAvatar, updateUserData } from '@slices/profile';
+import { Redirect } from 'react-router';
 import Button from '@material-ui/core/Button';
 import { BASE_RESOURCE_URL } from 'client/constants';
 import { useDispatch } from 'react-redux';
@@ -33,7 +34,7 @@ const ProfileEditInner = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
 
-    const { first_name, second_name, display_name, login, email, phone, avatar } = useProfile();
+    const { first_name, second_name, display_name, login, email, phone, avatar, success } = useProfile();
     const [profile, setProfile] = useState({ first_name, second_name, display_name, login, email, phone });
 
     const avatarInputRef = useRef<HTMLInputElement>(null);
@@ -44,7 +45,7 @@ const ProfileEditInner = () => {
 
     const handleUploadAvatar = React.useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
-        if (!files || files.length === 0) return; 
+        if (!files || files.length === 0) return;
         dispatch(updateAvatar(files[0]));
     }, [dispatch]);
 
@@ -59,6 +60,10 @@ const ProfileEditInner = () => {
         event.preventDefault();
         dispatch(updateUserData(profile as TUpdateUserData));
     }, [dispatch, profile]);
+
+    if (success) {
+        return <Redirect to="/profile" />;
+    }
 
     return (
         <Container component="main" maxWidth="xs">

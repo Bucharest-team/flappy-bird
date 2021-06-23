@@ -3,9 +3,6 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../types';
 import axios from '../axios';
 
-const PROFILE_FETCH = 'profile/fetch';
-const PROFILE_AVATAR_UPDATE = 'profile/avatar/update';
-
 export type TUpdateUserData = {
     first_name: string;
     second_name: string;
@@ -26,9 +23,10 @@ export type State = {
     id?: number;
     isLoading: boolean;
     hasError: boolean;
+    success: boolean;
 };
 
-type Info = Omit<State, 'isLoading' | 'hasError'>;
+type Info = Omit<State, 'isLoading' | 'hasError' | 'success'>;
 
 export const initialState: State = {
     avatar: null,
@@ -40,44 +38,57 @@ export const initialState: State = {
     phone: '',
     id: undefined,
     isLoading: false,
-    hasError: false
+    hasError: false,
+    success: false
 };
 
 const USER_URL = '/auth/user';
 const USER_AVATAR_URL = '/user/profile/avatar';
 const UPDATE_PROFILE_URL = '/user/profile';
 
-export const getProfileInfo = createAsyncThunk(PROFILE_FETCH, async () => {
+export const getProfileInfo = createAsyncThunk('profile/fetch', async () => {
     const { data } = await axios.get(USER_URL);
     return data;
 });
 
-export const updateAvatar = createAsyncThunk(PROFILE_AVATAR_UPDATE, async (file: File) => {
+export const updateAvatar = createAsyncThunk('profile/avatar/update', async (file: File) => {
     const formData = new FormData();
     formData.append('avatar', file);
     const { data } = await axios.put(USER_AVATAR_URL, formData);
     return data;
 });
 
-export const updateUserData = async (userData: TUpdateUserData): Promise<State> => {
+export const updateUserData = createAsyncThunk('profile/update', async (userData: TUpdateUserData): Promise<State> => {
     const { data } = await axios.put(UPDATE_PROFILE_URL, userData);
     return data;
-};
+});
+
+function updateProfile(state: State, profile: Info) {
+    Object.entries(profile).forEach(([key, value]) => {
+        // @ts-ignore
+        state[key] = value || '';
+    });
+}
 
 const profile = createSlice({
     name: 'profile',
     initialState,
-    reducers: {},
+    reducers: {
+        reset(state) {
+            state.success = false;
+        }
+    },
     extraReducers: (builder) => {
+        builder.addCase(updateUserData.fulfilled, (state, action) => {
+            state.success = true;
+            updateProfile(state, action.payload);
+        });
         builder.addCase(getProfileInfo.pending, (state) => {
             state.isLoading = true;
         });
         builder.addCase(getProfileInfo.fulfilled, (state, action: PayloadAction<Info>) => {
             state.isLoading = false;
-            Object.entries(action.payload).forEach(([key, value]) => {
-                // @ts-ignore
-                state[key] = value || '';
-            });
+            updateProfile(state, action.payload);
         });
         builder.addCase(getProfileInfo.rejected, (state) => {
             state.isLoading = false;
@@ -92,6 +103,7 @@ const profile = createSlice({
     }
 });
 
+export const { reset } = profile.actions;
 export default profile.reducer;
 
 export const profileInfo = (state: RootState) => state.profile;

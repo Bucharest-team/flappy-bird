@@ -13,7 +13,6 @@ module.exports = {
     target: 'web',
     entry: [
         __DEV__ && 'react-hot-loader/patch',
-        // Entry для работы HMR
         __DEV__ && 'webpack-hot-middleware/client',
         CLIENT_DIR
     ].filter(Boolean),

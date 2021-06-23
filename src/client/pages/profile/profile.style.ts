@@ -19,6 +19,10 @@ export const Wrapper = styled.div`
     border-radius: 16px;
 `;
 
+export const LoaderWrapper = styled(Wrapper)`
+    justify-content: center;
+`;
+
 export const AvatarWrapper = styled.div`
     position: relative;
 `;
