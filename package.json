@@ -12,7 +12,10 @@
         "test": "jest",
         "test:watch": "jest --watch",
         "test:update": "jest -u",
-        "postinstall": "ts-node --transpile-only scripts/make-alias.ts"
+        "postinstall": "ts-node --transpile-only scripts/make-alias.ts",
+        "docker:start": "docker-compose up",
+        "docker:build": "docker-compose build",
+        "docker:stop": "docker-compose stop"
     },
     "repository": {
         "type": "git",
@@ -34,6 +37,7 @@
         "connected-react-router": "6.9.1",
         "crypto": "1.0.1",
         "csurf": "1.11.0",
+        "dotenv": "10.0.0",
         "emotion-normalize": "11.0.1",
         "history": "4.9.0",
         "psl": "1.8.0",
