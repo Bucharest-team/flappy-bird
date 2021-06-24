@@ -1,7 +1,7 @@
 module.exports = (api) => {
-    const env = api.env()
+    const env = api.env();
 
-    api.cache.using(() => env === 'development')
+    api.cache.using(() => env === 'development');
 
     return {
         presets: [
@@ -12,7 +12,8 @@ module.exports = (api) => {
         plugins: [
             '@emotion',
             '@babel/plugin-syntax-dynamic-import',
+            ['@babel/plugin-proposal-decorators', { 'legacy': true }],
             '@babel/plugin-proposal-class-properties'
         ]
-    }
-}
+    };
+};
