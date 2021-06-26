@@ -1,4 +1,6 @@
-import { AllowNull, Column, DataType, Model, Table } from 'sequelize-typescript';
+import { AllowNull, Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+
+import { Comment } from './comment';
 
 @Table
 export class Topic extends Model<Topic> {
@@ -12,4 +14,7 @@ export class Topic extends Model<Topic> {
     @AllowNull(false)
     @Column(DataType.STRING)
     author!: string;
+
+    @HasMany(() => Comment)
+    comments?: Comment[];
 }
