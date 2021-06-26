@@ -15,7 +15,7 @@ export class Comment extends Model<Comment> {
     @Column(DataType.INTEGER)
     rating!: number;
 
-    @Column
+    @Column(DataType.STRING)
     reply?: string;
 
     @ForeignKey(() => Topic)
