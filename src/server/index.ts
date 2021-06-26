@@ -10,8 +10,10 @@ import { Topic } from './db/models/topic';
         await sequelize.authenticate();
         console.log('Успешное подключение к базе данных.');
 
+        await Topic.sync();
         const result = await Topic.create({
-            title: 'title'
+            title: 'title',
+            author: 'author'
         });
 
         console.log('result', result);

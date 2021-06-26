@@ -20,8 +20,8 @@ export class Comment extends Model<Comment> {
 
     @ForeignKey(() => Topic)
     @AllowNull(false)
-    @Column(DataType.STRING)
-    topicId!: string;
+    @Column(DataType.INTEGER)
+    topicId!: number;
 
     @BelongsTo(() => Topic)
     topic?: Topic;

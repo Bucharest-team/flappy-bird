@@ -9,7 +9,7 @@ export class Topic extends Model<Topic> {
     title!: string;
 
     @Column(DataType.STRING)
-    description!: string;
+    description?: string;
 
     @AllowNull(false)
     @Column(DataType.STRING)
