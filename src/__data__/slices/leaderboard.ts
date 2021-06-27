@@ -43,7 +43,7 @@ export const getLeaderboard = createAsyncThunk(LEADERBOARD_FETCH, async () => {
 
 export const setLeaderBoard = createAsyncThunk(LEADERBOARD_SET, async (_, thunkApi: any) => {
     const digit = Number(localStorage.getItem('best')) || 0;
-    const name = thunkApi.getState().profile['first_name'];
+    const name = thunkApi.getState().profile.first_name;
     await axios.post(LEADERBOARD_UPDATE_URL, {
         ratingFieldName: 'flappy-score',
         data: {
@@ -57,15 +57,15 @@ const leaderboard = createSlice({
     name: 'leaderboard',
     initialState,
     reducers: {},
-    extraReducers: builder => {
-        builder.addCase(getLeaderboard.pending, state => {
+    extraReducers: (builder) => {
+        builder.addCase(getLeaderboard.pending, (state) => {
             state.isLoading = true;
         });
         builder.addCase(getLeaderboard.fulfilled, (state, action: PayloadAction<Leaders>) => {
             state.isLoading = false;
             state.listLeader = action.payload.map(({ data }) => ({ ...data }));
         });
-        builder.addCase(getLeaderboard.rejected, state => {
+        builder.addCase(getLeaderboard.rejected, (state) => {
             state.isLoading = false;
             state.hasError = true;
         });

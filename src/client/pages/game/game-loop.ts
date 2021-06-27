@@ -1,5 +1,6 @@
 import { changeScreen, currentScreenSize } from '@slices/game';
 import { Store } from '@reduxjs/toolkit';
+import { setLeaderBoard } from '@slices/leaderboard';
 import { store as reduxStore } from '../../../__data__';
 
 import { Background } from './components/background';
@@ -9,7 +10,6 @@ import { GetReady } from './components/get-ready';
 import { Pipes } from './components/pipes';
 import { Score } from './components/score';
 import { ContextType, GameGlobalState, GameStatus } from './types';
-import { setLeaderBoard } from '@slices/leaderboard';
 
 export class GameLoop {
     public globalState: GameGlobalState;

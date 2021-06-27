@@ -45,7 +45,7 @@ const ProfileEditInner = () => {
     }, []);
 
     const handleUploadAvatar = React.useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
+        const { files } = event.target;
         if (!files || files.length === 0) return;
         dispatch(updateAvatar(files[0]));
     }, [dispatch]);
@@ -72,7 +72,7 @@ const ProfileEditInner = () => {
             <div className={classes.paper}>
                 <div className={classes.avatarWrapper} onClick={handleClickdAvatar}>
                     {avatar ? (
-                        <img src={`${BASE_RESOURCE_URL}${avatar}`} className={classes.avatar} />
+                        <img src={`${BASE_RESOURCE_URL}${avatar}`} className={classes.avatar} alt="" />
                     ) : (
                         <NoAvatar color="primary" fontSize="large" />
                     )}
