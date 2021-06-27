@@ -2,15 +2,13 @@ import React from 'react';
 import {
     Table,
     TableBody,
-    TableCell,
     TableHead,
     TableRow,
     CircularProgress
 } from '@material-ui/core';
 
-import { Main } from './leaderboard.styles';
-
 import { useLeaderboard } from '@hooks/use-leaderboard';
+import { Main, TableCell } from './leaderboard.styles';
 
 export const Leaderboard = () => {
     const { isLoading, listLeader } = useLeaderboard();
@@ -24,7 +22,7 @@ export const Leaderboard = () => {
     }
 
     return (
-        <Main>
+        <Main maxWidth="md">
             <Table>
                 <TableHead>
                     <TableRow>
