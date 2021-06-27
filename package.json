@@ -16,7 +16,8 @@
         "docker:start": "docker-compose up",
         "docker:start:db": "docker-compose up postgres pgadmin",
         "docker:build": "docker-compose build",
-        "docker:stop": "docker-compose stop"
+        "docker:stop": "docker-compose stop",
+        "prepare": "husky install"
     },
     "repository": {
         "type": "git",
@@ -102,6 +103,7 @@
         "express": "4.17.1",
         "file-loader": "6.2.0",
         "html-webpack-plugin": "5.3.1",
+        "husky": "^6.0.0",
         "jest": "26.6.3",
         "morgan": "1.10.0",
         "nodemon": "2.0.7",

@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { Link as RouterLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { AppBar, Drawer as MuiDrawer, ListItem as MuiListItem } from '@material-ui/core';
-import { ThemeTypes } from 'client/theme/theme';
+import type { ThemeTypes } from 'client/theme/theme';
 
 export const Header = styled(AppBar)(({ theme }: ThemeTypes) => {
     return css`
