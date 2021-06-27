@@ -7,7 +7,8 @@ export enum Navigation {
     Profile = '/profile',
     ProfileEdit = '/profile-edit',
     Game = '/game',
-    Leaderboard = '/leaderboard'
+    Leaderboard = '/leaderboard',
+    Forum = '/forum'
 }
 
 export const BASE_URL = 'https://ya-praktikum.tech';

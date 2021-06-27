@@ -4,16 +4,8 @@ import devMiddleware from 'webpack-dev-middleware';
 import hotMiddleware from 'webpack-hot-middleware';
 
 import { render, cookieParser, csrfProtection, isAuth } from '../middlewares';
-import { ROUTES } from '../../client/routes';
 
 const config = require('../../../webpack/config/client.config');
-
-const allRoutes = (function flatRoutes(routesMap: object): string[] {
-    return Object.values(routesMap).reduce<string[]>(
-        (routes, path) => routes.concat(typeof path === 'object' ? flatRoutes(path) : path),
-        []
-    );
-}(ROUTES));
 
 const middlewares: Array<RequestHandler | ErrorRequestHandler> = [
     cookieParser,
@@ -27,7 +19,8 @@ function getDefaultMiddleware() {
 
         return [
             devMiddleware(compiler, {
-                publicPath: config.output!.publicPath!
+                publicPath: config.output!.publicPath!,
+                writeToDisk: true
             }),
             hotMiddleware(compiler, {
                 path: '/__webpack_hmr'
@@ -39,5 +32,5 @@ function getDefaultMiddleware() {
 }
 
 export function appRoutes(router: Router) {
-    router.get(allRoutes, [...getDefaultMiddleware(), ...middlewares], render);
+    router.get('*', [...getDefaultMiddleware(), ...middlewares], render);
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { CircularProgress, Container, Divider, Typography } from '@material-ui/core';
+import { CircularProgress, Container } from '@material-ui/core';
 
 import { logout } from '@slices/auth';
 import { Meta } from '@components/meta';
@@ -18,7 +18,9 @@ import {
     Buttons,
     NoAvatar,
     AvatarWrapper,
-    LoaderWrapper
+    LoaderWrapper,
+    Typography,
+    Divider
 } from './profile.style';
 
 const ProfileInner = () => {
@@ -49,10 +51,10 @@ const ProfileInner = () => {
                     )}
                 </AvatarWrapper>
                 <div>
-                    <Typography variant="h4" color="inherit" display="block">
+                    <Typography variant="h4">
                         {first_name}
                     </Typography>
-                    <Typography variant="h4" color="inherit" display="block">
+                    <Typography variant="h4">
                         {second_name}
                     </Typography>
                 </div>

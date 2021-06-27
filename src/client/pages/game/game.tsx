@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 
 import { currentScreenSize } from '@slices/game';
 import { Meta } from '@components/meta';
+import { useProfile } from '@hooks/use-profile';
 import { withPrivateRoute } from '../../hoc/with-private-route';
 
 import { GameLoop } from './game-loop';
 import { getCanvasDimensions } from './constants';
 import { Wrapper, Title } from './game.style';
-import { useProfile } from '@hooks/use-profile';
 
 export const Game = withPrivateRoute(() => {
     const canvas = React.useRef<HTMLCanvasElement | null>(null);

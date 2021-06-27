@@ -1,13 +1,14 @@
 import React, { ChangeEvent, FormEvent, useRef, useState } from 'react';
-import { Container, CssBaseline, makeStyles, TextField } from '@material-ui/core';
+import { Container, CssBaseline, makeStyles } from '@material-ui/core';
 import { TUpdateUserData, updateAvatar, updateUserData } from '@slices/profile';
 import { Redirect } from 'react-router';
-import Button from '@material-ui/core/Button';
 import { BASE_RESOURCE_URL } from 'client/constants';
-import { useDispatch } from 'react-redux';
-import { CameraIconStyled, NoAvatar } from './profile.style';
 import { useProfile } from '@hooks/use-profile';
+import { useDispatch } from 'react-redux';
 import { withPrivateRoute } from '../../hoc/with-private-route';
+
+import { CameraIconStyled, NoAvatar } from './profile.style';
+import { TextField, Button } from './profile.edit.style';
 
 const useStyles = makeStyles((theme) => ({
     paper: {

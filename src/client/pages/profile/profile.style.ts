@@ -1,9 +1,15 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { List as MaterialList, Button as MaterialButton } from '@material-ui/core';
+import {
+    List as MaterialList,
+    Button as MaterialButton,
+    Typography as MuiTypography,
+    Divider as MuiDivider
+} from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+import type { ThemeTypes } from 'client/theme/theme';
 
 const thumbnailStyles = () => css`
     width: 160px;
@@ -17,6 +23,14 @@ export const Wrapper = styled.div`
     align-items: center;
     margin-top: 64px;
     border-radius: 16px;
+`;
+
+export const Typography = styled(MuiTypography)`
+    color: ${({ theme }: ThemeTypes) => theme?.textPrimary};
+`;
+
+export const Divider = styled(MuiDivider)`
+    background-color: ${({ theme }: ThemeTypes) => theme?.divider};
 `;
 
 export const LoaderWrapper = styled(Wrapper)`
@@ -47,6 +61,7 @@ export const CameraIconStyled = styled(PhotoCameraIcon)`
     position: absolute;
     right: 8px;
     bottom: 8px;
+    fill: ${({ theme }: ThemeTypes) => theme?.svgColor};
 `;
 
 export const List = styled(MaterialList)`
@@ -61,6 +76,7 @@ export const ListItemText = styled.li`
     margin-top: 16px;
     margin-bottom: 16px;
     font-family: inherit;
+    color: ${({ theme }: ThemeTypes) => theme?.textPrimary};
 
     &:last-child {
         margin-bottom: 0;

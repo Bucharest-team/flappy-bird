@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { Typography } from '@material-ui/core';
 
+import type { ThemeTypes } from 'client/theme/theme';
 import { CANVAS_DIMENSIONS, FULL_CANVAS_DIMENSIONS } from './constants';
 
 export const Wrapper = styled.div(({ fullScreen }: any) => css`
@@ -23,4 +24,6 @@ export const Title = styled(Typography)`
     user-select: none;
     text-align: center;
     font-size: 24px;
+
+    color: ${({ theme }: ThemeTypes) => theme?.textPrimary};
 `;
