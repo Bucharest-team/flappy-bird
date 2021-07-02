@@ -1,3 +1,7 @@
+import { createMuiTheme } from '@material-ui/core/styles';
+
+export const muiTheme = createMuiTheme();
+
 const theme = {
     light: {
         mainBg: '#3f51b5',

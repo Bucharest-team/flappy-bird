@@ -7,12 +7,14 @@ import { StaticRouter } from 'react-router-dom';
 import { StaticRouterContext } from 'react-router';
 import { Helmet, HelmetData } from 'react-helmet';
 import { setAuthorization } from '@slices/auth';
+import { ServerStyleSheets, ThemeProvider } from '@material-ui/core';
 
 import { App } from '../../client/app';
 import { renderObject } from '../utils/render-to-object';
 import { createReduxStore, getInitialState } from '../../__data__/store';
+import { muiTheme } from '../../client/theme/theme';
 
-const getHtml = (reactHtml: string, store: Store, helmet: HelmetData) => {
+const getHtml = (reactHtml: string, muiCss: any, store: Store, helmet: HelmetData) => {
     const html = renderToStaticMarkup(
         <html lang="en">
             <head>
@@ -20,7 +22,7 @@ const getHtml = (reactHtml: string, store: Store, helmet: HelmetData) => {
                 {helmet.meta.toComponent()}
                 {helmet.link.toComponent()}
                 {helmet.script.toComponent()}
-
+                <style id="jss-server-side" dangerouslySetInnerHTML={{ __html: muiCss }} />
                 <link rel="icon" type="image/png" href="/favicons/favicon.png" />
             </head>
             <body>
@@ -53,15 +55,18 @@ export default (req: Request, res: Response) => {
     const jsx = (
         <Provider store={store}>
             <StaticRouter context={context} location={location}>
-                <App />
+                <ThemeProvider theme={muiTheme}>
+                    <App />
+                </ThemeProvider>
             </StaticRouter>
         </Provider>
     );
 
-    const reactHtml = renderToString(jsx);
+    const sheets = new ServerStyleSheets();
+    const reactHtml = renderToString(sheets.collect(jsx));
     const helmet = Helmet.renderStatic();
 
     res
         .status(context.statusCode || 200)
-        .send(getHtml(reactHtml, store, helmet));
+        .send(getHtml(reactHtml, sheets, store, helmet));
 };
