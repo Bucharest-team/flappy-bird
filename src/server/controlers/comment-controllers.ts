@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import { Topic } from '../db/models/topic';
 import { Comment } from '../db/models/comment';
 
 export class CommentController {
