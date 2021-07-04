@@ -3,7 +3,7 @@ import express from 'express';
 import { logger } from './middlewares';
 import router from './router';
 import { sequelize } from './db/models/database';
-import { Topic } from './db/models/topic';
+import {} from './db/created';
 
 (async () => {
     try {
@@ -16,9 +16,7 @@ import { Topic } from './db/models/topic';
     }
 })();
 
-const server = express()
-    .disable('x-powered-by')
-    .use(logger)
+const server = express().disable('x-powered-by').use(express.json()).use(logger)
     .use(router);
 
 export { server };

@@ -1,12 +1,7 @@
-import { Column, AllowNull, DataType, Model, Table } from 'sequelize-typescript';
+import { DataTypes } from 'sequelize';
+import { sequelize } from './database';
 
-@Table
-export class Theme extends Model<Theme> {
-    @AllowNull(false)
-    @Column(DataType.STRING)
-    light!: string;
-
-    @AllowNull(false)
-    @Column(DataType.STRING)
-    dark!: string;
-}
+export const User = sequelize.define('user', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    theme: { type: DataTypes.STRING }
+});
