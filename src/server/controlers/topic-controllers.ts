@@ -36,4 +36,13 @@ export class TopicController {
         });
         return res.send(topic);
     }
+
+    static async updateRating(req: Request, res: Response) {
+        const { id } = req.params;
+        const { digit } = req.body;
+
+        const topic = await Topic.update({ rating: digit }, { where: { id } });
+
+        return res.send(topic);
+    }
 }

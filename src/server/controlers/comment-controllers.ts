@@ -24,7 +24,8 @@ export class CommentController {
     }
 
     static async updateRating(req: Request, res: Response) {
-        const { id, digit } = req.body;
+        const { id } = req.params;
+        const { digit } = req.body;
 
         const comment = await Comment.update(
             { rating: digit },

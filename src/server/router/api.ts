@@ -15,9 +15,11 @@ export const apiRouters = (router: Router) => {
 topic.get('/', TopicController.getAll);
 topic.get('/:id', TopicController.getOne);
 topic.post('/', TopicController.create);
+topic.put('/:id', TopicController.updateRating);
 
 comment.get('/', CommentController.getAll);
 comment.post('/', CommentController.create);
+comment.put('/:id', CommentController.updateRating);
 
 user.post('/', UserController.create);
 user.post('/:id', UserController.changeTheme);

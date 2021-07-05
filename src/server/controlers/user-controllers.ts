@@ -14,9 +14,10 @@ export class UserController {
     }
 
     static async changeTheme(req: Request, res: Response) {
-        const { userId, theme } = req.body;
+        const { id } = req.params;
+        const { theme } = req.body;
 
-        const result = await User.update({ currentTheme: theme }, { where: { userId } });
+        const result = await User.update({ currentTheme: theme }, { where: { userId: id } });
         res.send(result);
     }
 }
