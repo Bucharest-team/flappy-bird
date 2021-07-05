@@ -11,7 +11,7 @@ export const WrapperForm = styled.form`
   padding-top: 50px;
 
   box-sizing: border-box;
-  width: 340px;
+  width: 400px;
 
   background: #ffffff;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);

@@ -8,6 +8,7 @@ import type { ThemeTypes } from 'client/theme/theme';
 export const Header = styled(AppBar)(({ theme }: ThemeTypes) => {
     return css`
         background-color: ${theme?.mainBg};
+        margin-bottom: 32px;
     `;
 });
 
