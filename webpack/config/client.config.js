@@ -21,7 +21,7 @@ module.exports = {
     },
     output: {
         path: DIST_DIR,
-        filename: '[name].js',
+        filename: __DEV__ ? 'main.js' : '[name].js',
         publicPath: '/'
     },
     mode: __DEV__ ? 'development' : 'production',
