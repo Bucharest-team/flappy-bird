@@ -1,16 +1,7 @@
-import { Sequelize } from 'sequelize-typescript';
+import { Sequelize } from 'sequelize';
 
-import { Topic } from './topic';
-import { Comment } from './comment';
-import { User } from './user';
-import { Theme } from './theme';
-
-export const sequelize = new Sequelize({
+export const sequelize = new Sequelize('flappy-db', 'postgres', 'newPassword', {
     host: 'localhost',
     port: 5432,
-    username: 'postgres',
-    password: 'newPassword',
-    database: 'flappy-db',
-    dialect: 'postgres',
-    models: [Topic, Comment, User, Theme]
+    dialect: 'postgres'
 });

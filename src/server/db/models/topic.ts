@@ -1,20 +1,10 @@
-import { AllowNull, Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { DataTypes } from 'sequelize';
+import { sequelize } from './database';
 
-import { Comment } from './comment';
-
-@Table
-export class Topic extends Model<Topic> {
-    @AllowNull(false)
-    @Column(DataType.STRING)
-    title!: string;
-
-    @Column(DataType.STRING)
-    description?: string;
-
-    @AllowNull(false)
-    @Column(DataType.STRING)
-    author!: string;
-
-    @HasMany(() => Comment)
-    comments?: Comment[];
-}
+export const Topic = sequelize.define('topic', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    title: { type: DataTypes.STRING },
+    description: { type: DataTypes.STRING },
+    author: { type: DataTypes.INTEGER },
+    rating: { type: DataTypes.INTEGER }
+});
