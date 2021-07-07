@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
 
 export const CardContent = styled(CardContentMui)(({ theme }: ThemeTypes) => {
     const gradient = theme?.mode === 'light' ? 'linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff 75%)' : '';
-    return `
+    return css`
         max-height: 100px;
         overflow: hidden;
         margin-top: -30px;

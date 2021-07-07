@@ -36,8 +36,11 @@ export const getAppTheme = (mode: 'light' | 'dark') => ({
     mode
 });
 
+type Mode = {
+    mode?: 'light' | 'dark'
+};
+
 export type ThemeTypes = {
     // нам нет разницы light или dark, свойства будут одинаковыми
-    theme?: typeof theme.light,
-    mode?: 'light' | 'dark'
+    theme?: typeof theme.light & Mode,
 };
