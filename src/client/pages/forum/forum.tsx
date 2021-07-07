@@ -6,14 +6,28 @@ import GradeIcon from '@material-ui/icons/Grade';
 
 import { Card, RatingStyled, CardActions, Wrapper, Body2, CardContent, Link } from './forum.style';
 
-const mockData = [
+export const mockData = [
     {
         id: 1,
         title: 'Заголовок 1',
         author: 'John Doe',
         description: 'Описание 1',
         rating: 51,
-        date: '10.10.2021'
+        date: '10.10.2021',
+        comments: [
+            {
+                id: 1,
+                text: 'Первый комментарий',
+                rating: 1,
+                author: 'Джонни'
+            },
+            {
+                id: 2,
+                text: 'Второй комментарий',
+                rating: 2,
+                author: 'Джонни'
+            }
+        ]
     },
     {
         id: 2,
@@ -21,7 +35,8 @@ const mockData = [
         author: 'John Doe',
         description: 'Описание 2',
         rating: 12,
-        date: '10.10.2021'
+        date: '10.10.2021',
+        comments: []
     },
     {
         id: 3,
@@ -29,7 +44,8 @@ const mockData = [
         author: 'John Doe',
         description: 'Описание 3',
         rating: 0,
-        date: '10.10.2021'
+        date: '10.10.2021',
+        comments: []
     }
 ];
 
@@ -38,7 +54,7 @@ export const Forum = () => {
         <React.Fragment>
             <Meta title="Форум" description="Страница форума" />
             <Container maxWidth="md">
-                {mockData.map(({ id, author, title, date, description, rating = 0 }) => (
+                {mockData.map(({ id, author, title, date, description, rating }) => (
                     <Card key={id}>
                         <CardContent>
                             <Wrapper>
@@ -54,12 +70,12 @@ export const Forum = () => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Link to="/">Подробнее</Link>
+                            <Link to={`/forum/${id}`}>Подробнее</Link>
                             <RatingStyled>
                                 <Body2 variant="body2">
                                     {date}
                                 </Body2>
-                                <GradeIcon /> {' '} {rating}
+                                <GradeIcon /> {' '} {rating || 0}
                             </RatingStyled>
                         </CardActions>
                     </Card>

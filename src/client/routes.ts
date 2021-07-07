@@ -11,6 +11,7 @@ import { ProfileEdit } from './pages/profile/profile-edit';
 import { Leaderboard } from './pages/leaderboard';
 import { Main as MainPage } from './pages/main';
 import { Forum } from './pages/forum';
+import { TopicItem } from './pages/forum/topic-item';
 
 export type RouterFetchDataArgs = {
     dispatch: Dispatch<Action>;
@@ -67,6 +68,12 @@ export default [
         key: 'forum',
         path: '/forum',
         component: Forum,
+        exact: true
+    },
+    {
+        key: 'forum-item',
+        path: '/forum/:id',
+        component: TopicItem,
         exact: true
     },
     {
