@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardHeader, CardContent, Typography } from '@material-ui/core';
 
-import { Headline } from './topic-item.style';
+import { Headline } from './topics-item.style';
 import { ICommentList, IComment } from './types';
 import { Wrapper, CommentStyled } from './comments.style';
 

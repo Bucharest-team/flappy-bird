@@ -3,8 +3,21 @@ import { Meta } from '@components/meta';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import GradeIcon from '@material-ui/icons/Grade';
+import { useSelector } from 'react-redux';
+import { isAuthorized } from '@slices/auth';
 
-import { Card, RatingStyled, CardActions, Wrapper, Body2, CardContent, Link } from './forum.style';
+import {
+    Card,
+    RatingStyled,
+    CardActions,
+    Wrapper,
+    Body2,
+    CardContent,
+    Link,
+    CreateTopicWrapper
+} from './topics.style';
+
+import { Backward } from '../../components/backward';
 
 export const mockData = [
     {
@@ -42,18 +55,25 @@ export const mockData = [
         id: 3,
         title: 'Заголовок 3',
         author: 'John Doe',
-        description: 'Описание 3',
+        description: 'asfasf\nas\nfas\nfas\nfas\nf',
         rating: 0,
         date: '10.10.2021',
         comments: []
     }
 ];
 
-export const Forum = () => {
+export const Topics = () => {
+    const isLoggedIn = useSelector(isAuthorized);
+
     return (
-        <React.Fragment>
+        <Backward text="На главную">
             <Meta title="Форум" description="Страница форума" />
             <Container maxWidth="md">
+                {isLoggedIn && (
+                    <CreateTopicWrapper>
+                        <Link to="/create-topic">Создать топик</Link>
+                    </CreateTopicWrapper>
+                )}
                 {mockData.map(({ id, author, title, date, description, rating }) => (
                     <Card key={id}>
                         <CardContent>
@@ -65,22 +85,18 @@ export const Forum = () => {
                                     {author}
                                 </Typography>
                             </Wrapper>
-                            <Typography color="textSecondary">
-                                {description}
-                            </Typography>
+                            <Typography color="textSecondary">{description}</Typography>
                         </CardContent>
                         <CardActions>
                             <Link to={`/forum/${id}`}>Подробнее</Link>
                             <RatingStyled>
-                                <Body2 variant="body2">
-                                    {date}
-                                </Body2>
-                                <GradeIcon /> {' '} {rating || 0}
+                                <Body2 variant="body2">{date}</Body2>
+                                <GradeIcon /> {rating || 0}
                             </RatingStyled>
                         </CardActions>
                     </Card>
                 ))}
             </Container>
-        </React.Fragment>
+        </Backward>
     );
 };

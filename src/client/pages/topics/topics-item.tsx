@@ -2,13 +2,14 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, Container } from '@material-ui/core';
 import GradeIcon from '@material-ui/icons/Grade';
+import { Meta } from '@components/meta';
 
-import { mockData } from './forum';
+import { mockData } from './topics';
 import type { IParams, ITopicItem } from './types';
-import { Wrapper, Headline, Body, AuthorStyled, RatingButton } from './topic-item.style';
+import { Wrapper, Headline, Body, AuthorStyled, RatingButton } from './topics-item.style';
 import { Comments } from './comments';
 
-export const TopicItem = () => {
+export const TopicsItem = () => {
     const { id } = useParams<IParams>();
     const [topic, setTopic] = React.useState<ITopicItem>();
 
@@ -27,6 +28,7 @@ export const TopicItem = () => {
 
     return (
         <Container maxWidth="md">
+            <Meta title={topic?.title} description={topic?.description} />
             <Wrapper>
                 <Headline variant="h3">{topic?.title}</Headline>
                 <AuthorStyled variant="h6" gutterBottom>

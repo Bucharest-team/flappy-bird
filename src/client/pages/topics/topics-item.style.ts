@@ -30,6 +30,7 @@ export const Body = styled(Typography)`
     margin-top: 32px;
     margin-bottom: 32px;
     text-align: left;
+    white-space: pre-wrap;
 `;
 
 export const RatingButton = styled.button(({ theme, active }: any) => css`

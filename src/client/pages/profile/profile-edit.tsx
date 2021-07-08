@@ -6,6 +6,7 @@ import { BASE_RESOURCE_URL } from 'client/constants';
 import { useProfile } from '@hooks/use-profile';
 import { useDispatch } from 'react-redux';
 import { withPrivateRoute } from '../../hoc/with-private-route';
+import { Backward } from '../../components/backward';
 
 import { CameraIconStyled, NoAvatar } from './profile.style';
 import { TextField, Button } from './profile.edit.style';
@@ -67,31 +68,33 @@ const ProfileEditInner = () => {
     }
 
     return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-                <div className={classes.avatarWrapper} onClick={handleClickdAvatar}>
-                    {avatar ? (
-                        <img src={`${BASE_RESOURCE_URL}${avatar}`} className={classes.avatar} alt="" />
-                    ) : (
-                        <NoAvatar color="primary" fontSize="large" />
-                    )}
-                    <CameraIconStyled fontSize="large" />
+        <Backward>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <div className={classes.avatarWrapper} onClick={handleClickdAvatar}>
+                        {avatar ? (
+                            <img src={`${BASE_RESOURCE_URL}${avatar}`} className={classes.avatar} alt="" />
+                        ) : (
+                            <NoAvatar color="primary" fontSize="large" />
+                        )}
+                        <CameraIconStyled fontSize="large" />
+                    </div>
+
+                    <input type="file" name="avatar" ref={avatarInputRef} hidden accept="image/*" onChange={handleUploadAvatar} />
+
+                    <form onSubmit={handleSubmit}>
+                        <TextField name="first_name" margin="normal" required fullWidth label="Имя" value={profile.first_name} onChange={updateProperty} />
+                        <TextField name="second_name" margin="normal" required fullWidth label="Фамилия" value={profile.second_name} onChange={updateProperty} />
+                        <TextField name="display_name" margin="normal" required fullWidth label="Никнейм" value={profile.display_name} onChange={updateProperty} />
+                        <TextField name="login" margin="normal" required fullWidth label="Логин" value={profile.login} onChange={updateProperty} />
+                        <TextField name="email" margin="normal" required fullWidth label="Почта" value={profile.email} onChange={updateProperty} />
+                        <TextField name="phone" margin="normal" required fullWidth label="Телефон" value={profile.phone} onChange={updateProperty} />
+                        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}> Применить </Button>
+                    </form>
                 </div>
-
-                <input type="file" name="avatar" ref={avatarInputRef} hidden accept="image/*" onChange={handleUploadAvatar} />
-
-                <form onSubmit={handleSubmit}>
-                    <TextField name="first_name" margin="normal" required fullWidth label="Имя" value={profile.first_name} onChange={updateProperty} />
-                    <TextField name="second_name" margin="normal" required fullWidth label="Фамилия" value={profile.second_name} onChange={updateProperty} />
-                    <TextField name="display_name" margin="normal" required fullWidth label="Никнейм" value={profile.display_name} onChange={updateProperty} />
-                    <TextField name="login" margin="normal" required fullWidth label="Логин" value={profile.login} onChange={updateProperty} />
-                    <TextField name="email" margin="normal" required fullWidth label="Почта" value={profile.email} onChange={updateProperty} />
-                    <TextField name="phone" margin="normal" required fullWidth label="Телефон" value={profile.phone} onChange={updateProperty} />
-                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}> Применить </Button>
-                </form>
-            </div>
-        </Container>
+            </Container>
+        </Backward>
     );
 };
 
