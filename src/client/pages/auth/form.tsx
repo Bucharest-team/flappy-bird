@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { Button } from '@material-ui/core';
 
 import { Inputs, Field, Prop } from './types';
 
@@ -65,7 +66,7 @@ export const Form = ({
                 </WrapperInput>
             ))}
             <OAuth />
-            <Submit type="submit">{submitText}</Submit>
+            <Button type="submit" variant="contained" color="primary">{submitText}</Button>
             <Link to={link}>{linkText}</Link>
         </WrapperForm>
     );

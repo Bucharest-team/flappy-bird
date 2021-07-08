@@ -7,6 +7,10 @@ import CardContentMui from '@material-ui/core/CardContent';
 import type { ThemeTypes } from 'client/theme/theme';
 import { Link as RouterLink } from 'react-router-dom';
 
+export const CreateTopicWrapper = styled.div`
+    margin-bottom: 32px;
+`;
+
 export const Card = styled(CardMui)(({ theme }: ThemeTypes) => css`
     margin-bottom: 32px;
     background-color: ${theme?.cardBg};

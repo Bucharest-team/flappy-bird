@@ -10,8 +10,9 @@ import { Profile } from './pages/profile';
 import { ProfileEdit } from './pages/profile/profile-edit';
 import { Leaderboard } from './pages/leaderboard';
 import { Main as MainPage } from './pages/main';
-import { Forum } from './pages/forum';
-import { TopicItem } from './pages/forum/topic-item';
+import { Topics } from './pages/topics';
+import { TopicsItem } from './pages/topics/topics-item';
+import { CreateTopic } from './pages/topics/create-topic';
 
 export type RouterFetchDataArgs = {
     dispatch: Dispatch<Action>;
@@ -67,13 +68,19 @@ export default [
     {
         key: 'forum',
         path: '/forum',
-        component: Forum,
+        component: Topics,
         exact: true
     },
     {
         key: 'forum-item',
         path: '/forum/:id',
-        component: TopicItem,
+        component: TopicsItem,
+        exact: true
+    },
+    {
+        key: 'create-topic',
+        path: '/create-topic',
+        component: CreateTopic,
         exact: true
     },
     {
