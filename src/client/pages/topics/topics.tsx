@@ -6,6 +6,8 @@ import GradeIcon from '@material-ui/icons/Grade';
 import { useSelector } from 'react-redux';
 import { isAuthorized } from '@slices/auth';
 
+import { Backward } from '@components/backward';
+
 import {
     Card,
     RatingStyled,
@@ -16,8 +18,6 @@ import {
     Link,
     CreateTopicWrapper
 } from './topics.style';
-
-import { Backward } from '../../components/backward';
 
 export const mockData = [
     {
@@ -30,15 +30,26 @@ export const mockData = [
         comments: [
             {
                 id: 1,
-                text: 'Первый комментарий',
+                text: 'Первый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарий Первый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарий',
                 rating: 1,
-                author: 'Джонни'
+                author: 'Джонни',
+                replyId: null,
+                date: '10.10.2021'
             },
             {
                 id: 2,
                 text: 'Второй комментарий',
                 rating: 2,
-                author: 'Джонни'
+                author: 'Джонни',
+                replyId: null,
+                date: '10.10.2021'
+            },
+            {
+                id: 3,
+                text: 'ответ на коммент',
+                author: 'Вася',
+                replyId: 1,
+                date: '10.10.2021'
             }
         ]
     },

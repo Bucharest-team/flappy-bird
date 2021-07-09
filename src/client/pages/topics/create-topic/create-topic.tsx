@@ -3,13 +3,13 @@ import { useForm } from 'react-hook-form';
 import { Button, TextField, Input } from '@material-ui/core';
 import { Meta } from '@components/meta';
 import { withPrivateRoute } from 'client/hoc/with-private-route';
+import { Backward } from '@components/backward';
 
-import { ICreateTopic } from './types';
+import { ICreateTopic } from '../types';
 import { Title } from './create-topic.style';
 
-import { Wrapper } from '../auth/auth.style';
-import { WrapperForm, WrapperInput, TitleInput } from '../auth/form.style';
-import { Backward } from '../../components/backward';
+import { Wrapper } from '../../auth/auth.style';
+import { WrapperForm, WrapperInput, TitleInput } from '../../auth/form.style';
 
 const CreateTopicInner = () => {
     const { register, handleSubmit } = useForm<ICreateTopic>();
