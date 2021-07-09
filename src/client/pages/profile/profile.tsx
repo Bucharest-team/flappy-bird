@@ -5,9 +5,10 @@ import { CircularProgress, Container } from '@material-ui/core';
 import { logout } from '@slices/auth';
 import { Meta } from '@components/meta';
 import { useProfile } from '@hooks/use-profile';
+import { Backward } from '@components/backward';
+
 import { BASE_RESOURCE_URL } from '../../constants';
 import { withPrivateRoute } from '../../hoc/with-private-route';
-import { Backward } from '../../components/backward';
 
 import {
     Wrapper,

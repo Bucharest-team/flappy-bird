@@ -7,10 +7,13 @@ export interface IComment {
     text: string;
     rating: number;
     author: string;
+    replyId?: number;
+    date: string;
 }
 
 export interface ICommentList {
     comments: IComment[];
+    topicId: number;
 }
 
 export interface ITopicItem {

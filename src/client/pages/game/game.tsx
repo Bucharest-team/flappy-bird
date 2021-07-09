@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { currentScreenSize } from '@slices/game';
 import { Meta } from '@components/meta';
 import { useProfile } from '@hooks/use-profile';
+import { Backward } from '@components/backward';
+
 import { withPrivateRoute } from '../../hoc/with-private-route';
 
 import { GameLoop } from './game-loop';
@@ -36,7 +38,7 @@ export const Game = withPrivateRoute(() => {
     useProfile();
 
     return (
-        <React.Fragment>
+        <Backward>
             <Meta title="Играть во Flappy-Bird" description="Запуск игры Flappy-Bird" />
             <Title variant="h2">
                 {isFullScreen
@@ -46,6 +48,6 @@ export const Game = withPrivateRoute(() => {
             <Wrapper fullScreen={isFullScreen}>
                 <canvas ref={canvas} {...getCanvasDimensions(isFullScreen)} />
             </Wrapper>
-        </React.Fragment>
+        </Backward>
     );
 });

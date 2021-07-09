@@ -12,7 +12,7 @@ import { Leaderboard } from './pages/leaderboard';
 import { Main as MainPage } from './pages/main';
 import { Topics } from './pages/topics';
 import { TopicsItem } from './pages/topics/topics-item';
-import { CreateTopic } from './pages/topics/create-topic';
+import { CreateTopic } from './pages/topics/create-topic/create-topic';
 
 export type RouterFetchDataArgs = {
     dispatch: Dispatch<Action>;
