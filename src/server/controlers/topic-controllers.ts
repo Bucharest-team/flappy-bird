@@ -15,7 +15,7 @@ export class TopicController {
                 title,
                 description,
                 author,
-                rating: 0,
+                rating: 0
             });
 
             res.send(result);
@@ -36,10 +36,7 @@ export class TopicController {
             where: { id },
             include: [Comment, Likes]
         });
-        // const likes = await Topic.findAll({
-        //     where: { topicId: id }
-        // })
-        return res.send({ topic });
+        return res.send(topic);
     }
 
     static async updateRating(req: Request, res: Response) {

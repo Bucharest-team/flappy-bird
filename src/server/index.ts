@@ -1,5 +1,6 @@
 import express from 'express';
 
+import bodyParser from 'body-parser';
 import { logger } from './middlewares';
 import router from './router';
 import { sequelize } from './db/models/database';
@@ -20,6 +21,7 @@ import hotMiddleware from './middlewares/hot';
 const server = express()
     .disable('x-powered-by')
     .use(hotMiddleware)
+    .use(bodyParser.json())
     .use(logger)
     .use(router);
 
