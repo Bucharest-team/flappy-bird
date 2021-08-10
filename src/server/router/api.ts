@@ -28,4 +28,4 @@ comment.put('/:id', CommentController.updateRating);
 user.post('/', UserController.create);
 user.post('/:id', UserController.changeTheme);
 
-like.post('/', LikesController.setLike)
+like.post('/', LikesController.setLike);
