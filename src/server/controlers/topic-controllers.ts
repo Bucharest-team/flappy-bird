@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { Topic } from '../db/models/topic';
+import { Likes } from '../db/models/likes';
 import { Comment } from '../db/models/comment';
 
 export class TopicController {
@@ -13,7 +14,8 @@ export class TopicController {
             const result = await Topic.create({
                 title,
                 description,
-                author
+                author,
+                rating: 0,
             });
 
             res.send(result);
@@ -32,9 +34,12 @@ export class TopicController {
         const { id } = req.params;
         const topic = await Topic.findOne({
             where: { id },
-            include: Comment
+            include: [Comment, Likes]
         });
-        return res.send(topic);
+        // const likes = await Topic.findAll({
+        //     where: { topicId: id }
+        // })
+        return res.send({ topic });
     }
 
     static async updateRating(req: Request, res: Response) {
