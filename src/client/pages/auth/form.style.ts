@@ -1,22 +1,23 @@
 import styled from '@emotion/styled';
 import { Link as RouterLink } from 'react-router-dom';
+import { css } from '@emotion/react';
 
 const mainRed = '#ff2f2f';
 const mainText = '#1e1e1e';
 
-export const WrapperForm = styled.form`
+export const WrapperForm = styled.form(({ width = 400 }) => css`
   display: flex;
   flex-direction: column;
   padding: 30px;
   padding-top: 50px;
 
   box-sizing: border-box;
-  width: 340px;
+  width: ${width}px;
 
   background: #ffffff;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
   border-radius: 12px;
-`;
+`);
 
 export const Title = styled.h1`
   margin: 0;

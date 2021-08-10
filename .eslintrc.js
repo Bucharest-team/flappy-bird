@@ -45,7 +45,15 @@ module.exports = {
         'react/destructuring-assignment': 'off',
         'operator-linebreak': 'off',
         'operator-assignment': 'off',
-        'no-magic-numbers': 'warn',
+        'no-magic-numbers': [
+            'warn',
+            {
+                ignore: [0, 1, -1, 100],
+                ignoreArrayIndexes: false,
+                enforceConst: true,
+                detectObjects: false
+            }
+        ],
         'react/jsx-tag-spacing': 'warn',
         'spaced-comment': 'off',
         'max-len': 'off',

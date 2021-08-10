@@ -12,7 +12,9 @@ const theme = {
         inputLabel: 'rgba(0, 0, 0, 0.54)',
         drawerBg: '#fff',
         svgColor: 'rgba(0, 0, 0, 0.54)',
-        itemHover: 'rgba(0, 0, 0, 0.04)'
+        itemHover: 'rgba(0, 0, 0, 0.04)',
+        cardBg: '#fff',
+        linkColor: '#3f51b5'
     },
     dark: {
         mainBg: '#303030',
@@ -23,15 +25,22 @@ const theme = {
         inputLabel: 'rgba(255, 255, 255, 0.54)',
         drawerBg: '#303030',
         svgColor: '#fff',
-        itemHover: 'rgba(255, 255, 255, 0.2)'
+        itemHover: 'rgba(255, 255, 255, 0.2)',
+        cardBg: '#303030',
+        linkColor: '#f50057'
     }
 };
 
 export const getAppTheme = (mode: 'light' | 'dark') => ({
-    ...theme[mode]
+    ...theme[mode],
+    mode
 });
+
+type Mode = {
+    mode?: 'light' | 'dark'
+};
 
 export type ThemeTypes = {
     // нам нет разницы light или dark, свойства будут одинаковыми
-    theme?: typeof theme.light
+    theme?: typeof theme.light & Mode,
 };

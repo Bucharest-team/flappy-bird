@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import { OG } from './consts';
 
 type Props = {
-    title: string,
+    title?: string,
     description?: string
 };
 
@@ -27,5 +27,6 @@ export function Meta({ title, description }: Props) {
 }
 
 Meta.defaultProps = {
+    title: '',
     description: null
 };
