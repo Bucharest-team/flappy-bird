@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { CommentController } from '../controlers/comment-controllers';
-import { TopicController } from '../controlers/topic-controllers';
-import { UserController } from '../controlers/user-controllers';
-import { LikesController } from '../controlers/likes-controllers';
+import { CommentController } from '../controllers/comment-controllers';
+import { TopicController } from '../controllers/topic-controllers';
+import { UserController } from '../controllers/user-controllers';
+import { LikesController } from '../controllers/likes-controllers';
 
 const topic: Router = Router();
 const comment: Router = Router();

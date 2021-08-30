@@ -5,7 +5,6 @@ import { logger } from './middlewares';
 import router from './router';
 import { sequelize } from './db/models/database';
 import {} from './db/created';
-import hotMiddleware from './middlewares/hot';
 
 (async () => {
     try {
@@ -20,7 +19,6 @@ import hotMiddleware from './middlewares/hot';
 
 const server = express()
     .disable('x-powered-by')
-    .use(hotMiddleware)
     .use(bodyParser.json())
     .use(logger)
     .use(router);

@@ -36,7 +36,6 @@ module.exports = {
         hints: __DEV__ ? false : 'warning'
     },
     plugins: [
-        __PROD__ && new webpack.ProgressPlugin(),
         __PROD__ && new DuplicatePackageCheckerPlugin(),
         __DEV__ && new webpack.HotModuleReplacementPlugin()
     ].filter(Boolean)

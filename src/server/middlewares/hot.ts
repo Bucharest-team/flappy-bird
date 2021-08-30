@@ -4,7 +4,7 @@ import hotMiddleware from 'webpack-hot-middleware';
 
 const config = require('../../../webpack/config/client.config');
 
-function getDefaultMiddleware() {
+export function getDefaultMiddleware() {
     if (process.env.NODE_ENV === 'development') {
         const compiler = webpack(config);
 
@@ -21,7 +21,3 @@ function getDefaultMiddleware() {
 
     return [];
 }
-
-export default [
-    ...getDefaultMiddleware()
-];
