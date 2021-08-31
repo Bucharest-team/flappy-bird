@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const Comment = ({ comment, comments, formRef, setPreparedFormData }: Props) => {
-    const mainComment = comments.find(({ id }) => comment.replyId === id);
+    const mainComment = comments.find(({ id }) => comment.replayId === id);
     const text = mainComment?.author ? (
         <React.Fragment>
             <b>{mainComment?.author}</b>, {comment.text}

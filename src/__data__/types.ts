@@ -3,6 +3,7 @@ import { SliceState as AuthState } from './slices/auth';
 import { State as ProfileState } from './slices/profile';
 import { State as GameState } from './slices/game';
 import { State as LeaderboardState } from './slices/leaderboard';
+import { State as TopicsState } from './slices/topics';
 
 export interface RootState {
     readonly router: RouterState;
@@ -10,4 +11,5 @@ export interface RootState {
     readonly profile: ProfileState;
     readonly game: GameState;
     readonly leaderboard: LeaderboardState;
+    readonly topics: TopicsState;
 }

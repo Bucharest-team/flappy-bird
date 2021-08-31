@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Meta } from '@components/meta';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import GradeIcon from '@material-ui/icons/Grade';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { isAuthorized } from '@slices/auth';
 
 import { Backward } from '@components/backward';
 
+import { getAllTopics, getTopics } from '@slices/topics';
 import {
     Card,
     RatingStyled,
@@ -41,7 +42,7 @@ export const mockData = [
                 text: 'Второй комментарий',
                 rating: 2,
                 author: 'Джонни',
-                replyId: null,
+                replyId: 1,
                 date: '10.10.2021'
             },
             {
@@ -74,7 +75,15 @@ export const mockData = [
 ];
 
 export const Topics = () => {
+    const dispatch = useDispatch();
     const isLoggedIn = useSelector(isAuthorized);
+    const topics = useSelector(getTopics);
+
+    console.log(topics);
+
+    useEffect(() => {
+        dispatch(getAllTopics());
+    }, []);
 
     return (
         <Backward text="На главную">
@@ -85,7 +94,7 @@ export const Topics = () => {
                         <Link to="/create-topic">Создать топик</Link>
                     </CreateTopicWrapper>
                 )}
-                {mockData.map(({ id, author, title, date, description, rating }) => (
+                {topics.map(({ id, author, title, createdAt, description, rating }) => (
                     <Card key={id}>
                         <CardContent>
                             <Wrapper>
@@ -101,8 +110,8 @@ export const Topics = () => {
                         <CardActions>
                             <Link to={`/forum/${id}`}>Подробнее</Link>
                             <RatingStyled>
-                                <Body2 variant="body2">{date}</Body2>
-                                <GradeIcon /> {rating || 0}
+                                <Body2 variant="body2">{new Date(createdAt).toDateString()}</Body2>
+                                {/* <GradeIcon /> {rating || 0} */}
                             </RatingStyled>
                         </CardActions>
                     </Card>

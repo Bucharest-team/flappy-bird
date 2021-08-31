@@ -7,7 +7,7 @@ export interface IComment {
     text: string;
     rating: number;
     author: string;
-    replyId?: number;
+    replayId?: number;
     date: string;
 }
 

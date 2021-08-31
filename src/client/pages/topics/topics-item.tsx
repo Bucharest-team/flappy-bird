@@ -5,6 +5,8 @@ import GradeIcon from '@material-ui/icons/Grade';
 import { Meta } from '@components/meta';
 import { Backward } from '@components/backward';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { getCurrentTopic, getTopic } from '@slices/topics';
 import { mockData } from './topics';
 import type { IParams, ITopicItem } from './types';
 import { Wrapper, Headline, Body, AuthorStyled, RatingButton } from './topics-item.style';
@@ -12,18 +14,24 @@ import { Comments } from './comments/comments';
 
 export const TopicsItem = () => {
     const { id } = useParams<IParams>();
-    const [topic, setTopic] = React.useState<ITopicItem>();
+
+    const dispatch = useDispatch();
 
     React.useEffect(() => {
-        // тут запрос
-        const item = mockData.find((item) => String(item.id) === id);
-        setTopic(item);
+        dispatch(getTopic(Number(id)));
     }, [id]);
 
-    const handleChangeRating = React.useCallback(() => {
-        // запрос на изменение рейтинга с проверкой на то, что он уже не лайкал
-        console.log(1);
-    }, []);
+    const topic = useSelector(getCurrentTopic);
+    console.log(topic);
+
+    if (topic === null) {
+        return null;
+    }
+
+    // const handleChangeRating = React.useCallback(() => {
+    //     // запрос на изменение рейтинга с проверкой на то, что он уже не лайкал
+    //     console.log(1);
+    // }, []);
 
     return (
         <Backward>
@@ -35,14 +43,14 @@ export const TopicsItem = () => {
                         Author: {topic?.author}
                     </AuthorStyled>
                     <Typography variant="subtitle2" gutterBottom>
-                        {topic?.date}
+                        {new Date(topic?.createdAt).toDateString()}
                     </Typography>
                     <Body variant="body1" gutterBottom>
                         {topic?.description}
                     </Body>
-                    <RatingButton onClick={handleChangeRating} active={false}>
-                        <GradeIcon /> {' '} {topic?.rating}
-                    </RatingButton>
+                    {/* <RatingButton onClick={handleChangeRating} active={false}>
+                        <GradeIcon /> {topic?.rating}
+                    </RatingButton> */}
                 </Wrapper>
                 <Comments comments={topic?.comments || []} topicId={topic?.id} />
             </Container>

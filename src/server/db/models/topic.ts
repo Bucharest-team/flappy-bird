@@ -6,5 +6,5 @@ export const Topic = sequelize.define('topic', {
     title: { type: DataTypes.STRING },
     description: { type: DataTypes.STRING },
     rating: { type: DataTypes.INTEGER },
-    author: { type: DataTypes.INTEGER },
+    author: { type: DataTypes.STRING },
 });

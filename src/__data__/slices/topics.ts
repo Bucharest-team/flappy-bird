@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { RootState } from '../types';
 
 import { axiosBack } from '../axios';
 
@@ -24,6 +24,7 @@ export type Topic = {
     author: string;
     comments?: Array<Comment>;
     likes?: Array<Likes>;
+    createdAt: Date;
 };
 
 export type Topics = Array<Topic>;
@@ -58,7 +59,7 @@ export const getAllTopics = createAsyncThunk(TOPICS_FETCH, async () => {
     return data;
 });
 
-export const getTopic = createAsyncThunk(TOPICS_FETCH_ONE, async (id: number) => {
+export const getTopic = createAsyncThunk(TOPICS_FETCH_ONE, async (id: number | undefined) => {
     const { data } = await axiosBack.get(`${TOPICS_URL}/${id}`);
     return data;
 });
@@ -102,3 +103,6 @@ const topics = createSlice({
 });
 
 export default topics.reducer;
+
+export const getTopics = (state: RootState) => state.topics.allTopics;
+export const getCurrentTopic = (state: RootState) => state.topics.currentTopic;
