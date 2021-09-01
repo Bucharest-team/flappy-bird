@@ -28,11 +28,6 @@ export const TopicsItem = () => {
         return null;
     }
 
-    // const handleChangeRating = React.useCallback(() => {
-    //     // запрос на изменение рейтинга с проверкой на то, что он уже не лайкал
-    //     console.log(1);
-    // }, []);
-
     return (
         <Backward>
             <Container maxWidth="md">
@@ -48,9 +43,6 @@ export const TopicsItem = () => {
                     <Body variant="body1" gutterBottom>
                         {topic?.description}
                     </Body>
-                    {/* <RatingButton onClick={handleChangeRating} active={false}>
-                        <GradeIcon /> {topic?.rating}
-                    </RatingButton> */}
                 </Wrapper>
                 <Comments comments={topic?.comments || []} topicId={topic?.id} />
             </Container>

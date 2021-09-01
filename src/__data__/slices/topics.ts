@@ -65,6 +65,7 @@ export const getTopic = createAsyncThunk(TOPICS_FETCH_ONE, async (id: number | u
 });
 
 export const createTopic = createAsyncThunk(TOPICS_CREATE, async (object: Topic) => {
+    console.log(object);
     const { data } = await axiosBack.post(TOPICS_URL, object);
     return data;
 });
