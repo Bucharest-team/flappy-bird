@@ -7,7 +7,6 @@ import { Backward } from '@components/backward';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentTopic, getTopic } from '@slices/topics';
-import { mockData } from './topics';
 import type { IParams, ITopicItem } from './types';
 import { Wrapper, Headline, Body, AuthorStyled, RatingButton } from './topics-item.style';
 import { Comments } from './comments/comments';
@@ -22,7 +21,6 @@ export const TopicsItem = () => {
     }, [id]);
 
     const topic = useSelector(getCurrentTopic);
-    console.log(topic);
 
     if (topic === null) {
         return null;
