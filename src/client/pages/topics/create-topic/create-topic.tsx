@@ -6,6 +6,8 @@ import { Meta } from '@components/meta';
 import { withPrivateRoute } from 'client/hoc/with-private-route';
 import { Backward } from '@components/backward';
 
+import { createTopic } from '@slices/topics';
+import { useHistory } from 'react-router';
 import { ICreateTopic } from '../types';
 import { Title } from './create-topic.style';
 
@@ -15,9 +17,11 @@ import { WrapperForm, WrapperInput, TitleInput } from '../../auth/form.style';
 const CreateTopicInner = () => {
     const { register, handleSubmit } = useForm<ICreateTopic>();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const onSubmit = React.useCallback((data: ICreateTopic) => {
-        console.log(data);
+        dispatch(createTopic(data));
+        history.push('/forum');
     }, []);
 
     return (

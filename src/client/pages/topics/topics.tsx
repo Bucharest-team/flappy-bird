@@ -20,66 +20,10 @@ import {
     CreateTopicWrapper
 } from './topics.style';
 
-export const mockData = [
-    {
-        id: 1,
-        title: 'Заголовок 1',
-        author: 'John Doe',
-        description: 'Описание 1',
-        rating: 51,
-        date: '10.10.2021',
-        comments: [
-            {
-                id: 1,
-                text: 'Первый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарий Первый комментарийПервый комментарийПервый комментарийПервый комментарийПервый комментарий',
-                rating: 1,
-                author: 'Джонни',
-                replyId: null,
-                date: '10.10.2021'
-            },
-            {
-                id: 2,
-                text: 'Второй комментарий',
-                rating: 2,
-                author: 'Джонни',
-                replyId: 1,
-                date: '10.10.2021'
-            },
-            {
-                id: 3,
-                text: 'ответ на коммент',
-                author: 'Вася',
-                replyId: 1,
-                date: '10.10.2021'
-            }
-        ]
-    },
-    {
-        id: 2,
-        title: 'Заголовок 2',
-        author: 'John Doe',
-        description: 'Описание 2',
-        rating: 12,
-        date: '10.10.2021',
-        comments: []
-    },
-    {
-        id: 3,
-        title: 'Заголовок 3',
-        author: 'John Doe',
-        description: 'asfasf\nas\nfas\nfas\nfas\nf',
-        rating: 0,
-        date: '10.10.2021',
-        comments: []
-    }
-];
-
 export const Topics = () => {
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(isAuthorized);
     const topics = useSelector(getTopics);
-
-    console.log(topics);
 
     useEffect(() => {
         dispatch(getAllTopics());

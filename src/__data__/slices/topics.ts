@@ -2,6 +2,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../types';
 
 import { axiosBack } from '../axios';
+import { profileInfo } from './profile';
 
 export type Likes = {
     id: number;
@@ -64,8 +65,9 @@ export const getTopic = createAsyncThunk(TOPICS_FETCH_ONE, async (id: number | u
     return data;
 });
 
-export const createTopic = createAsyncThunk(TOPICS_CREATE, async (object: Topic) => {
-    console.log(object);
+export const createTopic = createAsyncThunk(TOPICS_CREATE, async (object: Topic, store: any) => {
+    const author = profileInfo(store.getState()).first_name;
+    object.author = author;
     const { data } = await axiosBack.post(TOPICS_URL, object);
     return data;
 });
